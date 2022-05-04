@@ -24,7 +24,21 @@ export async function getFeedbackById(id) {
   const db = admin.firestore()
   const doc = await db.collection('feedbacks').doc(id).get()
   if (doc.exists) {
-    return doc.data()
+    return { id: doc.id, ...doc.data() }
+  }
+  throw new Error('The document does not exist')
+}
+
+export async function getFeedbackByField(field, value) {
+  const db = admin.firestore()
+  const snapshot = await db
+    .collection('feedbacks')
+    .where(field, '==', value)
+    .get()
+
+  if (!snapshot.empty) {
+    const docs = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+    return docs[0]
   }
   throw new Error('The document does not exist')
 }

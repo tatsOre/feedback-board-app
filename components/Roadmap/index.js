@@ -2,23 +2,21 @@ import Link from 'next/link'
 import { useState } from 'react'
 
 import Button from '../Button'
+import NavLink from '../NavLink'
 import RoadmapCard from './roadmap-card'
 
 const RoadmapPage = ({ data }) => {
   const [show, setShow] = useState('planned')
   const { planned, 'in-progress': progress, live } = data
-  
+
   return (
     <div>
       <header className="flex text-white bg-indigo-900">
-        <Link href="/" passHref>
+        <button>
           <a>Go Back</a>
-        </Link>
+        </button>
         <h1 className="text-lg md:text-2xl">Roadmap</h1>
-
-        <Button type="button" variant="primary" handleClick={() => {}}>
-          + Add Feedback
-        </Button>
+        <NavLink href="/post" label="+ Add Feedback" variant="primary" />
       </header>
 
       <nav className="block md:hidden roadmap-tags-nav-mobile flex w-full relative">

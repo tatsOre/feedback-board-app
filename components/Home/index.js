@@ -1,12 +1,10 @@
 import Head from 'next/head'
-import { useEffect, useReducer } from 'react'
-
-import Button from '../Button'
+import { useReducer } from 'react'
 import Filter from '../Filter'
+import NavLink from '../NavLink'
 import RoadmapStatus from './roadmap-status'
 import Select from '../Select'
-
-import Suggestion from "../Suggestion"
+import Suggestion from '../Suggestion'
 
 const reducer = (state, action) => {
   let data
@@ -93,9 +91,18 @@ export default function Home({ data }) {
 
       <aside className="order-2 lg:order-3 w-full md:w-2//3 lg:w-1//4 lg:mr-4 md:h-44 bg-indigo-lighter flex flex-col md:flex-row lg:flex-col">
         <Filter
-          selectedTag={state.filter}
-          handleChange={onTabChange}
+          options={[
+            { label: 'All', value: 'all' },
+            { label: 'UI', value: 'ui' },
+            { label: 'UX', value: 'ux' },
+            { label: 'Enhancement', value: 'enhancement' },
+            { label: 'Bug', value: 'bug' },
+            { label: 'Feature', value: 'feature' },
+          ]}
+          checkedValue={state.filter}
+          onChange={onTabChange}
         />
+
         <RoadmapStatus
           data={{
             planned: state.requests.planned.length,
@@ -122,14 +129,14 @@ export default function Home({ data }) {
           {state.suggestions.length > 1 ? 's' : ''}
         </h2>
 
-        <Button type="button" variant="primary" handleClick={() => {}}>
-          + Add Feedback
-        </Button>
+        <NavLink href="/post" label="+ Add Feedback" variant="primary" />
       </div>
       {/* Suggesions pannel: */}
 
       <main className="">
-        {state.suggestions.map(fd => <Suggestion key={fd.id} data={fd} />)}
+        {state.suggestions.map((fd) => (
+          <Suggestion key={fd.id} data={fd} />
+        ))}
       </main>
       <footer className="">Some app coded by someone. 2022.</footer>
     </div>

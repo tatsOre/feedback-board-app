@@ -2,6 +2,7 @@ import axios from 'axios'
 import dashify from 'dashify'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import Button from '../Button'
 
 export default function Form({ data, edit }) {
   const getInitialState = (data) => {
@@ -22,6 +23,14 @@ export default function Form({ data, edit }) {
     getInitialState(data)
   )
 
+  const router = useRouter()
+
+  useEffect(() => {
+    document.title = edit
+      ? `Edit - ${values.title}`
+      : 'Feedback Board App - Add Feedback'
+  }, [])
+
   const onChange = (event) => {
     const { name, value } = event.target
     setState((prevState) => ({
@@ -32,13 +41,22 @@ export default function Form({ data, edit }) {
 
   const onSubmit = async (event) => {
     event.preventDefault()
-    console.log(values)
-    /*     const response = await axios.put(`/api/feedback/${id}`, {
-      ...state,
-      slug: dashify(state.title),
+    setState((prevState) => ({ ...prevState, loading: true }))
+    const response = await axios({
+      url: edit ? `/api/feedback/${data.id}` : `/api/feedback`,
+      method: edit ? 'put' : 'post',
+      data: {
+        ...values,
+        slug: dashify(values.title),
+      },
     })
 
-    console.log(response) */
+    setState((prevState) => ({ ...prevState, loading: false }))
+    if (response.statusText === 'OK') {
+      router.push(`/${dashify(values.title)}`)
+    } else {
+      setState((prevState) => ({ ...prevState, error: 'Ups' }))
+    }
   }
   return (
     <main className="p-6">
@@ -107,8 +125,18 @@ export default function Form({ data, edit }) {
           />
         </label>
 
-        <button type="button">Cancel</button>
-        <button type="submit">Edit Feedback</button>
+        <Button
+          type="submit"
+          variant="primary"
+          label={edit ? 'Save Changes' : 'Add Feedback'}
+        />
+        <Button
+          type="button"
+          variant="secondary"
+          label="Cancel"
+          onClick={() => router.back()}
+        />
+        {edit && <Button type="button" variant="danger" label="Delete" />}
       </form>
     </main>
   )

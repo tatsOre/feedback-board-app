@@ -1,29 +1,24 @@
-import admin from "../firebase/nodeApp"
+import Feedback from '../components/Feedback'
+import { getFeedbackByField } from '../services/firebase'
 
 export async function getStaticPaths() {
   return { paths: [], fallback: true }
 }
 
 export async function getStaticProps({ params }) {
-  const { slug } = params
   try {
-    const result = await admin
-      .firestore()
-      .collection('feedbacks')
-      .where('slug', '==', slug)
-      .get()
-
-    const docs = result.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+    const data = await getFeedbackByField("slug", params.slug)
     return {
-      props: { data: docs[0] },
+      props: { data },
       revalidate: 60,
     }
   } catch (error) {
-    console.log(`Error in feedback/[${slug}] page:`, error)
+    console.log(`Error in feedback/[${params.slug}] page:`, error)
     return { notFound: true }
   }
 }
+/* Bug with getStaticProps when the doc does not exist  */
 
 export default function Page(props) {
-  return <div>{props?.data?.title}</div>
+  return <Feedback {...props} />
 }

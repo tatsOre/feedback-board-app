@@ -12,7 +12,7 @@ const RoadmapCard = ({ feedback }) => {
     >
       <p className={`status text-indigo-500`}>{toCapitalize(status)}</p>
       <h3 className="lg:text-lg">
-        <Link href={`/feedback/${slug}`} passHref>
+        <Link href={`/${slug}`} passHref>
           <a className="text-indigo-800 hover:text-blue-900">{title}</a>
         </Link>
       </h3>
