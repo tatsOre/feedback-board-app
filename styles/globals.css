@@ -1,16 +1,130 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Jost', sans-serif;
+    background-color: #f7f8fd;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: bold;
+  }
+  h1 {
+    line-height: 35px;
+    letter-spacing: -0.333333px;
+  }
+  h2 {
+    line-height: 29px;
+    letter-spacing: -0.25px;
+  }
+  h3 {
+    line-height: 26px;
+    letter-spacing: -0.25px
+  }
+  h4 {
+    line-height: 20px;
+    letter-spacing: -0.194444px;
+  }
+  small {
+    font-size: 100%;
+  }
+  button {
+    cursor: pointer;
+  }
+  button:disabled {
+    cursor: progress;
+  }
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+:root {
+  --sky-medium: #62bcfa;
+  --coral: #f49f85;
+  --violet-900: #ad1fea;
 }
 
-* {
-  box-sizing: border-box;
+/* Decorative Elements */
+
+.roadmap-feedback-card.planned {
+  border-color: var(--coral);
+}
+.roadmap-feedback-card.in-progress {
+  border-color: var(--violet-900);
+}
+.roadmap-feedback-card.live {
+  border-color: var(--sky-medium);
+}
+
+.roadmap-status-panel .title::before,
+.roadmap-feedback-card .status::before {
+  content: '●';
+  margin-right: 1rem;
+}
+
+.roadmap-status-panel .title.planned::before,
+.roadmap-feedback-card.planned .status::before {
+  color: var(--coral);
+}
+.roadmap-status-panel .title.in-progress::before,
+.roadmap-feedback-card.in-progress .status::before {
+  color: var(--violet-900);
+}
+.roadmap-status-panel .title.live::before,
+.roadmap-feedback-card.live .status::before {
+  color: var(--sky-medium);
+}
+
+.roadmap-feedback-card .comments::before {
+  content: url('/assets/shared/icon-comments.svg');
+  position: relative;
+  top: 0.125rem;
+  right: 0.5rem;
+}
+
+.roadmap-tags-nav-mobile::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: #8c92b3;
+  left: 0;
+  bottom: 0;
+  position: absolute;
+}
+
+.active-status {
+  display: block;
+}
+
+/* Skeleton */
+
+.skeleton {
+  display: block;
+  width: 100%;
+  border-radius: 5px;
+
+  background-image: linear-gradient(
+    270deg,
+    #111111,
+    #333333,
+    #333333,
+    #111111
+  );
+  background-size: 400% 100%;
+  animation: loading 8s ease-in-out infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }
