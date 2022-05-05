@@ -2,12 +2,12 @@ import Link from 'next/link'
 import { Fragment } from 'react'
 import { toCapitalize } from '../../utils/text'
 
-const RoadmapStatus = ({ data }) => {
+const RoadmapStatus = ({ data,className }) => {
   return (
-    <section className="roadmap-status-panel bg-white rounded-10 w-full md:w-1/2 lg:w-full">
-      <h2 className="text-indigo-800 text-lg inline-block">Roadmap</h2>
+    <article className={className}>
+      <h2 className="text-indigo-800 text-lg inline-block mb-5">Roadmap</h2>
       <Link href="/roadmap" passHref>
-        <a className="float-right text-blue-900 text-small font-semibold underline">
+        <a className="float-right text-blue-900 text-small font-semibold underline mt-1">
           View
         </a>
       </Link>
@@ -27,7 +27,7 @@ const RoadmapStatus = ({ data }) => {
           )
         })}
       </dl>
-    </section>
+    </article>
   )
 }
 
