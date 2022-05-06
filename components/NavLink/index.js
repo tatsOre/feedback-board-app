@@ -7,7 +7,7 @@ const colors = {
 
 const NavLink = React.forwardRef(({ label, variant, href, onClick }, ref) => {
   const styles = `${colors[variant].base} ${colors[variant].hover}
-    text-white text-small md:text-sm font-bold px-6 pb-3 pt-2.5 rounded-10`
+    text-white text-small md:text-sm font-bold px-6 py-2.5 rounded-10 inline-block`
   return (
     <a ref={ref} href={href} onClick={onClick} className={styles}>
       {label}

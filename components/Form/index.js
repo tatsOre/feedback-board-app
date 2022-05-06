@@ -63,13 +63,15 @@ export default function Form({ data, edit }) {
       <a>Go Back</a>
       <form
         onSubmit={onSubmit}
-        className="bg-white flex flex-col p-6 pt-8 text-small"
+        className={`form-${
+          edit ? 'edit' : 'create'
+        } bg-white flex flex-col rounded-10 p-6 text-small relative`}
       >
         <h1 className="text-lg md:text-2xl text-indigo-800">
           {edit ? `Edit '${data.title}'` : 'Create New Feedback'}
         </h1>
 
-        <label className="font-bold text-indigo-800 mb-8">
+        <label className="font-bold text-indigo-800 mt-6 leading-5">
           Feedback Title{' '}
           <small className="block font-normal text-indigo-500">
             Add a short, descriptive headline
@@ -78,11 +80,11 @@ export default function Form({ data, edit }) {
             value={values.title}
             name="title"
             onChange={onChange}
-            className="w-full bg-indigo-100 rounded-5 my-3 px-4 py-2"
+            className="w-full bg-indigo-100 rounded-5 px-4 py-2 mt-3"
           />
         </label>
 
-        <label className="font-bold text-indigo-800 mb-8">
+        <label className="font-bold text-indigo-800 mt-6 leading-5">
           Category{' '}
           <small className="block font-normal text-indigo-500">
             Choose a category for your feedback
@@ -97,7 +99,7 @@ export default function Form({ data, edit }) {
         </label>
 
         {edit && (
-          <label className="font-bold text-indigo-800 mb-8">
+          <label className="font-bold text-indigo-800 mt-6 leading-5">
             Update Status{' '}
             <small className="block font-normal text-indigo-500">
               Change feedback state
@@ -111,7 +113,7 @@ export default function Form({ data, edit }) {
           </label>
         )}
 
-        <label className="font-bold text-indigo-800 mb-8">
+        <label className="font-bold text-indigo-800 mt-6 leading-5">
           Feedback Detail{' '}
           <small className="block font-normal text-indigo-500">
             Include any specific comments on what should be improved, added,
@@ -121,7 +123,8 @@ export default function Form({ data, edit }) {
             value={values.description}
             name="description"
             onChange={onChange}
-            className="bg-indigo-100 w-full rounded-5 my-3 px-4 py-2"
+            rows="4"
+            className="bg-indigo-100 w-full rounded-5 px-4 py-2 mt-3"
           />
         </label>
 
@@ -129,12 +132,14 @@ export default function Form({ data, edit }) {
           type="submit"
           variant="primary"
           label={edit ? 'Save Changes' : 'Add Feedback'}
+          style={{ marginTop: '2rem', marginBottom: '1rem' }}
         />
         <Button
           type="button"
           variant="secondary"
           label="Cancel"
           onClick={() => router.back()}
+          style={{ marginBottom: '1rem' }}
         />
         {edit && <Button type="button" variant="danger" label="Delete" />}
       </form>

@@ -1,12 +1,13 @@
+import { Fragment } from "react";
+
 export default function Filter({ options, checkedValue, onChange, className }) {
   return (
     <fieldset className={className}>
       <legend className="invisible h-0">Categories:</legend>
       {options.map(({ label, value }, index) => {
         return (
-          <>
+          <Fragment key={`category-${value}`}>
             <input
-              key={`category-input-${value}`}
               id={value}
               tabIndex={index + 1}
               type="radio"
@@ -16,7 +17,6 @@ export default function Filter({ options, checkedValue, onChange, className }) {
               checked={value === checkedValue}
             />
             <label
-              key={`category-label-${value}`}
               htmlFor={value}
               className={`${
                 checkedValue === value
@@ -26,7 +26,7 @@ export default function Filter({ options, checkedValue, onChange, className }) {
             >
               {label}
             </label>
-          </>
+          </Fragment>
         )
       })}
     </fieldset>

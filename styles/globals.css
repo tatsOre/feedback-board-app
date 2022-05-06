@@ -41,6 +41,9 @@
   button:disabled {
     cursor: progress;
   }
+  input {
+    margin: 0;
+  }
 }
 
 :root {
@@ -67,7 +70,8 @@
 .roadmap-status-panel .title::before,
 .roadmap-feedback-card .status::before {
   content: '●';
-  margin-right: 1rem;
+  font-size: 1.25rem;
+  margin-right: 0.5rem;
 }
 
 .roadmap-status-panel .title.planned::before,
@@ -99,6 +103,16 @@
   left: 0;
   bottom: 0;
   position: absolute;
+}
+
+.roadmap-tags-nav-mobile .planned {
+  border-color: var(--coral);
+}
+.roadmap-tags-nav-mobile .in-progress {
+  border-color: var(--violet-900);
+}
+.roadmap-tags-nav-mobile .live {
+  border-color: var(--sky-medium);
 }
 
 .active-status {

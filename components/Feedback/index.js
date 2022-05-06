@@ -9,7 +9,7 @@ export default function Feedback({ data }) {
     <div>
       <h1>{title}</h1>
       <Link
-        href={{ pathname: '/edit/[id]', query: { id } }}
+        href={{ pathname: '/feedback/edit/[id]', query: { id } }}
         as="/edit"
         passHref
       >

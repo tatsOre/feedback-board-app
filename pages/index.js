@@ -17,3 +17,4 @@ export const getStaticProps = async () => {
 export default function Page(props) {
   return <Home {...props} />
 }
+// <img className="h-12 w-12" src={imageUrl} alt={imageAlt}>

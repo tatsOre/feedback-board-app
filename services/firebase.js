@@ -8,9 +8,9 @@ export async function getAllFeedbacks() {
     ...fd.data(),
   }))
   const schema = {
+    planned: [],
     'in-progress': [],
     live: [],
-    planned: [],
     suggestion: [],
   }
   return docs.reduce((acc, req) => {

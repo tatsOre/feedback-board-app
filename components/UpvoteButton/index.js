@@ -36,8 +36,8 @@ const UpvoteButton = ({ upvotes, upvoted, variant }) => {
         className={`${
           active
             ? 'bg-blue-900 text-white'
-            : `bg-indigo-100 text-indigo-800 ${
-                !loading && 'hover:bg-indigo-300'
+            : `bg-indigo-300 text-indigo-800 ${
+                !loading && 'hover:bg-indigo-400'
               }`
         } rounded-10 text-small p-3 font-bold leading-3`}
       >

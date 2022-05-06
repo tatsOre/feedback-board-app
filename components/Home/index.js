@@ -6,6 +6,8 @@ import RoadmapStatus from './roadmap-status'
 import Select from '../Select'
 import Suggestion from '../Suggestion'
 import Link from 'next/link'
+import Image from 'next/image'
+import IllustrationEmpty from '../Shared/IllustrationEmpty'
 
 const reducer = (state, action) => {
   let data
@@ -87,11 +89,13 @@ export default function Home({ data }) {
         <header className="w-full md:w-1/3 lg:w-full h-[72px] md:h-full lg:h-[140px] md:rounded-10 md:mr-2.5 lg:mr-0 bg-header-sm py-3 px-5 md:p-6 md:bg-header-md lg:bg-header-xl bg-cover bg-no-repeat">
           <h1 className="text-base md:text-xl text-white font-bold leading-5 md:leading-7">
             Frontend Mentor
-            <small className="font-normal text-small md:text-base opacity-75 block">Feedback Board</small>
+            <small className="font-normal text-small md:text-base opacity-75 block">
+              Feedback Board
+            </small>
           </h1>
         </header>
 
-        <div className="w-full md:w-2/3 lg:w-full md:flex md:flex-row lg:flex-col lg:space-y-4"> {/* mobile menu */}
+        <div className="w-full md:w-2/3 lg:w-full md:flex md:flex-row lg:flex-col lg:space-y-4">
           <Filter
             className="bg-white rounded-10 w-full md:w-1/2 lg:w-full p-5"
             options={[
@@ -105,7 +109,6 @@ export default function Home({ data }) {
             checkedValue={state.filter}
             onChange={onTabChange}
           />
-
           <RoadmapStatus
             className="roadmap-status-panel bg-white rounded-10 w-full md:w-1/2 lg:w-full p-5 md:ml-2.5 lg:ml-0"
             data={{
@@ -140,12 +143,27 @@ export default function Home({ data }) {
           </Link>
         </header>
 
-        {state.suggestions.map((fd) => (
-          <Suggestion key={fd.id} data={fd} />
-        ))}
+        <div className="py-8 px-6 md:p-0">
+          {state.suggestions.length ? (
+            state.suggestions.map((fd) => <Suggestion key={fd.id} data={fd} />)
+          ) : (
+            <div className="bg-white rounded-10 text-center py-20 px-7 md:py-24 md:px-44">
+              <p className="text-indigo-800 font-bold text-lg md:text-2xl tracking-tight mt-6">
+                There is no feedback yet.
+              </p>
+              <p className="text-indigo-500 text-small mt-2 mb-5">
+                Got a suggestion? Found a bug that needs to be squashed? We love
+                hearing about new ideas to improve our app.
+              </p>
+              <Link href="/post" passHref>
+                <NavLink label="+ Add Feedback" variant="primary" />
+              </Link>
+            </div>
+          )}
+        </div>
       </section>
 
-      <footer className="w-full order-last">2022</footer>
+      <footer className="w-full order-last text-xs text-center my-6">Feedback Board App - Coded by <a>Someone</a>. 2022.</footer>
     </main>
   )
 }
