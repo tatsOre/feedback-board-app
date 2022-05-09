@@ -69,7 +69,7 @@ const Select = ({ options, selected, onChange }) => {
         onKeyDown={handleKeyDown}
         className="text-white"
       >
-        Sort by: {options[highlightedIndex].label}
+        Sort by: {"options[highlightedIndex].label"}
       </button>
 
       <ul
@@ -83,6 +83,7 @@ const Select = ({ options, selected, onChange }) => {
         {isOpen &&
           options.map(({ label, value }, index) => (
             <li
+              key={`select-${value}`}
               className={`${
                 value === selected ? 'font-bold' : 'font-regular'
               } ${

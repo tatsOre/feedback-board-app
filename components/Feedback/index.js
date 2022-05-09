@@ -115,12 +115,12 @@ const Comment = ({ comment, fdid, cmid }) => {
 }
 
 export default function Feedback({ data }) {
-  if (!data) return <p>...Loading</p>
-
   const [newComment, setNewComment] = useState('')
   const router = useRouter()
-  const n = 225
 
+  if (!data) return <p>...Loading</p>
+
+  const n = 225
   const total = getCommentsLength(data.comments)
 
   const onSubmit = (event) => {

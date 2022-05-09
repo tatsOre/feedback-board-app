@@ -2,7 +2,7 @@ import admin from '../../../firebase/nodeApp'
 /*
   await axios.post(`/api/feedback`, {...});
 */
-export default async (req, res) => {
+export default async function feedbackHandler(req, res) {
   console.log(req.method, req.query)
   try {
     const { slug } = req.body
