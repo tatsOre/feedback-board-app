@@ -1,10 +1,12 @@
 import Link from 'next/link'
 import UpvoteButton from '../UpvoteButton'
-import { toCapitalize } from '../../utils/text'
+import { getCommentsLength, toCapitalize } from '../../utils/index'
 
 export default function RoadmapCard({ feedback }) {
   const { status, title, description, category, upvotes, comments, slug } =
     feedback
+
+  const total = getCommentsLength(comments)
 
   return (
     <div
@@ -22,7 +24,7 @@ export default function RoadmapCard({ feedback }) {
       </p>
       <UpvoteButton upvoted={false} upvotes={upvotes} variant="inline" />
       <p className="comments float-right mt-2 font-bold lg:text-base text-indigo-800">
-        {comments.length}
+        {total}
       </p>
     </div>
   )

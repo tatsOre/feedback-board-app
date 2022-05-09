@@ -4,10 +4,10 @@ const colors = {
   danger: { base: 'bg-red-900', hover: 'hover:bg-red-500' },
 }
 
-export default function Button (props) {
+export default function Button(props) {
   const variant = props.variant ? props.variant : 'primary'
   const styles = `${colors[variant].base} ${colors[variant].hover} 
-    rounded-10 text-white font-bold text-small md:text-sm leading-3 h-10 md:h-11 px-4 md:px-6`
+    rounded-10 text-white font-bold text-small md:text-sm leading-3 h-10 md:h-11 px-4 md:px-6 min-w-max`
   return (
     <button {...props} className={styles}>
       {props.label || 'Button Label'}

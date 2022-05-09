@@ -49,6 +49,7 @@
 :root {
   --bg-indigo-100: #F7F8FD;
   --bg-indigo-300: #F2F4FF;
+  --bg-indigo-400: #CFD7FF;
   --sky-medium: #62bcfa;
   --coral: #f49f85;
   --blue-900: #4661E6;
@@ -194,5 +195,14 @@ input[type='radio']:focus {
 } */
 
 .feedback-comments-section .feedback-comment:not(:last-of-type) {
-  border-bottom: 1px var(--blue-900) solid;
+  border-bottom: 1px solid var(--bg-indigo-400);
 }
+
+.feedback-comments-section .feedback-comment {
+
+}
+
+.feedback-comments-section .feedback-reply {
+
+}
+

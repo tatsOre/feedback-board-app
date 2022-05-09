@@ -1,10 +1,10 @@
 import UpvoteButton from '../UpvoteButton'
-import { toCapitalize } from '../../utils/text'
+import { getCommentsLength, toCapitalize } from '../../utils'
 import Link from 'next/link'
 
 const Suggestion = ({ data }) => {
   const { title, description, category, upvotes, comments, slug } = data
-  // all the component should be the link
+  const total = getCommentsLength(comments)
   return (
     <div className="w-full group bg-white rounded-md cursor-pointer">
       <h3 className="text-small lg:text-lg text-indigo-800">
@@ -18,7 +18,7 @@ const Suggestion = ({ data }) => {
       </p>
       <UpvoteButton upvoted={false} variant="inline" upvotes={upvotes} />
       <p className="font-bold float-right request-comments mt-2">
-        {comments?.length}
+        {total}
       </p>
     </div>
   )

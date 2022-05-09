@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { Fragment } from 'react'
-import { toCapitalize } from '../../utils/text'
+import { toCapitalize } from '../../utils/index'
 
 const RoadmapStatus = ({ data,className }) => {
   return (

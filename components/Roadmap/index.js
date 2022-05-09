@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { toCapitalize } from '../../utils/text'
+import { toCapitalize } from '../../utils/index'
 import NavLink from '../NavLink'
 import RoadmapCard from './roadmap-card'
 
