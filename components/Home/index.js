@@ -138,7 +138,7 @@ export default function Home({ data }) {
             onChange={onSelectChange}
           />
 
-          <Link href="/post" passHref>
+          <Link href="/feedback/new" passHref>
             <NavLink label="+ Add Feedback" variant="primary" />
           </Link>
         </header>

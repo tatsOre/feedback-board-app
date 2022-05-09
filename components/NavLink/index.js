@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 const colors = {
   primary: { base: 'bg-violet-900', hover: 'hover:bg-violet-500' },
@@ -15,4 +15,6 @@ const NavLink = React.forwardRef(({ label, variant, href, onClick }, ref) => {
   )
 })
 
+// for es-lint displayName error:
+NavLink.displayName = 'NavLink'
 export default NavLink

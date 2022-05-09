@@ -8,7 +8,7 @@ export default function RoadmapCard({ feedback }) {
 
   return (
     <div
-      className={`roadmap-feedback-card ${status} rounded-md border-t-6 bg-white p-6 pt-3 text-small lg:text-base`}
+      className={`roadmap-feedback-card ${status} rounded-md border-t-6 bg-white p-6 pt-3 mb-4 text-small lg:text-base`}
     >
       <p className={`status text-indigo-500`}>{toCapitalize(status)}</p>
       <h3 className="lg:text-lg mt-3 mb-1">

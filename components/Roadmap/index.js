@@ -13,8 +13,8 @@ const RoadmapPage = ({ data }) => {
   const [show, setShow] = useState('planned')
 
   return (
-    <div>
-      <header className="flex text-white bg-indigo-900">
+    <main className="container lg:px-4 md:pt-14 lg:pt-20">
+      <header className="flex text-white bg-indigo-900 md:rounded-10 p-6 md:p-7">
         <button>
           <a>Go Back</a>
         </button>
@@ -41,7 +41,7 @@ const RoadmapPage = ({ data }) => {
         )}
       </nav>
 
-      <div className="flex p-6 lg:pt-8">
+      <div className="flex p-6 md:p-0 md:pt-8 space-x-2">
         {Object.keys(data).map(
           (category) =>
             category !== 'suggestion' && (
@@ -63,7 +63,7 @@ const RoadmapPage = ({ data }) => {
             )
         )}
       </div>
-    </div>
+    </main>
   )
 }
 

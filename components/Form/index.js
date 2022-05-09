@@ -53,13 +53,13 @@ export default function Form({ data, edit }) {
 
     setState((prevState) => ({ ...prevState, loading: false }))
     if (response.statusText === 'OK') {
-      router.push(`/${dashify(values.title)}`)
+      router.push(`/feedback/detail/${dashify(values.title)}`)
     } else {
       setState((prevState) => ({ ...prevState, error: 'Ups' }))
     }
   }
   return (
-    <main className="p-6">
+    <main className="p-6 max-w-[540px] mx-auto">
       <a>Go Back</a>
       <form
         onSubmit={onSubmit}
