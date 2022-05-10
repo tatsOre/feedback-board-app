@@ -87,7 +87,7 @@ export default function Home({ data }) {
 
   return (
     <main className="container flex flex-wrap flex-col lg:flex-row md:pt-14 lg:pt-24">
-      <aside className="md:flex md:flex-row lg:flex-col lg:w-1/4 md:h-44 lg:h-full md:mb-10 bg-indigo-lighter lg:space-y-4">
+      <aside className="md:flex md:flex-row lg:flex-col lg:w-1/4 md:h-44 lg:h-full md:mb-10 bg-indigo-lighter lg:space-y-6">
         <header className="w-full md:w-1/3 lg:w-full h-[72px] md:h-full lg:h-[140px] md:rounded-10 md:mr-2.5 lg:mr-0 bg-header-sm py-3 px-5 md:p-6 md:bg-header-md lg:bg-header-xl bg-cover bg-no-repeat">
           <h1 className="text-base md:text-xl text-white font-bold leading-5 md:leading-7">
             Frontend Mentor
@@ -97,7 +97,7 @@ export default function Home({ data }) {
           </h1>
         </header>
 
-        <div className="w-full md:w-2/3 lg:w-full md:flex md:flex-row lg:flex-col lg:space-y-4">
+        <div className="w-full md:w-2/3 lg:w-full md:flex md:flex-row lg:flex-col lg:space-y-6">
           <Filter
             className="bg-white rounded-10 w-full md:w-1/2 lg:w-full p-5"
             options={[
@@ -123,7 +123,7 @@ export default function Home({ data }) {
       </aside>
 
       <section className="home-suggestions-section lg:w-3/4 lg:pl-5">
-        <header className="flex items-center justify-between bg-indigo-800 md:rounded-10 px-6 py-2 md:pr-4 md:pl-9 md:py-4">
+        <header className="flex items-center justify-between bg-indigo-800 md:rounded-10 px-6 py-2 md:pr-4 md:pl-9 md:py-4 md:mb-6">
           <h2 className="hidden md:block text-white font-bold text-lg">
             {SuggLength} Suggestion
             {SuggLength > 1 || !SuggLength ? 's' : ''}
@@ -145,15 +145,10 @@ export default function Home({ data }) {
           </Link>
         </header>
 
-        <div className="py-8 px-6 md:p-0">
+        <div className="py-8 px-6 md:p-0 space-y-6">
           {SuggLength ? (
             state.suggestions.map((fd) => (
-              <div
-                key={fd.id}
-                className="feedback-detail group bg-white text-[13px] rounded-10 cursor-pointer mb-6 p-6 md:px-8"
-              >
-                <FeedbackCard feedback={fd} />
-              </div>
+              <FeedbackCard key={fd.id} feedback={fd} />
             ))
           ) : (
             <div className="bg-white rounded-10 text-center py-20 px-7 md:py-24 md:px-44">

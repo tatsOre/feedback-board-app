@@ -5,8 +5,8 @@ import useUser from '../../hooks/use-user'
 import { getCommentsLength } from '../../utils'
 import Button from '../Buttons/Default'
 import GoBack from '../Buttons/GoBack'
+import FeedbackCard from '../FeedbackCard'
 import NavLink from '../NavLink'
-import Suggestion from '../Suggestion'
 
 const PostReply = ({ data }) => {
   const { feedbackID, commentID, replyingTo } = data
@@ -147,10 +147,10 @@ export default function Feedback({ data }) {
         )}
       </nav>
 
-      <Suggestion data={data} />
+      <FeedbackCard feedback={data} />
 
       {commentsLength ? (
-        <section className="feedback-comments-section bg-white rounded-10 p-6 pb-0 md:px-8">
+        <section className="feedback-comments-section bg-white rounded-10 p-6 pb-0 md:px-8 mt-6">
           <h2 className="text-indigo-800 text-lg">
             {commentsLength} Comment{commentsLength > 1 ? 's' : ''}
           </h2>
