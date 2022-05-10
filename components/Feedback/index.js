@@ -13,7 +13,7 @@ const PostReply = ({ data }) => {
 
   const [state, setState] = useState('')
 
-  const { user } = useUser()
+  const { user } = useUser('jesse10930')
 
   const onChange = ({ target }) => setState(target.value)
 
@@ -26,9 +26,9 @@ const PostReply = ({ data }) => {
       replyingTo,
       content: state,
       user: {
-        image: user.image,
-        name: user.name,
-        username: user.username,
+        image: user?.image,
+        name: user?.name,
+        username: user?.username,
       },
     }
     console.log(payload)

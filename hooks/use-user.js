@@ -1,9 +1,8 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 
-export default function useUser() {
+export default function useUser(username) {
   const [user, setUser] = useState(null)
-  const username = 'jesse10930'
 
   useEffect(() => {
     async function getUser(username) {

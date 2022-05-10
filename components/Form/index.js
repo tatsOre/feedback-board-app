@@ -26,7 +26,7 @@ export default function Form({ data, edit }) {
   )
   const router = useRouter()
 
-  const { user } = useUser()
+  const { user } = useUser('jesse10930')
 
   const onChange = (event) => {
     const { name, value } = event.target
@@ -44,7 +44,7 @@ export default function Form({ data, edit }) {
       method: edit ? 'put' : 'post',
       data: {
         ...values,
-        author: user.username,
+        author: user?.username || "jesse10930",
         slug: dashify(values.title),
       },
     })
