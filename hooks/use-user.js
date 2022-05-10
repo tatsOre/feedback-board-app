@@ -8,6 +8,7 @@ export default function useUser() {
   useEffect(() => {
     async function getUser(username) {
       const response = await axios(`/api/user/${username}`)
+      console.log(response)
 
       if (response.statusText === 'OK') {
         setUser(response.data)
