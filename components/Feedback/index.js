@@ -1,9 +1,10 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import { useState } from 'react'
+import useUser from '../../hooks/use-user'
 import { getCommentsLength } from '../../utils'
-import Button from '../Button'
+import Button from '../Buttons/Default'
+import GoBack from '../Buttons/GoBack'
 import NavLink from '../NavLink'
 import Suggestion from '../Suggestion'
 
@@ -11,6 +12,9 @@ const PostReply = ({ data }) => {
   const { feedbackID, commentID, replyingTo } = data
 
   const [state, setState] = useState('')
+
+  const { user } = useUser()
+
   const onChange = ({ target }) => setState(target.value)
 
   const onSubmit = (event) => {
@@ -22,9 +26,9 @@ const PostReply = ({ data }) => {
       replyingTo,
       content: state,
       user: {
-        image: 'user-images/image-suzanne.jpg',
-        name: 'Suzanne Chang',
-        username: 'upbeat1811',
+        image: user.image,
+        name: user.name,
+        username: user.username,
       },
     }
     console.log(payload)
@@ -116,12 +120,12 @@ const Comment = ({ comment, fdid, cmid }) => {
 
 export default function Feedback({ data }) {
   const [newComment, setNewComment] = useState('')
-  const router = useRouter()
+  const { user } = useUser()
 
   if (!data) return <p>...Loading</p>
 
-  const n = 225
-  const total = getCommentsLength(data.comments)
+  const charsLeft = 225 - newComment.length
+  const commentsLength = getCommentsLength(data.comments)
 
   const onSubmit = (event) => {
     event.preventDefault()
@@ -129,21 +133,27 @@ export default function Feedback({ data }) {
   }
 
   return (
-    <main className="p-6 md:p-10 max-w-[calc(730px+5rem)] mx-auto flex flex-wrap justify-between space-y-6">
-      <button onClick={() => router.back()}>Go Back</button>
-      <Link
-        href={{ pathname: '/feedback/edit/[id]', query: { id: data.id } }}
-        as="/edit"
-        passHref
-      >
-        <NavLink label="Edit Feedback" variant="secondary" />
-      </Link>
+    <main className="p-6 md:p-10 max-w-[calc(730px+5rem)] mx-auto">
+      <nav className="flex justify-between mb-6">
+        <GoBack />
+        {user?.username === data.author && (
+          <Link
+            href={{ pathname: '/feedback/edit/[id]', query: { id: data.id } }}
+            as="/edit"
+            passHref
+          >
+            <NavLink label="Edit Feedback" variant="secondary" />
+          </Link>
+        )}
+      </nav>
 
       <Suggestion data={data} />
 
-      {data.comments.length ? (
-        <section className="feedback-comments-section w-full bg-white rounded-10 p-6 pb-0 md:px-8">
-          <h2 className="text-indigo-800 text-lg">{total} Comments</h2>
+      {commentsLength ? (
+        <section className="feedback-comments-section bg-white rounded-10 p-6 pb-0 md:px-8">
+          <h2 className="text-indigo-800 text-lg">
+            {commentsLength} Comment{commentsLength > 1 ? 's' : ''}
+          </h2>
 
           {data.comments.map((c) => (
             <Comment
@@ -158,25 +168,28 @@ export default function Feedback({ data }) {
         ''
       )}
 
-      <form
-        onSubmit={onSubmit}
-        className="w-full bg-white rounded-10 p-6 md:px-8 flex flex-wrap justify-between items-center"
-      >
-        <h2 className="w-full text-indigo-800 text-lg mb-6">Add Comment</h2>
-        <textarea
-          name="new-comment"
-          value={newComment}
-          onChange={(e) => setNewComment(e.target.value)}
-          aria-label={`Add a new comment for ${data.title}`}
-          className="w-full text-[13px] md:text-[15px] bg-indigo-100 rounded-5 p-4 mb-4 text-indigo-800 border border-indigo-100 hover:border-blue-900 cursor-pointer"
-          placeholder="Type your comment here"
-          rows="3"
-        />
-        <p className="text-indigo-500 text-[13px]">
-          {n} character{n > 1 || n === 0 ? 's' : ''} left
-        </p>
-        <Button type="submit" label="Post Comment" variant="primary" />
-      </form>
+      {user?.username !== data.author && (
+        <form
+          onSubmit={onSubmit}
+          className="bg-white rounded-10 p-6 md:px-8 mt-6 flex flex-wrap justify-between items-center"
+        >
+          <h2 className="w-full text-indigo-800 text-lg mb-6">Add Comment</h2>
+          <textarea
+            name="new-comment"
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)}
+            aria-label={`Add a new comment for ${data.title}`}
+            className="w-full text-[13px] md:text-[15px] bg-indigo-100 rounded-5 p-4 mb-4 text-indigo-800 border border-indigo-100 hover:border-blue-900 cursor-pointer"
+            placeholder="Type your comment here"
+            rows="3"
+            maxLength="225"
+          />
+          <p className="text-indigo-500 text-[13px]">
+            {charsLeft} character{charsLeft > 1 || !charsLeft ? 's' : ''} left
+          </p>
+          <Button type="submit" label="Post Comment" variant="primary" />
+        </form>
+      )}
     </main>
   )
 }

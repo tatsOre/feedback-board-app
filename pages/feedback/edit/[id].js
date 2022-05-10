@@ -1,3 +1,5 @@
+import Head from 'next/head'
+import Footer from '../../../components/Shared/footer'
 import Form from '../../../components/Form'
 import { getFeedbackById } from '../../../services/firebase'
 
@@ -14,5 +16,13 @@ export async function getServerSideProps({ params }) {
 }
 
 export default function Page(props) {
-  return <Form {...props} edit={true} />
+  return (
+    <>
+      <Head>
+        <title>Edit - {props.data.title}</title>
+      </Head>
+      <Form {...props} edit />
+      <Footer />
+    </>
+  )
 }

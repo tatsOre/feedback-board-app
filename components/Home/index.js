@@ -4,10 +4,10 @@ import Filter from '../Filter'
 import NavLink from '../NavLink'
 import RoadmapStatus from './roadmap-status'
 import Select from '../Select'
-import Suggestion from '../Suggestion'
 import Link from 'next/link'
 import Image from 'next/image'
 import IllustrationEmpty from '../Shared/IllustrationEmpty'
+import FeedbackCard from '../FeedbackCard'
 
 const reducer = (state, action) => {
   let data
@@ -76,6 +76,8 @@ export default function Home({ data }) {
   const initFunc = () => init(initialState, data)
   const [state, dispatch] = useReducer(reducer, initialState, initFunc)
 
+  const SuggLength = state.suggestions?.length || 0
+
   const onTabChange = ({ target }) =>
     dispatch({ type: 'CHANGE_FILTER_VALUE', payload: target.value })
 
@@ -120,11 +122,11 @@ export default function Home({ data }) {
         </div>
       </aside>
 
-      <section className="lg:w-3/4 lg:pl-5">
-        <header className="flex items-center justify-between md:rounded-10 px-6 py-2 bg-indigo-800">
+      <section className="home-suggestions-section lg:w-3/4 lg:pl-5">
+        <header className="flex items-center justify-between bg-indigo-800 md:rounded-10 px-6 py-2 md:pr-4 md:pl-9 md:py-4">
           <h2 className="hidden md:block text-white font-bold text-lg">
-            {state.suggestions.length} Suggestion
-            {state.suggestions.length > 1 ? 's' : ''}
+            {SuggLength} Suggestion
+            {SuggLength > 1 || !SuggLength ? 's' : ''}
           </h2>
 
           <Select
@@ -144,8 +146,15 @@ export default function Home({ data }) {
         </header>
 
         <div className="py-8 px-6 md:p-0">
-          {state.suggestions.length ? (
-            state.suggestions.map((fd) => <Suggestion key={fd.id} data={fd} />)
+          {SuggLength ? (
+            state.suggestions.map((fd) => (
+              <div
+                key={fd.id}
+                className="feedback-detail group bg-white text-[13px] rounded-10 cursor-pointer mb-6 p-6 md:px-8"
+              >
+                <FeedbackCard feedback={fd} />
+              </div>
+            ))
           ) : (
             <div className="bg-white rounded-10 text-center py-20 px-7 md:py-24 md:px-44">
               <p className="text-indigo-800 font-bold text-lg md:text-2xl tracking-tight mt-6">
@@ -155,15 +164,13 @@ export default function Home({ data }) {
                 Got a suggestion? Found a bug that needs to be squashed? We love
                 hearing about new ideas to improve our app.
               </p>
-              <Link href="/post" passHref>
+              <Link href="/feedback/new" passHref>
                 <NavLink label="+ Add Feedback" variant="primary" />
               </Link>
             </div>
           )}
         </div>
       </section>
-
-      <footer className="w-full order-last text-xs text-center my-6">Feedback Board App - Coded by <a>Someone</a>. 2022.</footer>
     </main>
   )
 }

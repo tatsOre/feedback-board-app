@@ -1,4 +1,6 @@
+import Head from 'next/head'
 import RoadmapPage from '../components/Roadmap'
+import Footer from '../components/Shared/footer'
 import { getAllFeedbacks } from '../services/firebase'
 
 export const getStaticProps = async () => {
@@ -15,5 +17,13 @@ export const getStaticProps = async () => {
 }
 
 export default function Page(props) {
-  return <RoadmapPage {...props} />
+  return (
+    <>
+      <Head>
+        <title>Feedback Board App - Roadmap</title>
+      </Head>
+      <RoadmapPage {...props} />
+      <Footer />
+    </>
+  )
 }

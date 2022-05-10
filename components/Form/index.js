@@ -1,35 +1,32 @@
 import axios from 'axios'
 import dashify from 'dashify'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
-import Button from '../Button'
+import { useState } from 'react'
+import useUser from '../../hooks/use-user'
+import Button from '../Buttons/Default'
+import GoBack from '../Buttons/GoBack'
+
+function getInitialState(data, edit) {
+  let values = {
+    title: data?.title || '',
+    category: data?.category || 'Feature',
+    description: data?.description || '',
+  }
+  if (edit) values = { ...values, status: data?.status }
+  return {
+    loading: false,
+    error: false,
+    values,
+  }
+}
 
 export default function Form({ data, edit }) {
-  const getInitialState = (data) => {
-    let values = {
-      title: data?.title || '',
-      category: data?.category || '',
-      description: data?.description || '',
-    }
-    if (edit) values = { ...values, status: data?.status }
-    return {
-      loading: false,
-      error: false,
-      values,
-    }
-  }
-
   const [{ values, loading, error }, setState] = useState(() =>
-    getInitialState(data)
+    getInitialState(data, edit)
   )
-
   const router = useRouter()
 
-  useEffect(() => {
-    document.title = edit
-      ? `Edit - ${values.title}`
-      : 'Feedback Board App - Add Feedback'
-  }, [])
+  const { user } = useUser()
 
   const onChange = (event) => {
     const { name, value } = event.target
@@ -47,6 +44,7 @@ export default function Form({ data, edit }) {
       method: edit ? 'put' : 'post',
       data: {
         ...values,
+        author: user.username,
         slug: dashify(values.title),
       },
     })
@@ -59,8 +57,8 @@ export default function Form({ data, edit }) {
     }
   }
   return (
-    <main className="p-6 max-w-[540px] mx-auto">
-      <a>Go Back</a>
+    <main className="max-w-[540px] mx-auto p-6 md:pt-14 lg:pt-20">
+      <GoBack />
       <form
         onSubmit={onSubmit}
         className={`form-${

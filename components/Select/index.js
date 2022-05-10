@@ -67,9 +67,9 @@ const Select = ({ options, selected, onChange }) => {
         aria-labelledby="dropdown-label dropdown-toggle-button"
         onClick={handleToggleButton}
         onKeyDown={handleKeyDown}
-        className="text-white"
+        className="text-white font-normal text-[13px]"
       >
-        Sort by: {"options[highlightedIndex].label"}
+        Sort by: {"Most Upvotes"}
       </button>
 
       <ul

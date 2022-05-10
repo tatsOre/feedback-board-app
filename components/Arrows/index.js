@@ -1,4 +1,4 @@
-export const ArrowUp = ({ color, className = '' }) => {
+const ArrowUp = ({ color, className }) => {
   return (
     <svg
       className={className}
@@ -16,3 +16,24 @@ export const ArrowUp = ({ color, className = '' }) => {
     </svg>
   )
 }
+
+const ArrowLeft = ({ color, className }) => {
+  return (
+    <svg
+      width="7"
+      height="10"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+    >
+      <path
+        d="M6 9L2 5l4-4"
+        stroke={color}
+        strokeWidth="2"
+        fill="none"
+        fillRule="evenodd"
+      />
+    </svg>
+  )
+}
+
+export { ArrowUp, ArrowLeft }

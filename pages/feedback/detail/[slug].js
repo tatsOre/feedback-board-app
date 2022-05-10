@@ -1,4 +1,6 @@
+import Head from 'next/head'
 import Feedback from '../../../components/Feedback'
+import Footer from '../../../components/Shared/footer'
 import { getFeedbackByField } from '../../../services/firebase'
 
 export async function getServerSideProps({ params }) {
@@ -14,7 +16,15 @@ export async function getServerSideProps({ params }) {
 }
 
 export default function Page(props) {
-  return <Feedback {...props} />
+  return (
+    <>
+    <Head>
+      <title>{`Feedback Board App - ${props.data.title}`}</title>
+    </Head>
+    <Feedback {...props} />
+    <Footer />
+    </>
+  )
 }
 
 

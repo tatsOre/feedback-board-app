@@ -2,8 +2,7 @@ import admin from '../../../firebase/nodeApp'
 /*
   await axios.post(`/api/feedback`, {...});
 */
-export default async function feedbackHandler(req, res) {
-  console.log(req.method, req.query)
+export default async function postFeedbackHandler(req, res) {
   try {
     const { slug } = req.body
     const db = admin.firestore()
@@ -20,7 +19,6 @@ export default async function feedbackHandler(req, res) {
         comments: [],
         created: new Date().toISOString(),
       })
-      // si decido cambiar dsp el param de la ruta dinamica puedo agregar slug a response:
       res.status(200).json({ id })
     }
   } catch (error) {

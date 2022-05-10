@@ -1,5 +1,28 @@
 import admin from '../firebase/nodeApp'
 
+export async function getUserById(id) {
+  const db = admin.firestore()
+  const doc = await db.collection('users').doc(id).get()
+  if (doc.exists) {
+    return { id: doc.id, ...doc.data() }
+  }
+  throw new Error('The user does not exist')
+}
+
+export async function getUserByUsername(username) {
+  const db = admin.firestore()
+  const snapshot = await db
+    .collection('users')
+    .where('username', '==', username)
+    .get()
+
+  if (!snapshot.empty) {
+    const docs = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+    return docs[0]
+  }
+  throw new Error('The user does not exist')
+}
+
 export async function getAllFeedbacks() {
   const db = admin.firestore()
   const result = await db.collection('feedbacks').get()

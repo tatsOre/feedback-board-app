@@ -1,4 +1,6 @@
+import Head from 'next/head'
 import Home from '../components/Home'
+import Footer from '../components/Shared/footer'
 import { getAllFeedbacks } from '../services/firebase'
 
 export const getStaticProps = async () => {
@@ -15,6 +17,13 @@ export const getStaticProps = async () => {
 }
 
 export default function Page(props) {
-  return <Home {...props} />
+  return (
+    <>
+      <Head>
+        <title>Feedback Board App - Hello!</title>
+      </Head>
+      <Home {...props} />
+      <Footer />
+    </>
+  )
 }
-// <img className="h-12 w-12" src={imageUrl} alt={imageAlt}>
