@@ -1,7 +1,6 @@
-const ArrowUp = ({ color, className }) => {
+const ArrowUp = ({ color }) => {
   return (
     <svg
-      className={className}
       width="10"
       height="7"
       xmlns="http://www.w3.org/2000/svg"

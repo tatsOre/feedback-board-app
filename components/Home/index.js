@@ -1,12 +1,9 @@
-import Head from 'next/head'
 import { useReducer } from 'react'
 import Filter from '../Filter'
 import NavLink from '../NavLink'
 import RoadmapStatus from './roadmap-status'
 import Select from '../Select'
 import Link from 'next/link'
-import Image from 'next/image'
-import IllustrationEmpty from '../Shared/IllustrationEmpty'
 import FeedbackCard from '../FeedbackCard'
 
 const reducer = (state, action) => {
@@ -88,7 +85,7 @@ export default function Home({ data }) {
   return (
     <main className="container flex flex-wrap flex-col lg:flex-row md:pt-14 lg:pt-24">
       <aside className="md:flex md:flex-row lg:flex-col lg:w-1/4 md:h-44 lg:h-full md:mb-10 bg-indigo-lighter lg:space-y-6">
-        <header className="w-full md:w-1/3 lg:w-full h-[72px] md:h-full lg:h-[140px] md:rounded-10 md:mr-2.5 lg:mr-0 bg-header-sm py-3 px-5 md:p-6 md:bg-header-md lg:bg-header-xl bg-cover bg-no-repeat">
+        <header className="w-full md:w-1/3 lg:w-full h-[72px] md:h-full lg:h-[140px] md:rounded-10 md:mr-2.5 lg:mr-0 py-3 px-5 md:p-6 bg-header-sm md:bg-header-md lg:bg-header-xl bg-cover bg-no-repeat">
           <h1 className="text-base md:text-xl text-white font-bold leading-5 md:leading-7">
             Frontend Mentor
             <small className="font-normal text-small md:text-base opacity-75 block">
@@ -147,8 +144,8 @@ export default function Home({ data }) {
 
         <div className="py-8 px-6 md:p-0 space-y-6">
           {SuggLength ? (
-            state.suggestions.map((fd) => (
-              <FeedbackCard key={fd.id} feedback={fd} />
+            state.suggestions.map((data) => (
+              <FeedbackCard key={data.id} feedback={data} link />
             ))
           ) : (
             <div className="bg-white rounded-10 text-center py-20 px-7 md:py-24 md:px-44">

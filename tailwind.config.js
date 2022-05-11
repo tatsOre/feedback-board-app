@@ -39,9 +39,9 @@ module.exports = {
     },
     extend: {
       backgroundImage: {
-        'header-sm': "url('/assets/suggestions/desktop/background-header.png')",
+        'header-sm': "url('/assets/suggestions/mobile/background-header.png')",
         'header-md': "url('/assets/suggestions/tablet/background-header.png')",
-        'header-xl': "url('/assets/suggestions/mobile/background-header.png')",
+        'header-xl': "url('/assets/suggestions/desktop/background-header.png')",
       },
       fontSize: {
         small: '0.813rem',

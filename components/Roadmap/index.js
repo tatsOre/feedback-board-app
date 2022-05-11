@@ -47,7 +47,7 @@ const RoadmapPage = ({ data }) => {
         )}
       </nav>
 
-      <section className="roadmap-feedbacks-section flex p-6 md:p-0 md:pt-8 space-x-2">
+      <section className="roadmap-feedbacks-section flex p-6 md:p-0 md:pt-8 md:space-x-2.5 lg:space-x-4 xl:space-x-7">
         {Object.keys(data).map(
           (category) =>
             category !== 'suggestion' && (

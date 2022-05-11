@@ -48,7 +48,7 @@ function Edit({ data, edit, user }) {
         },
       })
       console.log('Response in Form', response)
-      router.push(`/feedback/detail/${response.data.slug}`)
+      router.push(`/feedback/detail/${dashify(values.title)}`)
     } catch (error) {
       setState((prevState) => ({ ...prevState, error: error.message }))
     } finally {
