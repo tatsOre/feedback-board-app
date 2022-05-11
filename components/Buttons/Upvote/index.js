@@ -26,7 +26,7 @@ const UpvoteButton = ({ upvotes, upvoted }) => {
     const newData = votes + 1
     return setState({ votes: newData, loading: false, active: true })
   }
-
+  
   return (
     <>
       <button
@@ -39,7 +39,7 @@ const UpvoteButton = ({ upvotes, upvoted }) => {
             : `bg-indigo-300 text-indigo-800 ${
                 !loading && 'hover:bg-indigo-400'
               }`
-        } rounded-10 text-small min-w-[70px] py-3 leading-3 relative z-10`}
+        } rounded-10 text-small min-w-[70px] py-3 px-4 leading-3 flex justify-between relative z-10`}
       >
         {loading ? (
           <i>⏱</i>

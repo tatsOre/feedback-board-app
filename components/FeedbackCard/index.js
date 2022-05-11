@@ -3,8 +3,7 @@ import UpvoteButton from '../Buttons/Upvote'
 import { getCommentsLength, toCapitalize } from '../../utils'
 
 export default function FeedbackCard({ feedback, link }) {
-  const { category, comments, description, slug, status, title, upvotes } =
-    feedback
+  const { category, comments, description, slug, title, upvotes } = feedback
   const commentsLength = getCommentsLength(comments)
   const categoryText = ['ux', 'ui'].includes(category)
     ? category.toUpperCase()
@@ -33,7 +32,11 @@ export default function FeedbackCard({ feedback, link }) {
       </div>
 
       <UpvoteButton upvoted={false} upvotes={upvotes} variant="inline" />
-      <p className="comments ml-auto md:my-auto font-bold lg:text-base text-indigo-800">
+      <p
+        className={`${
+          commentsLength ? 'text-indigo-800' : 'text-[#898EAC]'
+        } comments ml-auto md:my-auto font-bold lg:text-base`}
+      >
         {commentsLength}
       </p>
     </div>

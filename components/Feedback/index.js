@@ -37,14 +37,14 @@ const PostReply = ({ data }) => {
   return (
     <form
       onSubmit={onSubmit}
-      className="col-span-3 md:col-start-2 md:col-span-2 md:flex md:space-x-4 mt-6 mb-2"
+      className="col-span-3 md:col-start-2 md:col-span-2 md:flex md:space-x-4 mt-6 md:mb-2"
     >
       <textarea
         name="new-comment"
         value={state}
         onChange={onChange}
         aria-label="Add a new comment"
-        className="w-full mb-3 md:mb-0 p-4 bg-indigo-100 text-indigo-800 md:text-sm rounded-5 border border-indigo-100 hover:border-blue-900 cursor-pointer"
+        className="w-full mb-3 md:mb-0 p-2 md:p-4 bg-indigo-100 text-indigo-800 md:text-sm rounded-5 border border-indigo-100 hover:border-blue-900 cursor-pointer"
       />
       <Button type="submit" label="Post Reply" variant="primary" />
     </form>

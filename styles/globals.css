@@ -26,7 +26,7 @@
   }
   h3 {
     line-height: 26px;
-    letter-spacing: -0.25px
+    letter-spacing: -0.25px;
   }
   h4 {
     line-height: 20px;
@@ -35,10 +35,10 @@
   small {
     font-size: 100%;
   }
-  
+
   button {
     cursor: pointer;
-    color: #FFF;
+    color: #fff;
     font-weight: bold;
   }
   button:disabled {
@@ -53,12 +53,12 @@
 }
 
 :root {
-  --bg-indigo-100: #F7F8FD;
-  --bg-indigo-300: #F2F4FF;
-  --bg-indigo-400: #CFD7FF;
+  --bg-indigo-100: #f7f8fd;
+  --bg-indigo-300: #f2f4ff;
+  --bg-indigo-400: #cfd7ff;
   --sky-medium: #62bcfa;
   --coral: #f49f85;
-  --blue-900: #4661E6;
+  --blue-900: #4661e6;
   --violet-900: #ad1fea;
 }
 
@@ -114,6 +114,7 @@
   position: relative;
   top: 0.2rem;
   right: 0.6rem;
+  opacity: 1;
 }
 
 .roadmap-tags-nav-mobile::after {
@@ -144,19 +145,12 @@
 }
 
 /* Skeleton */
-
 .skeleton {
   display: block;
   width: 100%;
   border-radius: 5px;
 
-  background-image: linear-gradient(
-    270deg,
-    #111111,
-    #333333,
-    #333333,
-    #111111
-  );
+  background-image: linear-gradient(270deg, #111111, #333333, #333333, #111111);
   background-size: 400% 100%;
   animation: loading 8s ease-in-out infinite;
 }
@@ -196,20 +190,50 @@ input[type='radio']:focus + label {
 /*  Styles for Upvote Button */
 .roadmap-feedback-card button svg,
 .feedback-card button svg {
-  margin-right: 0.625rem;
-  margin-bottom: 0.25rem;
+  margin-top: 0.2rem;
 }
 
 @media (min-width: 720px) {
   .feedback-card button {
+    flex-direction: column;
+    align-items: center;
+    padding-inline: 0.5rem;
     order: -1;
     min-width: 40px;
   }
 
   .feedback-card button svg {
-    display: block;
-    margin-inline: auto;
     margin-bottom: 0.625rem;
   }
 }
 
+.form-new::before {
+  content: url('/assets/shared/icon-new-feedback.svg');
+}
+
+.form-edit::before {
+  content: url('/assets/shared/icon-edit-feedback.svg');
+}
+
+.form-new::before,
+.form-edit::before {
+  position: absolute;
+  top: -1.25rem;
+}
+
+@media (min-width: 720px) {
+  .form-new::before {
+    transform: scale(1.4);
+  }
+
+  .form-edit::before {
+    transform: scale(1.3);
+  }
+
+  .form-edit button:first-of-type {
+    margin-left: 1rem;
+  }
+  .form-edit button:last-of-type {
+    margin-right: auto;
+  }
+}

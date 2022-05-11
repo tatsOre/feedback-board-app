@@ -60,8 +60,8 @@ function Edit({ data, edit, user }) {
     <form
       onSubmit={onSubmit}
       className={`form-${
-        edit ? 'edit' : 'create'
-      } bg-white flex flex-col rounded-10 p-6 text-small relative`}
+        edit ? 'edit' : 'new'
+      } bg-white text-[13px] p-6 pt-11 md:p-10 md:pt-12 mt-14 md:mt-10 lg:mt-16 flex flex-col rounded-10 relative`}
     >
       <h1 className="text-lg md:text-2xl text-indigo-800">
         {edit ? `Edit '${data.title}'` : 'Create New Feedback'}
@@ -123,20 +123,20 @@ function Edit({ data, edit, user }) {
         />
       </label>
 
-      <Button
-        type="submit"
-        variant="primary"
-        label={edit ? 'Save Changes' : 'Add Feedback'}
-        style={{ marginTop: '2rem', marginBottom: '1rem' }}
-      />
-      <Button
-        type="button"
-        variant="secondary"
-        label="Cancel"
-        onClick={() => router.back()}
-        style={{ marginBottom: '1rem' }}
-      />
-      {edit && <Button type="button" variant="danger" label="Delete" />}
+      <div className="w-full flex flex-col mt-9 md:mt-6 md:flex-row-reverse space-y-4 md:space-y-0 ">
+        <Button
+          type="submit"
+          variant="primary"
+          label={edit ? 'Save Changes' : 'Add Feedback'}
+        />
+        <Button
+          type="button"
+          variant="secondary"
+          label="Cancel"
+          onClick={() => router.back()}
+        />
+        {edit && <Button type="button" variant="danger" label="Delete" />}
+      </div>
     </form>
   )
 }
