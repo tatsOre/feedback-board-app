@@ -120,7 +120,7 @@ const Comment = ({ comment, fdid, cmid }) => {
 
 export default function Feedback({ data }) {
   const [newComment, setNewComment] = useState('')
-  const { user } = useUser()
+  const { user } = useUser('jesse10930')
 
   if (!data) return <p>...Loading</p>
 

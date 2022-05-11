@@ -6,6 +6,7 @@ import { getFeedbackByField } from '../../../services/firebase'
 export async function getServerSideProps({ params }) {
   try {
     const data = await getFeedbackByField("slug", params.slug)
+    console.log('Slug Page', data)
     return {
       props: { data },
     }

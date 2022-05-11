@@ -10,7 +10,7 @@ export default async function postFeedbackHandler(req, res) {
     const feedbacksData = feedbacks.docs.map((fd) => fd.data())
 
     if (feedbacksData.some((fd) => fd.slug === slug)) {
-      res.status(400).end()
+      res.status(400).end('The document already exist')
     } else {
       const { id } = await db.collection('feedbacks').add({
         ...req.body,
@@ -19,7 +19,7 @@ export default async function postFeedbackHandler(req, res) {
         comments: [],
         created: new Date().toISOString(),
       })
-      res.status(200).json({ id })
+      res.status(200).json({ id, slug })
     }
   } catch (error) {
     console.log(error)

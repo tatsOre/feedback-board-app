@@ -28,6 +28,8 @@ export default function Form({ data, edit }) {
 
   const { user } = useUser('jesse10930')
 
+  console.log('User', user)
+
   const onChange = (event) => {
     const { name, value } = event.target
     setState((prevState) => ({
@@ -44,14 +46,14 @@ export default function Form({ data, edit }) {
       method: edit ? 'put' : 'post',
       data: {
         ...values,
-        author: user?.username || "jesse10930",
+        author: user?.username,
         slug: dashify(values.title),
       },
     })
-
+    console.log('Response in Form', response)
     setState((prevState) => ({ ...prevState, loading: false }))
     if (response.statusText === 'OK') {
-      router.push(`/feedback/detail/${dashify(values.title)}`)
+      router.push(`/feedback/detail/${response.data.slug}`)
     } else {
       setState((prevState) => ({ ...prevState, error: 'Ups' }))
     }
