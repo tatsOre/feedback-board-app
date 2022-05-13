@@ -1,8 +1,7 @@
-import axios from 'axios'
 import dashify from 'dashify'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import useUser from '../../hooks/use-user'
+import { createFeedback, updateFeedback } from '../../services/firebase-client'
 import Button from '../Buttons/Default'
 import GoBack from '../Buttons/GoBack'
 
@@ -15,13 +14,13 @@ function getInitialState(data, edit) {
   if (edit) values = { ...values, status: data?.status }
   return {
     loading: false,
-    error: false,
+    errors: {},
     values,
   }
 }
 
 function Edit({ data, edit, user }) {
-  const [{ values, loading, error }, setState] = useState(() =>
+  const [{ values, loading, errors }, setState] = useState(() =>
     getInitialState(data, edit)
   )
   const router = useRouter()
@@ -37,24 +36,34 @@ function Edit({ data, edit, user }) {
   const onSubmit = async (event) => {
     event.preventDefault()
     setState((prevState) => ({ ...prevState, loading: true }))
+    
     try {
-      const response = await axios({
-        url: edit ? `/api/feedback/${data.id}` : `/api/feedback`,
-        method: edit ? 'put' : 'post',
-        data: {
+      const slug = dashify(values.title)
+      if (edit) {
+        await updateFeedback({
+          ...data,
           ...values,
-          author: user?.username,
-          slug: dashify(values.title),
-        },
-      })
-      console.log('Response in Form', response)
-      router.push(`/feedback/detail/${dashify(values.title)}`)
+          slug,
+        })
+      } else {
+        await createFeedback({
+          ...values,
+          author: 'jesse10930',
+          slug,
+        })
+      }
+      router.push(`/feedback/detail/${slug}`)
     } catch (error) {
-      setState((prevState) => ({ ...prevState, error: error.message }))
+      setState((prevState) => ({
+        ...prevState,
+        errors: { submit: error.message },
+      }))
     } finally {
       setState((prevState) => ({ ...prevState, loading: false }))
     }
   }
+
+  const InputError = () => <span className="text-red-900">Can't be empty</span>
 
   return (
     <form
@@ -66,7 +75,7 @@ function Edit({ data, edit, user }) {
       <h1 className="text-lg md:text-2xl text-indigo-800">
         {edit ? `Edit '${data.title}'` : 'Create New Feedback'}
       </h1>
-      {error && <p>{error}</p>}
+      {errors && errors.submit && <p className="font-bold text-red-900">Error {errors.submit}</p>}
       <label className="font-bold text-indigo-800 mt-6 leading-5">
         Feedback Title{' '}
         <small className="block font-normal text-indigo-500">
@@ -79,6 +88,7 @@ function Edit({ data, edit, user }) {
           className="w-full bg-indigo-100 rounded-5 px-4 py-2 mt-3"
         />
       </label>
+      {errors.title ? <InputError /> : null}
 
       <label className="font-bold text-indigo-800 mt-6 leading-5">
         Category{' '}
@@ -118,10 +128,11 @@ function Edit({ data, edit, user }) {
           value={values.description}
           name="description"
           onChange={onChange}
-          rows="4"
+          rows={4}
           className="bg-indigo-100 w-full rounded-5 px-4 py-2 mt-3"
         />
       </label>
+      {errors.description ? <InputError /> : null}
 
       <div className="w-full flex flex-col mt-9 md:mt-6 md:flex-row-reverse space-y-4 md:space-y-0 ">
         <Button
@@ -142,12 +153,10 @@ function Edit({ data, edit, user }) {
 }
 
 export default function Form({ data, edit }) {
-  const { user } = useUser('jesse10930')
-  console.log('User', user)
   return (
     <main className="max-w-[540px] mx-auto p-6 md:pt-14 lg:pt-20">
       <GoBack />
-      <Edit data={data} edit={edit} user={user} />
+      <Edit data={data} edit={edit} />
     </main>
   )
 }

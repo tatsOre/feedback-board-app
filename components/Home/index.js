@@ -62,6 +62,15 @@ export default function Home({ data }) {
 
   const SuggLength = state.suggestions?.length || 0
 
+  const filterOptions = [
+    { label: 'All', value: 'all' },
+    { label: 'UI', value: 'ui' },
+    { label: 'UX', value: 'ux' },
+    { label: 'Enhancement', value: 'enhancement' },
+    { label: 'Bug', value: 'bug' },
+    { label: 'Feature', value: 'feature' },
+  ]
+
   const onTabChange = ({ target }) => {
     dispatch({ type: 'CHANGE_FILTER_VALUE', payload: target.value })
     setShowMenu(false)
@@ -86,7 +95,7 @@ export default function Home({ data }) {
             type="button"
             onClick={() => setShowMenu(!showMenu)}
           >
-            <div class={`bar ${showMenu ? 'animate' : ''}`}></div>
+            <div className={`bar ${showMenu ? 'animate' : ''}`}></div>
           </button>
         </header>
 
@@ -96,26 +105,11 @@ export default function Home({ data }) {
           } mobile-nav md:w-2/3 lg:w-full md:flex md:flex-row lg:flex-col lg:space-y-6`}
         >
           <Filter
-            className="bg-white rounded-10 w-full md:w-1/2 lg:w-full p-5"
-            options={[
-              { label: 'All', value: 'all' },
-              { label: 'UI', value: 'ui' },
-              { label: 'UX', value: 'ux' },
-              { label: 'Enhancement', value: 'enhancement' },
-              { label: 'Bug', value: 'bug' },
-              { label: 'Feature', value: 'feature' },
-            ]}
+            options={filterOptions}
             checkedValue={state.filter}
             onChange={onTabChange}
           />
-          <RoadmapStatus
-            className="roadmap-status-panel bg-white rounded-10 w-full md:w-1/2 lg:w-full p-5 md:ml-2.5 lg:ml-0"
-            data={{
-              planned: state.requests.planned.length,
-              'in-progress': state.requests['in-progress'].length,
-              live: state.requests.live.length,
-            }}
-          />
+          <RoadmapStatus data={state.requests} />
         </nav>
         <div className={`${showMenu ? 'mobile-nav-backdrop' : ''}`}></div>
       </aside>

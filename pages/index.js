@@ -3,12 +3,11 @@ import Home from '../components/Home'
 import Footer from '../components/Shared/footer'
 import { getAllFeedbacks } from '../services/firebase'
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   try {
     const data = await getAllFeedbacks()
     return {
       props: { data },
-      revalidate: 10,
     }
   } catch (error) {
     console.log(error)

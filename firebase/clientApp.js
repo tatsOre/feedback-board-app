@@ -1,5 +1,8 @@
-import { initializeApp, getApps } from 'firebase/app'
+import {  getApps } from 'firebase/app'
 import { getAnalytics } from 'firebase/analytics'
+
+import { initializeApp } from "firebase/app";
+
 
 export const createFirebaseApp = () => {
   const CONFIG = {
@@ -25,4 +28,3 @@ export const createFirebaseApp = () => {
     return app
   }
 }
-

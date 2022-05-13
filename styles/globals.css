@@ -111,6 +111,11 @@
   }
 
   /* Home Mobile Nav Button */
+  .mobile-nav-button {
+    width: 20px;
+    min-height: 25px;
+  }
+
   .mobile-nav-button .bar,
   .mobile-nav-button .bar:after,
   .mobile-nav-button .bar:before {
@@ -345,9 +350,10 @@ input[type='radio']:focus + label {
     transform: scale(1.3);
   }
 
-  .form-edit button:first-of-type {
+  [class^='form-'] button:first-of-type {
     margin-left: 1rem;
   }
+
   .form-edit button:last-of-type {
     margin-right: auto;
   }

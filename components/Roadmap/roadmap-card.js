@@ -3,7 +3,7 @@ import UpvoteButton from '../Buttons/Upvote'
 import { getCommentsLength, toCapitalize } from '../../utils'
 
 export default function RoadmapCard({ feedback }) {
-  const { category, comments, description, slug, status, title, upvotes } =
+  const { category, comments, description, id, slug, status, title, upvotes } =
     feedback
   const commentsLength = getCommentsLength(comments)
   const categoryText = ['ux', 'ui'].includes(category)
@@ -14,7 +14,6 @@ export default function RoadmapCard({ feedback }) {
     <div
       className={`roadmap-feedback-card ${status} rounded-md border-t-6 bg-white p-6 pt-3 mb-4 text-small lg:text-base`}
     >
-
       <p className={`status text-indigo-500 mb-3`}>{toCapitalize(status)}</p>
       <Link href={`/feedback/detail/${slug}`} passHref>
         <a>
@@ -28,10 +27,12 @@ export default function RoadmapCard({ feedback }) {
         {categoryText}
       </p>
 
-
-
-      <UpvoteButton upvoted={false} upvotes={upvotes} variant="inline" />
-      <p className="comments float-right -mt-7 font-bold lg:text-base text-indigo-800">
+      <UpvoteButton upvoted={false} upvotes={upvotes} fdid={id} />
+      <p
+        className={`${
+          commentsLength ? 'text-indigo-800' : 'text-[#898EAC]'
+        } comments float-right mt-2 font-bold lg:text-base text-indigo-800`}
+      >
         {commentsLength}
       </p>
     </div>

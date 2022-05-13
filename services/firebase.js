@@ -25,17 +25,22 @@ export async function getUserByUsername(username) {
 
 export async function getAllFeedbacks() {
   const db = admin.firestore()
-  const result = await db.collection('feedbacks').get()
+  const result = await db
+    .collection('feedbacks')
+    .orderBy('upvotes', 'desc')
+    .get()
   const docs = result.docs.map((fd) => ({
     id: fd.id,
     ...fd.data(),
   }))
+
   const schema = {
     planned: [],
     'in-progress': [],
     live: [],
     suggestion: [],
   }
+
   return docs.reduce((acc, req) => {
     let status = req.status
     acc[status] = acc[status].length ? [...acc[status], req] : [req]

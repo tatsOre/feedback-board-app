@@ -29,19 +29,19 @@ const RoadmapPage = ({ data }) => {
 
       <nav className="roadmap-tags-nav-mobile md:hidden flex w-full relative">
         {Object.keys(data).map(
-          (category) =>
-            category !== 'suggestion' && (
+          (status) =>
+            status !== 'suggestion' && (
               <button
                 className={`${
-                  show === category
-                    ? `text-indigo-800 border-b-4 ${category}`
+                  show === status
+                    ? `text-indigo-800 border-b-4 ${status}`
                     : 'text-indigo-500'
                 } w-1/3 h-14 box-content font-bold text-small`}
                 type="button"
-                onClick={() => setShow(category)}
-                key={`roapmap-nav-link-${category}`}
+                onClick={() => setShow(status)}
+                key={`roapmap-nav-link-${status}`}
               >
-                {toCapitalize(category)} ({data[category].length})
+                {toCapitalize(status)} ({data[status].length})
               </button>
             )
         )}
@@ -49,21 +49,21 @@ const RoadmapPage = ({ data }) => {
 
       <section className="roadmap-feedbacks-section flex p-6 md:p-0 md:pt-8 md:space-x-2.5 lg:space-x-4 xl:space-x-7">
         {Object.keys(data).map(
-          (category) =>
-            category !== 'suggestion' && (
+          (status) =>
+            status !== 'suggestion' && (
               <div
-                key={`roapmap-section-${category}`}
+                key={`roapmap-section-${status}`}
                 className={`hidden md:block w-full md:w-1/3 ${
-                  show === category && 'active-status'
+                  show === status && 'active-status'
                 }`}
               >
                 <h2 className="text-indigo-800 text-lg md:text-sm lg:text-lg">
-                  {toCapitalize(category)} ({data[category].length})
+                  {toCapitalize(status)} ({data[status].length})
                 </h2>
                 <p className="text-indigo-500 text-small md:text-sm lg:text-base pb-6">
-                  {tagline[category]}
+                  {tagline[status]}
                 </p>
-                {data[category].map((feedback) => (
+                {data[status].map((feedback) => (
                   <RoadmapCard key={feedback.id} feedback={feedback} />
                 ))}
               </div>

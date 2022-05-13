@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
-import useUser from '../../hooks/use-user'
 import { getCommentsLength } from '../../utils'
 import Button from '../Buttons/Default'
 import GoBack from '../Buttons/GoBack'
@@ -10,15 +9,13 @@ import NavLink from '../NavLink'
 
 const PostReply = ({ data }) => {
   const { feedbackID, commentID, replyingTo } = data
-
   const [state, setState] = useState('')
-
-  const { user } = useUser('jesse10930')
-
   const onChange = ({ target }) => setState(target.value)
-
   const onSubmit = (event) => {
     event.preventDefault()
+    const user = {
+      username: 'jesse10930',
+    }
 
     const payload = {
       feedbackID,
@@ -26,8 +23,6 @@ const PostReply = ({ data }) => {
       replyingTo,
       content: state,
       user: {
-        image: user?.image,
-        name: user?.name,
         username: user?.username,
       },
     }
@@ -120,7 +115,11 @@ const Comment = ({ comment, fdid, cmid }) => {
 
 export default function Feedback({ data }) {
   const [newComment, setNewComment] = useState('')
-  const { user } = useUser('jesse10930')
+
+  const user = {
+    username: 'jesse10930',
+  }
+  console.log('', data.author !== user.username)
 
   if (!data) return <p>...Loading</p>
 
@@ -139,7 +138,7 @@ export default function Feedback({ data }) {
         {user?.username === data.author && (
           <Link
             href={{ pathname: '/feedback/edit/[id]', query: { id: data.id } }}
-            as="/edit"
+            as={`/edit/${data.slug}`}
             passHref
           >
             <NavLink label="Edit Feedback" variant="secondary" />

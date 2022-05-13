@@ -38,11 +38,6 @@ module.exports = {
       xl: '1440px',
     },
     extend: {
-      backgroundImage: {
-        'header-sm': "url('/assets/suggestions/mobile/background-header.png')",
-        'header-md': "url('/assets/suggestions/tablet/background-header.png')",
-        'header-xl': "url('/assets/suggestions/desktop/background-header.png')",
-      },
       fontSize: {
         small: '0.813rem',
       },

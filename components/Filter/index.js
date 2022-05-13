@@ -1,8 +1,8 @@
 import { Fragment } from "react";
 
-export default function Filter({ options, checkedValue, onChange, className }) {
+export default function Filter({ options, checkedValue, onChange }) {
   return (
-    <fieldset className={className}>
+    <fieldset className="bg-white rounded-10 w-full md:w-1/2 lg:w-full p-5">
       <legend className="invisible h-0">Categories:</legend>
       {options.map(({ label, value }, index) => {
         return (

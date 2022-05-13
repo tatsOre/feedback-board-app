@@ -1,32 +1,76 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ArrowUp } from '../../Arrows'
 
-async function getError(res) {
-  if (res.headers.get('Content-Type').includes('application/json')) {
-    const data = await res.json()
-    return data.errors[0]
-  }
-  return { message: (await res.text()) || res.statusText }
-}
+import { createFirebaseApp } from '../../../firebase/clientApp'
+import {
+  getFirestore,
+  doc,
+  updateDoc,
+  arrayRemove,
+  arrayUnion,
+  increment,
+} from 'firebase/firestore'
 
-// TODO: remove extra spaces and falsy values from classes
-// import cn from 'clsx'
-// const cn = (arr) => arr.filter(Boolean).join(' ')
+import { useUser } from '../../../context/userContext'
 
-const UpvoteButton = ({ upvotes, upvoted }) => {
-  const [{ votes, loading, error, active }, setState] = useState({
+const UpvoteButton = ({ upvotes, fdid }) => {
+  const { user, loadingUser } = useUser()
+
+  const [{ votes, loading, error, upvoted }, setState] = useState({
     votes: upvotes,
-    active: upvoted,
+    upvoted: false,
     loading: false,
   })
 
-  const onClick = (event) => {
+  useEffect(() => {
+    console.log('Use Effect Upvote')
+    setState((prevState) => ({
+      ...prevState,
+      upvoted: user?.upvotes.includes(fdid),
+    }))
+  }, [loadingUser, user, fdid])
+
+  const onClick = async (event) => {
     event.preventDefault()
-    setState({ votes, loading: true })
-    const newData = votes + 1
-    return setState({ votes: newData, loading: false, active: true })
-  }
+    setState((prevState) => ({
+      ...prevState,
+      loading: true,
+    }))
+    console.log('upvoted', upvoted)
+
+
+
+    try {
+      const app = createFirebaseApp()
+      const db = getFirestore(app)
   
+      const userRef = doc(db, 'users', user?.id)
+      const fdRef = doc(db, 'feedbacks', fdid)
+      
+      await updateDoc(userRef, {
+        upvotes: upvoted ? arrayRemove(fdid) : arrayUnion(fdid),
+      })
+      await updateDoc(fdRef, {
+        upvotes: upvoted ? increment(-1) : increment(1),
+      })
+      setState((prevState) => ({
+        ...prevState,
+        votes: upvoted ? votes - 1 : votes + 1,
+        upvoted: !upvoted,
+      }))
+    } catch (error) {
+      setState((prevState) => ({
+        ...prevState,
+        error: error.message,
+      }))
+    } finally {
+      setState((prevState) => ({
+        ...prevState,
+        loading: false,
+      }))
+    }
+  }
+
   return (
     <>
       <button
@@ -34,18 +78,18 @@ const UpvoteButton = ({ upvotes, upvoted }) => {
         onClick={onClick}
         disabled={loading}
         className={`${
-          active
+          upvoted
             ? 'bg-blue-900 text-white'
             : `bg-indigo-300 text-indigo-800 ${
                 !loading && 'hover:bg-indigo-400'
               }`
-        } rounded-10 text-small min-w-[70px] py-3 px-4 leading-3 flex justify-between relative z-10`}
+        } rounded-10 text-small min-w-[70px] py-3 px-4 leading-3 flex-inline justify-evenly relative z-10`}
       >
         {loading ? (
           <i>⏱</i>
         ) : (
           <>
-            <ArrowUp color={active ? '#FFFFFF' : '#4661E6'} />
+            <ArrowUp color={upvoted ? '#FFFFFF' : '#4661E6'} />
             {votes}
           </>
         )}
