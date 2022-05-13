@@ -60,9 +60,121 @@
   --coral: #f49f85;
   --blue-900: #4661e6;
   --violet-900: #ad1fea;
+  --white: #ffffff;
+
+  --mobile-header-height: 72px;
 }
 
-/* Decorative Elements */
+/* Home Header and Mobile Nav */
+@media (max-width: 719px) {
+  .home aside header {
+    background: url('/assets/suggestions/mobile/background-header.png');
+    background-size: cover;
+    height: var(--mobile-header-height);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 1.25rem;
+  }
+
+  .home .mobile-nav {
+    position: absolute;
+    top: var(--mobile-header-height);
+    z-index: 20;
+    background-color: var(--bg-indigo-100);
+    width: 75%;
+    padding: 1.5rem;
+  }
+
+  .home .mobile-nav > :first-child {
+    margin-bottom: 1.5rem;
+  }
+
+  .home .mobile-nav.show {
+    opacity: 1;
+    right: 0;
+  }
+
+  .home .mobile-nav.hide {
+    opacity: 0;
+    right: 100%;
+  }
+
+  .home aside .mobile-nav-backdrop {
+    content: '';
+    position: absolute;
+    inset: 0;
+    top: var(--mobile-header-height);
+    background-color: #000000;
+    opacity: 0.5;
+    z-index: 15;
+  }
+
+  /* Home Mobile Nav Button */
+  .mobile-nav-button .bar,
+  .mobile-nav-button .bar:after,
+  .mobile-nav-button .bar:before {
+    background: var(--white);
+    width: 20px;
+    height: 3px;
+  }
+
+  .mobile-nav-button .bar {
+    position: relative;
+    transition: all 0ms 300ms;
+  }
+
+  .mobile-nav-button .bar:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 6px;
+    transition: bottom 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1),
+      transform 300ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .mobile-nav-button .bar:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 6px;
+    transition: top 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1),
+      transform 300ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .mobile-nav-button .bar.animate {
+    background: rgb(232, 89, 146, 0);
+  }
+
+  .mobile-nav-button .bar.animate:before {
+    bottom: 0;
+    transform: rotate(-45deg);
+    transition: bottom 300ms cubic-bezier(0.23, 1, 0.32, 1),
+      transform 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .mobile-nav-button .bar.animate:after {
+    top: 0;
+    transform: rotate(45deg);
+    transition: top 300ms cubic-bezier(0.23, 1, 0.32, 1),
+      transform 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+}
+
+@media (min-width: 720px) {
+  .home aside header {
+    background-image: url('/assets/suggestions/tablet/background-header.png');
+    background-size: cover;
+  }
+}
+
+@media (min-width: 976px) {
+  .home aside header {
+    background-image: url('/assets/suggestions/desktop/background-header.png');
+    background-size: cover;
+  }
+}
+
 .roadmap-feedback-card.planned {
   border-color: var(--coral);
 }
@@ -190,11 +302,13 @@ input[type='radio']:focus + label {
 /*  Styles for Upvote Button */
 .roadmap-feedback-card button svg,
 .feedback-card button svg {
-  margin-top: 0.2rem;
+  margin-top: -0.2rem;
+  margin-right: 0.75rem;
 }
 
 @media (min-width: 720px) {
   .feedback-card button {
+    display: flex;
     flex-direction: column;
     align-items: center;
     padding-inline: 0.5rem;
@@ -204,6 +318,7 @@ input[type='radio']:focus + label {
 
   .feedback-card button svg {
     margin-bottom: 0.625rem;
+    margin-right: 0;
   }
 }
 

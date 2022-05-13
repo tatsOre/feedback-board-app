@@ -1,4 +1,4 @@
-import { useReducer } from 'react'
+import { useReducer, useState } from 'react'
 import Filter from '../Filter'
 import NavLink from '../NavLink'
 import RoadmapStatus from './roadmap-status'
@@ -48,53 +48,53 @@ const reducer = (state, action) => {
   }
 }
 
-const init = (state, payload) => {
-  const suggestions = payload && payload.suggestion
-  const progress = payload && payload['in-progress']
-  const planned = payload && payload.planned
-  const live = payload && payload.live
-
-  const requests = {
-    suggestion: suggestions || [],
-    'in-progress': progress || [],
-    planned: planned || [],
-    live: live || [],
-  }
-
-  return {
-    ...state,
-    requests,
-    suggestions: requests.suggestion,
-  }
-}
-
 export default function Home({ data }) {
-  const initialState = { filter: 'all', sort: 'MOST_UPVOTES' }
-  const initFunc = () => init(initialState, data)
-  const [state, dispatch] = useReducer(reducer, initialState, initFunc)
+  const initialState = {
+    filter: 'all',
+    sort: 'MOST_UPVOTES',
+    suggestions: data?.suggestion,
+    requests: data,
+  }
+  const [state, dispatch] = useReducer(reducer, initialState)
+  const [showMenu, setShowMenu] = useState(false)
+
+  if (!data) return <p>...Loading</p>
 
   const SuggLength = state.suggestions?.length || 0
 
-  const onTabChange = ({ target }) =>
+  const onTabChange = ({ target }) => {
     dispatch({ type: 'CHANGE_FILTER_VALUE', payload: target.value })
+    setShowMenu(false)
+  }
 
   const onSelectChange = (option) => {
     dispatch({ type: option })
   }
 
   return (
-    <main className="container flex flex-wrap flex-col lg:flex-row md:pt-14 lg:pt-24">
-      <aside className="md:flex md:flex-row lg:flex-col lg:w-1/4 md:h-44 lg:h-full md:mb-10 bg-indigo-lighter lg:space-y-6">
-        <header className="w-full md:w-1/3 lg:w-full h-[72px] md:h-full lg:h-[140px] md:rounded-10 md:mr-2.5 lg:mr-0 py-3 px-5 md:p-6 bg-header-sm md:bg-header-md lg:bg-header-xl bg-cover bg-no-repeat">
+    <main className="home container flex flex-wrap flex-col lg:flex-row md:pt-14 lg:pt-24">
+      <aside className="overflow-hidden md:flex md:flex-row lg:flex-col lg:w-1/4 md:h-44 lg:h-full md:mb-10 bg-indigo-lighter lg:space-y-6">
+        <header className="md:w-1/3 lg:w-full md:h-full lg:h-[140px] md:rounded-10 md:mr-2.5 lg:mr-0 py-3 md:p-6">
           <h1 className="text-base md:text-xl text-white font-bold leading-5 md:leading-7">
             Frontend Mentor
             <small className="font-normal text-small md:text-base opacity-75 block">
               Feedback Board
             </small>
           </h1>
+          <button
+            className="mobile-nav-button"
+            type="button"
+            onClick={() => setShowMenu(!showMenu)}
+          >
+            <div class={`bar ${showMenu ? 'animate' : ''}`}></div>
+          </button>
         </header>
 
-        <div className="w-full md:w-2/3 lg:w-full md:flex md:flex-row lg:flex-col lg:space-y-6">
+        <nav
+          className={`${
+            showMenu ? 'show' : 'hide'
+          } mobile-nav md:w-2/3 lg:w-full md:flex md:flex-row lg:flex-col lg:space-y-6`}
+        >
           <Filter
             className="bg-white rounded-10 w-full md:w-1/2 lg:w-full p-5"
             options={[
@@ -116,7 +116,8 @@ export default function Home({ data }) {
               live: state.requests.live.length,
             }}
           />
-        </div>
+        </nav>
+        <div className={`${showMenu ? 'mobile-nav-backdrop' : ''}`}></div>
       </aside>
 
       <section className="home-suggestions-section lg:w-3/4 lg:pl-5">
