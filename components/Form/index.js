@@ -63,7 +63,7 @@ function Edit({ data, edit, user }) {
     }
   }
 
-  const InputError = () => <span className="text-red-900">Can't be empty</span>
+  const InputError = () => <span className="text-red-900">Can&quot;t be empty</span>
 
   return (
     <form

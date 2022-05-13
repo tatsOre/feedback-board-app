@@ -81,28 +81,28 @@ export default function Home({ data }) {
   }
 
   return (
-    <main className="home container flex flex-wrap flex-col lg:flex-row md:pt-14 lg:pt-24">
-      <aside className="overflow-hidden md:flex md:flex-row lg:flex-col lg:w-1/4 md:h-44 lg:h-full md:mb-10 bg-indigo-lighter lg:space-y-6">
-        <header className="md:w-1/3 lg:w-full md:h-full lg:h-[140px] md:rounded-10 md:mr-2.5 lg:mr-0 py-3 md:p-6">
-          <h1 className="text-base md:text-xl text-white font-bold leading-5 md:leading-7">
-            Frontend Mentor
-            <small className="font-normal text-small md:text-base opacity-75 block">
-              Feedback Board
-            </small>
-          </h1>
-          <button
-            className="mobile-nav-button"
-            type="button"
-            onClick={() => setShowMenu(!showMenu)}
-          >
-            <div className={`bar ${showMenu ? 'animate' : ''}`}></div>
-          </button>
-        </header>
+    <main className="home container grid lg:gap-x-4 xl:gap-x-8 grid-cols-3 grid-rows-[72px_auto] md:grid-rows-[178px_auto] lg:grid-cols-4 lg:grid-rows-none md:pt-14 lg:pt-24">
+      <header className="col-span-4 md:col-span-1 md:rounded-10 lg:mb-6 py-3 md:p-6">
+        <h1 className="text-base md:text-xl text-white font-bold leading-5 md:leading-7">
+          Frontend Mentor
+          <small className="font-normal text-small md:text-base opacity-75 block">
+            Feedback Board
+          </small>
+        </h1>
+        <button
+          className="mobile-nav-button"
+          type="button"
+          onClick={() => setShowMenu(!showMenu)}
+        >
+          <div className={`bar ${showMenu ? 'animate' : ''}`}></div>
+        </button>
+      </header>
 
+      <aside className="lg:order-3 col-span-3 md:col-span-2 lg:col-span-1 md:ml-3 bg-indigo-lighter">
         <nav
           className={`${
             showMenu ? 'show' : 'hide'
-          } mobile-nav md:w-2/3 lg:w-full md:flex md:flex-row lg:flex-col lg:space-y-6`}
+          } mobile-nav md:flex md:flex-row lg:flex-col lg:space-y-6`}
         >
           <Filter
             options={filterOptions}
@@ -114,7 +114,7 @@ export default function Home({ data }) {
         <div className={`${showMenu ? 'mobile-nav-backdrop' : ''}`}></div>
       </aside>
 
-      <section className="home-suggestions-section lg:w-3/4 lg:pl-5">
+      <section className="col-span-3 md:col-span-3 lg:row-span-4 md:pt-10 lg:pt-0 home-suggestions-section">
         <header className="flex items-center justify-between bg-indigo-800 md:rounded-10 px-6 py-2 md:pr-4 md:pl-9 md:py-4 md:mb-6">
           <h2 className="hidden md:block text-white font-bold text-lg">
             {SuggLength} Suggestion
@@ -161,3 +161,5 @@ export default function Home({ data }) {
     </main>
   )
 }
+// section lg:pl-5 header lg:h-[140px]
+// aside lg:w-1/4 md:h-44 lg:h-full

@@ -67,7 +67,11 @@
 
 /* Home Header and Mobile Nav */
 @media (max-width: 719px) {
-  .home aside header {
+  .home  {
+    overflow: hidden;
+  }
+
+  .home > header {
     background: url('/assets/suggestions/mobile/background-header.png');
     background-size: cover;
     height: var(--mobile-header-height);
@@ -84,10 +88,7 @@
     background-color: var(--bg-indigo-100);
     width: 75%;
     padding: 1.5rem;
-  }
-
-  .home .mobile-nav > :first-child {
-    margin-bottom: 1.5rem;
+    transition: 0.2s ease;
   }
 
   .home .mobile-nav.show {
@@ -100,7 +101,11 @@
     right: 100%;
   }
 
-  .home aside .mobile-nav-backdrop {
+  .home .mobile-nav > :first-child {
+    margin-bottom: 1.5rem;
+  }
+
+  .home .mobile-nav-backdrop {
     content: '';
     position: absolute;
     inset: 0;
@@ -167,14 +172,14 @@
 }
 
 @media (min-width: 720px) {
-  .home aside header {
+  .home > header {
     background-image: url('/assets/suggestions/tablet/background-header.png');
     background-size: cover;
   }
 }
 
 @media (min-width: 976px) {
-  .home aside header {
+  .home > header {
     background-image: url('/assets/suggestions/desktop/background-header.png');
     background-size: cover;
   }
