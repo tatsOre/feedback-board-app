@@ -60,6 +60,7 @@ export default function Home({ data }) {
 
   useEffect(() => {
     document.body.style.overflow = showMenu ? 'hidden' : 'unset'
+    return () => (document.body.style.overflow = '')
   }, [showMenu])
 
   if (!data) return <p>...Loading</p>
