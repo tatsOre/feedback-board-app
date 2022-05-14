@@ -19,7 +19,6 @@ export async function createFeedback(data) {
   const snapshot = await getDocs(q)
 
   if (!snapshot.empty) {
-    console.log('The document already exist')
     throw new Error('The document already exist')
   }
   const docRef = await addDoc(collection(db, 'feedbacks'), {
@@ -49,4 +48,18 @@ export async function updateFeedback(data) {
   }).catch((error) => {
     throw new Error(error.message)
   })
+}
+
+export async function getFeedbackByField(field, value) {
+  const app = createFirebaseApp()
+  const db = getFirestore(app)
+
+  const q = query(collection(db, 'feedbacks'), where(field, '==', value))
+  const snapshot = await getDocs(q)
+
+  if (snapshot.empty) {
+    throw new Error('The document does not exist')
+  }
+  const docs = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+  return docs[0]
 }

@@ -9,6 +9,8 @@ import Button from '../Buttons/Default'
 import GoBack from '../Buttons/GoBack'
 import FeedbackCard from '../FeedbackCard'
 import NavLink from '../NavLink'
+import Spinner from '../Shared/spinner'
+
 
 const PostReply = ({ data }) => {
   const { feedbackID, commentID, replyingTo } = data
@@ -118,33 +120,28 @@ const Comment = ({ comment, fdid, cmid }) => {
 
 export default function Feedback({ slug }) {
   const [data, setData] = useState(null)
-  const [isLoading, setLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const [newComment, setNewComment] = useState('')
 
   const { user, setUser } = useUser()
 
-  /*   const user = {
-    id: 'YIUtfVspL7sqQ8Uhsh7c',
-    image: 'user-images/image-jesse.jpg',
-    name: 'Jesse Ronda',
-    username: 'jesse10930',
-    upvotes: ['d1e1zI7xdY816FMveKD5'],
-  } */
-
   useEffect(() => {
     const getFeedback = async () => {
+      setIsLoading(true)
       try {
         const result = await getFeedbackByField('slug', slug)
         setData(result)
       } catch (error) {
         console.log(error.message)
+      } finally {
+        setIsLoading(false)
       }
     }
     getFeedback()
-  }, [slug])
+  }, [slug, isLoading])
 
-  if (isLoading && !data) return <p>Loading...</p>
-  if (!data) return <p>Ups</p>
+  if (isLoading && !data) return <Spinner />
+  if (!isLoading && !data) return <p>Something went wrong</p>
 
   const charsLeft = 225 - newComment.length
   const commentsLength = getCommentsLength(data.comments)
