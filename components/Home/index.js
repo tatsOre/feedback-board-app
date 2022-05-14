@@ -1,4 +1,4 @@
-import { useReducer, useState } from 'react'
+import { useEffect, useReducer, useState } from 'react'
 import Filter from '../Filter'
 import NavLink from '../NavLink'
 import RoadmapStatus from './roadmap-status'
@@ -57,6 +57,10 @@ export default function Home({ data }) {
   }
   const [state, dispatch] = useReducer(reducer, initialState)
   const [showMenu, setShowMenu] = useState(false)
+
+  useEffect(() => {
+    document.body.style.overflow = showMenu ? 'hidden' : 'unset'
+  }, [showMenu])
 
   if (!data) return <p>...Loading</p>
 

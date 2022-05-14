@@ -1,6 +1,9 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
+import { useUser } from '../../context/userContext'
+import { getFeedbackByField } from '../../services/firebase-client'
 import { getCommentsLength } from '../../utils'
 import Button from '../Buttons/Default'
 import GoBack from '../Buttons/GoBack'
@@ -113,15 +116,35 @@ const Comment = ({ comment, fdid, cmid }) => {
   )
 }
 
-export default function Feedback({ data }) {
+export default function Feedback({ slug }) {
+  const [data, setData] = useState(null)
+  const [isLoading, setLoading] = useState(false)
   const [newComment, setNewComment] = useState('')
 
-  const user = {
-    username: 'jesse10930',
-  }
-  console.log('', data.author !== user.username)
+  const { user, setUser } = useUser()
 
-  if (!data) return <p>...Loading</p>
+  /*   const user = {
+    id: 'YIUtfVspL7sqQ8Uhsh7c',
+    image: 'user-images/image-jesse.jpg',
+    name: 'Jesse Ronda',
+    username: 'jesse10930',
+    upvotes: ['d1e1zI7xdY816FMveKD5'],
+  } */
+
+  useEffect(() => {
+    const getFeedback = async () => {
+      try {
+        const result = await getFeedbackByField('slug', slug)
+        setData(result)
+      } catch (error) {
+        console.log(error.message)
+      }
+    }
+    getFeedback()
+  }, [slug])
+
+  if (isLoading && !data) return <p>Loading...</p>
+  if (!data) return <p>Ups</p>
 
   const charsLeft = 225 - newComment.length
   const commentsLength = getCommentsLength(data.comments)
@@ -146,14 +169,14 @@ export default function Feedback({ data }) {
         )}
       </nav>
 
-      <FeedbackCard feedback={data} />
+      <FeedbackCard feedback={data}/>
       {commentsLength ? (
         <section className="feedback-comments-section bg-white rounded-10 p-6 pb-0 md:px-8 mt-6">
           <h2 className="text-indigo-800 text-lg">
             {commentsLength} Comment{commentsLength > 1 ? 's' : ''}
           </h2>
 
-          {data.comments.map((c) => (
+          {data?.comments.map((c) => (
             <Comment
               comment={c}
               fdid={data.id}

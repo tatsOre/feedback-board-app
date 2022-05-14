@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import UpvoteButton from '../Buttons/Upvote'
 import { getCommentsLength, toCapitalize } from '../../utils'
-import useUser from '../../hooks/use-user'
 
 export default function FeedbackCard({ feedback, link }) {
   const { category, comments, description, id, slug, title, upvotes } = feedback
@@ -9,8 +8,6 @@ export default function FeedbackCard({ feedback, link }) {
   const categoryText = ['ux', 'ui'].includes(category)
     ? category.toUpperCase()
     : toCapitalize(category)
-
-  const { user } = useUser()
 
   return (
     <div
@@ -35,7 +32,7 @@ export default function FeedbackCard({ feedback, link }) {
         </p>
       </div>
 
-      <UpvoteButton upvotes={upvotes} fdid={id} user={user}/>
+      <UpvoteButton upvotes={upvotes} fdid={id} />
       <p
         className={`${
           commentsLength ? 'text-indigo-800' : 'text-[#898EAC]'

@@ -22,7 +22,7 @@ export default function Filter({ options, checkedValue, onChange }) {
                 checkedValue === value
                   ? 'text-white bg-blue-900'
                   : 'text-blue-900 bg-indigo-100 hover:bg-indigo-300 cursor-pointer'
-              } rounded-10 inline-block px-4 py-1.5 mr-2 mb-3 text-small font-semibold`}
+              } rounded-10 inline-block px-4 py-2 md:py-1.5 mr-2 mb-3 text-sm font-semibold`}
             >
               {label}
             </label>

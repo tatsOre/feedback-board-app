@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { ArrowUp } from '../../Arrows'
-
 import { createFirebaseApp } from '../../../firebase/clientApp'
 import {
   getFirestore,
@@ -14,21 +13,22 @@ import {
 import { useUser } from '../../../context/userContext'
 
 const UpvoteButton = ({ upvotes, fdid }) => {
-  const { user, loadingUser } = useUser()
-
-  const [{ votes, loading, error, upvoted }, setState] = useState({
+  const [{ votes, loading, error, isUpvoted }, setState] = useState({
     votes: upvotes,
-    upvoted: false,
+    isUpvoted: false,
     loading: false,
   })
 
+  const { loadingUser, user, setUser } = useUser()
+
   useEffect(() => {
-    console.log('Use Effect Upvote')
-    setState((prevState) => ({
-      ...prevState,
-      upvoted: user?.upvotes.includes(fdid),
-    }))
-  }, [loadingUser, user, fdid])
+    if (!loadingUser && user) {
+      setState((prevState) => ({
+        ...prevState,
+        isUpvoted: user.upvoted.includes(fdid),
+      }))
+    }
+  }, [user, loadingUser])
 
   const onClick = async (event) => {
     event.preventDefault()
@@ -36,29 +36,34 @@ const UpvoteButton = ({ upvotes, fdid }) => {
       ...prevState,
       loading: true,
     }))
-    console.log('upvoted', upvoted)
-
-
 
     try {
       const app = createFirebaseApp()
       const db = getFirestore(app)
-  
+
       const userRef = doc(db, 'users', user?.id)
-      const fdRef = doc(db, 'feedbacks', fdid)
-      
       await updateDoc(userRef, {
-        upvotes: upvoted ? arrayRemove(fdid) : arrayUnion(fdid),
+        upvoted: isUpvoted ? arrayRemove(fdid) : arrayUnion(fdid),
       })
+
+      const fdRef = doc(db, 'feedbacks', fdid)
       await updateDoc(fdRef, {
-        upvotes: upvoted ? increment(-1) : increment(1),
+        upvotes: isUpvoted ? increment(-1) : increment(1),
       })
+
+      const upvotedFeedbacks = isUpvoted
+        ? user.upvoted.filter((f) => f !== fdid)
+        : [...user.upvoted, fdid]
+
+      setUser((prevState) => ({ ...prevState, upvoted: upvotedFeedbacks }))
+
       setState((prevState) => ({
         ...prevState,
-        votes: upvoted ? votes - 1 : votes + 1,
-        upvoted: !upvoted,
+        votes: isUpvoted ? votes - 1 : votes + 1,
+        isUpvoted: !isUpvoted,
       }))
     } catch (error) {
+      console.log(error)
       setState((prevState) => ({
         ...prevState,
         error: error.message,
@@ -78,7 +83,7 @@ const UpvoteButton = ({ upvotes, fdid }) => {
         onClick={onClick}
         disabled={loading}
         className={`${
-          upvoted
+          isUpvoted
             ? 'bg-blue-900 text-white'
             : `bg-indigo-300 text-indigo-800 ${
                 !loading && 'hover:bg-indigo-400'
@@ -89,7 +94,7 @@ const UpvoteButton = ({ upvotes, fdid }) => {
           <i>⏱</i>
         ) : (
           <>
-            <ArrowUp color={upvoted ? '#FFFFFF' : '#4661E6'} />
+            <ArrowUp color={isUpvoted ? '#FFFFFF' : '#4661E6'} />
             {votes}
           </>
         )}
