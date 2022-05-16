@@ -119,9 +119,9 @@ export default function Home({ data }) {
         <div className={`${showMenu ? 'mobile-nav-backdrop' : ''}`}></div>
       </aside>
 
-      <section className="col-span-3 md:col-span-3 lg:row-span-4 md:pt-10 lg:pt-0 home-suggestions-section">
-        <header className="flex items-center justify-between bg-indigo-800 md:rounded-10 px-6 py-2 md:pr-4 md:pl-9 md:py-4 md:mb-6">
-          <h2 className="hidden md:block text-white font-bold text-lg">
+      <section className="home-suggestions-section col-span-3 md:col-span-3 lg:row-span-4 md:pt-10 lg:pt-0">
+        <header className="flex items-center bg-indigo-800 md:rounded-10 px-6 py-2 md:pr-4 md:pl-9 md:py-4 md:mb-6">
+          <h2 className="hidden md:block text-white font-bold text-lg mr-11 leading-loose">
             {SuggLength} Suggestion
             {SuggLength > 1 || !SuggLength ? 's' : ''}
           </h2>
@@ -135,6 +135,8 @@ export default function Home({ data }) {
             ]}
             selected={state.sort}
             onChange={onSelectChange}
+            btnDetail="Sort by:"
+            disabled={!SuggLength}
           />
 
           <Link href="/feedback/new" passHref>

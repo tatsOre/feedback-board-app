@@ -36,7 +36,7 @@ function Edit({ data, edit, user }) {
   const onSubmit = async (event) => {
     event.preventDefault()
     setState((prevState) => ({ ...prevState, loading: true }))
-    
+
     try {
       const slug = dashify(values.title)
       if (edit) {
@@ -63,7 +63,9 @@ function Edit({ data, edit, user }) {
     }
   }
 
-  const InputError = () => <span className="text-red-900">Can&quot;t be empty</span>
+  const InputError = () => (
+    <span className="text-red-900">Can&quot;t be empty</span>
+  )
 
   return (
     <form
@@ -75,13 +77,16 @@ function Edit({ data, edit, user }) {
       <h1 className="text-lg md:text-2xl text-indigo-800">
         {edit ? `Edit '${data.title}'` : 'Create New Feedback'}
       </h1>
-      {errors && errors.submit && <p className="font-bold text-red-900">Error {errors.submit}</p>}
+      {errors && errors.submit && (
+        <p className="font-bold text-red-900">Error {errors.submit}</p>
+      )}
       <label className="font-bold text-indigo-800 mt-6 leading-5">
         Feedback Title{' '}
         <small className="block font-normal text-indigo-500">
           Add a short, descriptive headline
         </small>
         <input
+          required
           value={values.title}
           name="title"
           onChange={onChange}
@@ -95,7 +100,12 @@ function Edit({ data, edit, user }) {
         <small className="block font-normal text-indigo-500">
           Choose a category for your feedback
         </small>
-        <select value={values.category} name="category" onChange={onChange}>
+        <select
+          className="w-full py-2 pl-4 mt-3 border border-blue-500 rounded-5"
+          value={values.category}
+          name="category"
+          onChange={onChange}
+        >
           <option value="feature">Feature</option>
           <option value="ui">UI</option>
           <option value="ux">UX</option>
@@ -105,12 +115,17 @@ function Edit({ data, edit, user }) {
       </label>
 
       {edit && (
-        <label className="font-bold text-indigo-800 mt-6 leading-5">
+        <label className="w-full font-bold text-indigo-800 mt-6 leading-5">
           Update Status{' '}
           <small className="block font-normal text-indigo-500">
             Change feedback state
           </small>
-          <select value={values.status} name="status" onChange={onChange}>
+          <select
+            className="w-full py-2 pl-4 mt-3 border border-blue-500 rounded-5"
+            value={values.status}
+            name="status"
+            onChange={onChange}
+          >
             <option value="suggestion">Suggestion</option>
             <option value="planned">Planned</option>
             <option value="in-progress">In-Progress</option>
@@ -125,6 +140,7 @@ function Edit({ data, edit, user }) {
           Include any specific comments on what should be improved, added, etc.
         </small>
         <textarea
+          required
           value={values.description}
           name="description"
           onChange={onChange}

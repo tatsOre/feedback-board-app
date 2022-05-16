@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 
-const Select = ({ options, selected, onChange }) => {
-  const [isOpen, setIsOpen] = useState(false)
+const Select = ({ options, selected, onChange, btnDetail, disabled }) => {
+  const [isOpen, setIsOpen] = useState(true)
 
   const initialIndex = options.findIndex((obj) => obj.value === selected)
 
@@ -11,15 +11,16 @@ const Select = ({ options, selected, onChange }) => {
 
   useEffect(() => {
     const handleOutsideClick = ({ target }) => {
-      // contains from browser API
       if (isOpen && me.current && !me.current.contains(target)) setIsOpen(false)
     }
-
+    document.body.style.overflowY = isOpen ? 'scroll' : ''
+    document.body.style.position = isOpen ? 'fixed' : ''
+    
     document.addEventListener('click', handleOutsideClick)
     return () => document.removeEventListener('click', handleOutsideClick)
   }, [isOpen])
 
-  const handleToggleButton = (event) =>  {
+  const handleToggleButton = () => {
     setIsOpen(!isOpen)
     setHighlightedIndex(0)
   }
@@ -27,38 +28,31 @@ const Select = ({ options, selected, onChange }) => {
   const handleOptionOnClick = (option) => {
     onChange(option)
     setIsOpen(!isOpen)
-    setHighlightedIndex(null)
+    setHighlightedIndex(0)
   }
 
   const handleKeyDown = (event) => {
     let newIndex
     switch (event.key) {
       case 'ArrowDown':
-        console.log("wft")
-        console.log(event.key, event.keyCode, event.target)
-
         newIndex =
           highlightedIndex === options.length - 1
             ? highlightedIndex
             : highlightedIndex + 1
         setHighlightedIndex(newIndex)
         !isOpen && onChange(options[newIndex].value)
-        console.log(selected)
         break
       case 'ArrowUp':
         newIndex = highlightedIndex - 1 <= 0 ? 0 : highlightedIndex - 1
         setHighlightedIndex(newIndex)
-        console.log(newIndex)
-        //listItems[newIndex].focus()
         break
       default:
-        console.log('key pressed:', event.key)
         return
     }
   }
 
   return (
-    <div ref={me}>
+    <div ref={me} id="dropdown-container" className={`${isOpen ? 'open' : ''}`}>
       <button
         type="button"
         id="dropdown-toggle-button"
@@ -67,13 +61,13 @@ const Select = ({ options, selected, onChange }) => {
         aria-labelledby="dropdown-label dropdown-toggle-button"
         onClick={handleToggleButton}
         onKeyDown={handleKeyDown}
-        className="text-white font-normal text-[13px]"
+        disabled={disabled}
       >
-        Sort by: {"Most Upvotes"}
+        {btnDetail && <span>{btnDetail} </span>}
+        {options[initialIndex]?.label}
       </button>
 
       <ul
-        className="bg-indigo-300"
         id="dropdown-menu"
         role="listbox"
         aria-labelledby="dropdown-label"
@@ -83,17 +77,14 @@ const Select = ({ options, selected, onChange }) => {
         {isOpen &&
           options.map(({ label, value }, index) => (
             <li
-              key={`select-${value}`}
-              className={`${
-                value === selected ? 'font-bold' : 'font-regular'
-              } ${
+              key={`dropdown-option-${value}`}
+              className={`${value === selected ? 'selected' : ''} ${
                 index === highlightedIndex && value !== selected
-                  ? 'text-violet-900'
+                  ? 'highlighted'
                   : ''
-              } hover:bg-red-500 focus:bg-red-500`}
+              }`}
               role="option"
               aria-selected={value === selected}
-              id={`category-option-${value}`}
               onClick={() => handleOptionOnClick(value)}
             >
               {label}

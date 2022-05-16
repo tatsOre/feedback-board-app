@@ -7,7 +7,7 @@ const RoadmapStatus = ({ data }) => {
     <article className="roadmap-status-panel bg-white rounded-10 w-full md:w-1/2 lg:w-full p-5 md:ml-2.5 lg:ml-0">
       <h2 className="text-indigo-800 text-lg inline-block mb-5">Roadmap</h2>
       <Link href="/roadmap" passHref>
-        <a className="float-right text-blue-900 text-small font-semibold underline mt-1">
+        <a className="float-right text-blue-900 text-sm font-semibold underline mt-1">
           View
         </a>
       </Link>
