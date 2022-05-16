@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
 
-const Select = ({ options, selected, onChange, btnDetail, disabled }) => {
-  const [isOpen, setIsOpen] = useState(true)
+const Select = ({ options, selected, onChange, labelDetail, disabled }) => {
+  const [isOpen, setIsOpen] = useState(false)
 
-  const initialIndex = options.findIndex((obj) => obj.value === selected)
+  const initialSelectedItemIndex = options.findIndex(
+    (obj) => obj.value === selected
+  )
 
-  const [highlightedIndex, setHighlightedIndex] = useState(initialIndex)
+  const [selectedIndex, setSelectedIndex] = useState(initialSelectedItemIndex)
 
   const me = useRef()
 
@@ -14,38 +16,38 @@ const Select = ({ options, selected, onChange, btnDetail, disabled }) => {
       if (isOpen && me.current && !me.current.contains(target)) setIsOpen(false)
     }
     document.body.style.overflowY = isOpen ? 'scroll' : ''
-    document.body.style.position = isOpen ? 'fixed' : ''
-    
+
     document.addEventListener('click', handleOutsideClick)
     return () => document.removeEventListener('click', handleOutsideClick)
   }, [isOpen])
 
-  const handleToggleButton = () => {
+  const onToggleButton = () => setIsOpen(!isOpen)
+
+  const onSelectClick = (index, value) => {
+    setSelectedIndex(index)
+    onChange(value)
     setIsOpen(!isOpen)
-    setHighlightedIndex(0)
   }
 
-  const handleOptionOnClick = (option) => {
-    onChange(option)
-    setIsOpen(!isOpen)
-    setHighlightedIndex(0)
-  }
-
-  const handleKeyDown = (event) => {
+  const onKeyDown = (event) => {
     let newIndex
     switch (event.key) {
       case 'ArrowDown':
+        event.preventDefault()
         newIndex =
-          highlightedIndex === options.length - 1
-            ? highlightedIndex
-            : highlightedIndex + 1
-        setHighlightedIndex(newIndex)
-        !isOpen && onChange(options[newIndex].value)
+          selectedIndex === options.length - 1
+            ? selectedIndex
+            : selectedIndex + 1
+        setSelectedIndex(newIndex)
         break
       case 'ArrowUp':
-        newIndex = highlightedIndex - 1 <= 0 ? 0 : highlightedIndex - 1
-        setHighlightedIndex(newIndex)
+        event.preventDefault()
+        newIndex = selectedIndex - 1 <= 0 ? 0 : selectedIndex - 1
+        setSelectedIndex(newIndex)
         break
+
+      case 'Enter':
+        isOpen && onChange(options[selectedIndex].value)
       default:
         return
     }
@@ -59,12 +61,12 @@ const Select = ({ options, selected, onChange, btnDetail, disabled }) => {
         aria-haspopup="listbox"
         aria-expanded={isOpen}
         aria-labelledby="dropdown-label dropdown-toggle-button"
-        onClick={handleToggleButton}
-        onKeyDown={handleKeyDown}
+        onClick={onToggleButton}
+        onKeyDown={onKeyDown}
         disabled={disabled}
       >
-        {btnDetail && <span>{btnDetail} </span>}
-        {options[initialIndex]?.label}
+        {labelDetail && <span>{labelDetail} </span>}
+        {options[selectedIndex]?.label}
       </button>
 
       <ul
@@ -72,20 +74,16 @@ const Select = ({ options, selected, onChange, btnDetail, disabled }) => {
         role="listbox"
         aria-labelledby="dropdown-label"
         tabIndex="-1"
-        onKeyDown={(event) => handleOptionKeyDown(event)}
       >
         {isOpen &&
           options.map(({ label, value }, index) => (
             <li
+              tabIndex={index + 1}
               key={`dropdown-option-${value}`}
-              className={`${value === selected ? 'selected' : ''} ${
-                index === highlightedIndex && value !== selected
-                  ? 'highlighted'
-                  : ''
-              }`}
+              className={selectedIndex === index ? 'selected' : ''}
               role="option"
-              aria-selected={value === selected}
-              onClick={() => handleOptionOnClick(value)}
+              aria-selected={selectedIndex === index}
+              onClick={() => onSelectClick(index, value)}
             >
               {label}
             </li>

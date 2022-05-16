@@ -9,7 +9,7 @@ import Button from '../Buttons/Default'
 import GoBack from '../Buttons/GoBack'
 import FeedbackCard from '../FeedbackCard'
 import NavLink from '../NavLink'
-import Spinner from '../Shared/spinner'
+import Loader from '../Shared/loader'
 
 
 const PostReply = ({ data }) => {
@@ -140,7 +140,7 @@ export default function Feedback({ slug }) {
     getFeedback()
   }, [slug, isLoading])
 
-  if (isLoading && !data) return <Spinner />
+  if (isLoading && !data) return <Loader />
   if (!isLoading && !data) return <p>Something went wrong</p>
 
   const charsLeft = 225 - newComment.length

@@ -5,6 +5,7 @@ import RoadmapStatus from './roadmap-status'
 import Select from '../Select'
 import Link from 'next/link'
 import FeedbackCard from '../FeedbackCard'
+import { getCommentsLength } from '../../utils'
 
 const reducer = (state, action) => {
   let data
@@ -32,15 +33,19 @@ const reducer = (state, action) => {
       return { ...state, sort: type, suggestions: data }
 
     case 'MOST_COMMENTS':
-      data = [...state.suggestions].sort(
-        (a, b) => b.comments.length - a.comments.length
-      )
+      data = [...state.suggestions].sort((a, b) => {
+        const aComments = getCommentsLength(a.comments)
+        const bComments = getCommentsLength(b.comments)
+        return bComments - aComments
+      })
       return { ...state, sort: type, suggestions: data }
 
     case 'LEAST_COMMENTS':
-      data = [...state.suggestions].sort(
-        (a, b) => a.comments.length - b.comments.length
-      )
+      data = [...state.suggestions].sort((a, b) => {
+        const aComments = getCommentsLength(a.comments)
+        const bComments = getCommentsLength(b.comments)
+        return aComments - bComments
+      })
       return { ...state, sort: type, suggestions: data }
 
     default:
@@ -135,7 +140,7 @@ export default function Home({ data }) {
             ]}
             selected={state.sort}
             onChange={onSelectChange}
-            btnDetail="Sort by:"
+            labelDetail="Sort by:"
             disabled={!SuggLength}
           />
 

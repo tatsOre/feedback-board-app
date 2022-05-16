@@ -11,6 +11,7 @@ import {
 } from 'firebase/firestore'
 
 import { useUser } from '../../../context/userContext'
+import Loader from '../../Shared/loader'
 
 const UpvoteButton = ({ upvotes, fdid }) => {
   const [{ votes, loading, error, isUpvoted }, setState] = useState({
@@ -90,14 +91,8 @@ const UpvoteButton = ({ upvotes, fdid }) => {
               }`
         } rounded-10 text-small min-w-[70px] py-3 px-4 leading-3 flex-inline justify-evenly relative z-10`}
       >
-        {loading ? (
-          <i>⏱</i>
-        ) : (
-          <>
-            <ArrowUp color={isUpvoted ? '#FFFFFF' : '#4661E6'} />
-            {votes}
-          </>
-        )}
+        <ArrowUp color={isUpvoted ? '#FFFFFF' : '#4661E6'} />
+        {loading ? '...' : votes}
       </button>
       {error && (
         <span className="ml-2 text-xs text-red-900">

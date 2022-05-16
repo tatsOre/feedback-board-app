@@ -377,6 +377,7 @@ input[type='radio']:focus + label {
 .home-suggestions-section #dropdown-toggle-button {
   font-weight: bold;
   font-size: 14px;
+  padding-block: 0.5rem;
 }
 
 .home-suggestions-section #dropdown-toggle-button::after {
@@ -384,7 +385,9 @@ input[type='radio']:focus + label {
   margin-left: 10px;
 }
 
-.home-suggestions-section #dropdown-container.open #dropdown-toggle-button::after {
+.home-suggestions-section
+  #dropdown-container.open
+  #dropdown-toggle-button::after {
   content: url('/assets/shared/icon-arrow-up-white.svg');
   margin-left: 10px;
 }
@@ -393,7 +396,7 @@ input[type='radio']:focus + label {
   font-weight: normal;
 }
 
-.home-suggestions-section #dropdown-toggle-button[aria-expanded=true] {
+.home-suggestions-section #dropdown-toggle-button[aria-expanded='true'] {
   opacity: 0.75;
 }
 
@@ -406,14 +409,14 @@ input[type='radio']:focus + label {
   position: absolute;
   top: 4rem;
   width: 255px;
-  z-index: 10;
+  z-index: 20;
   background-color: var(--white);
   border-radius: 10px;
   box-shadow: 0px 10px 40px -7px rgba(55, 63, 104, 0.350492);
   border-radius: 10px;
 }
 
-#dropdown-container #dropdown-menu li { 
+#dropdown-container #dropdown-menu li {
   color: var(--bg-indigo-500);
   padding-block: 0.75rem;
   padding-inline: 1.5rem;
@@ -436,7 +439,7 @@ input[type='radio']:focus + label {
   border-bottom: 1px solid var(--bg-indigo-400);
 }
 
-/* Spinner */
+/* Loader */
 .loader,
 .loader:before,
 .loader:after {
@@ -448,6 +451,7 @@ input[type='radio']:focus + label {
   -webkit-animation: load7 1.8s infinite ease-in-out;
   animation: load7 1.8s infinite ease-in-out;
 }
+
 .loader {
   color: var(--blue-900);
   font-size: 10px;
@@ -460,20 +464,24 @@ input[type='radio']:focus + label {
   -webkit-animation-delay: -0.16s;
   animation-delay: -0.16s;
 }
+
 .loader:before,
 .loader:after {
   content: '';
   position: absolute;
   top: 0;
 }
+
 .loader:before {
   left: -3.5em;
   -webkit-animation-delay: -0.32s;
   animation-delay: -0.32s;
 }
+
 .loader:after {
   left: 3.5em;
 }
+
 @-webkit-keyframes load7 {
   0%,
   80%,
@@ -484,6 +492,7 @@ input[type='radio']:focus + label {
     box-shadow: 0 2.5em 0 0;
   }
 }
+
 @keyframes load7 {
   0%,
   80%,
