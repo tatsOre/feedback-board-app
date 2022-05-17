@@ -78,7 +78,6 @@ const Select = ({ options, selected, onChange, labelDetail, disabled }) => {
         {isOpen &&
           options.map(({ label, value }, index) => (
             <li
-              tabIndex={index + 1}
               key={`dropdown-option-${value}`}
               className={selectedIndex === index ? 'selected' : ''}
               role="option"

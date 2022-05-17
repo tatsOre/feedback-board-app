@@ -129,7 +129,12 @@ export default function Home({ data }) {
           />
           <RoadmapStatus data={state.requests} />
         </nav>
-        <div className={`${isMenuOpen ? 'mobile-nav-backdrop' : ''}`}></div>
+        <div
+          className={`${isMenuOpen ? 'mobile-nav-backdrop' : ''}`}
+          onClick={() => {
+            setIsMenuOpen(false)
+          }}
+        ></div>
       </aside>
 
       <section className="home-suggestions-section col-span-3 md:col-span-3 lg:row-span-4 md:pt-10 lg:pt-0">
