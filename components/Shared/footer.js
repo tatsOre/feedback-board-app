@@ -1,7 +1,14 @@
 export default function Footer() {
   return (
-    <footer className="w-full order-last text-xs text-center text-blue-500 mt-2 mb-8">
-      Feedback Board App - Coded by <a>Someone</a>. 2022.
+    <footer className="text-center text-blue-500 text-xs my-6">
+      Feedback Board App - Built by{' '}
+      <a
+        href="https://github.com/tatsOre"
+        className="font-semibold cursor-pointer"
+      >
+        Tatiana Orejuela Zapata
+      </a>
+      . 2022.
     </footer>
   )
 }

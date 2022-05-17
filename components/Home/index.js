@@ -3,6 +3,7 @@ import Link from 'next/link'
 import FeedbackCard from '../FeedbackCard'
 import Filter from '../Filter'
 import Loader from '../Shared/loader'
+import Login from '../Shared/login'
 import NavLink from '../NavLink'
 import RoadmapStatus from './roadmap-status'
 import Select from '../Select'
@@ -113,7 +114,9 @@ export default function Home({ data }) {
             onChange={onTabChange}
           />
           <RoadmapStatus data={state.requests} />
+          <Login />
         </nav>
+
         <div
           className={`${isMenuOpen ? 'mobile-nav-backdrop' : ''}`}
           onClick={() => {
@@ -163,6 +166,8 @@ export default function Home({ data }) {
           )}
         </div>
       </section>
+
+      <Login breakpoint="md" />
     </main>
   )
 }

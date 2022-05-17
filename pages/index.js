@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import Home from '../components/Home'
-import Footer from '../components/Shared/footer'
 import { getAllFeedbacks } from '../services/firebase'
 
 export const getServerSideProps = async () => {
@@ -22,7 +21,6 @@ export default function Page(props) {
         <title>Feedback Board App - Hello!</title>
       </Head>
       <Home {...props} />
-      <Footer />
     </>
   )
 }

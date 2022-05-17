@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import Footer from '../../components/Shared/footer'
 import Form from '../../components/Form'
 
 export default function Page() {
@@ -9,7 +8,6 @@ export default function Page() {
         <title>Feedback Board App - New</title>
       </Head>
       <Form />
-      <Footer />
     </>
   )
 }

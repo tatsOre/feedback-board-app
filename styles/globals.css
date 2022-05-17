@@ -515,3 +515,39 @@ input[type='radio']:focus + label {
     background-position: -200% 0;
   }
 }
+
+/* Login Mockup */
+@media (max-width: 719px) {
+  .login {
+    display: flex;
+  }
+  .login.tablet {
+    display: none;
+  }
+}
+
+@media (min-width: 720px) {
+  .login {
+    display: none;
+  }
+  .login.tablet {
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    grid-column: 1 / span 3;
+    width: 100%;
+  }
+ 
+  .login.tablet p {
+    width: auto;
+  }
+}
+
+@media (min-width: 976px) {
+  .login {
+    display: flex;
+  }
+  .login.tablet {
+    display: none;
+  }
+}

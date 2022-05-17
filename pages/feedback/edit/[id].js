@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import Footer from '../../../components/Shared/footer'
 import Form from '../../../components/Form'
 import { getFeedbackById } from '../../../services/firebase'
 
@@ -22,7 +21,6 @@ export default function Page(props) {
         <title>Edit - {props.data.title}</title>
       </Head>
       <Form {...props} edit />
-      <Footer />
     </>
   )
 }
