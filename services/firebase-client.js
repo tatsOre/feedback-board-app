@@ -1,6 +1,8 @@
 import { createFirebaseApp } from '../firebase/clientApp'
 import {
   addDoc,
+  arrayRemove,
+  arrayUnion,
   collection,
   doc,
   getDoc,
@@ -62,4 +64,49 @@ export async function getFeedbackByField(field, value) {
   }
   const docs = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
   return docs[0]
+}
+
+export async function updateFeedbackComments(data, content, user) {
+  const app = createFirebaseApp()
+  const db = getFirestore(app)
+  const fdRef = doc(db, 'feedbacks', data.id)
+
+  const comment = {
+    id: data.comments.length + 1,
+    content,
+    user: {
+      image: user.image,
+      name: user.name,
+      username: user.username,
+    },
+  }
+  await updateDoc(fdRef, {
+    updated: new Date().toISOString(),
+    comments: arrayUnion(comment),
+  }).catch((error) => {
+    throw new Error(error.message)
+  })
+  return comment
+}
+
+export async function updateFeedbackReplies(data, reply, cmid) {
+  const app = createFirebaseApp()
+  const db = getFirestore(app)
+  const fdRef = doc(db, 'feedbacks', data.id)
+
+  const updatedComments = data.comments.map((c) => {
+    if (c.id === cmid) {
+      return { ...c, replies: c.replies ? [...c.replies, reply] : [reply] }
+    }
+    return c
+  })
+
+  await updateDoc(fdRef, {
+    updated: new Date().toISOString(),
+    comments: updatedComments,
+  }).catch((error) => {
+    throw new Error(error.message)
+  })
+  console.log(updatedComments)
+  return updatedComments
 }
