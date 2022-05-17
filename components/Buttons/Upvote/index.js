@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { ArrowUp } from '../../Arrows'
 import { createFirebaseApp } from '../../../firebase/clientApp'
 import {
   getFirestore,
@@ -11,13 +10,13 @@ import {
 } from 'firebase/firestore'
 
 import { useUser } from '../../../context/userContext'
-import Loader from '../../Shared/loader'
+import { ArrowUp } from '../../Arrows'
 
 const UpvoteButton = ({ upvotes, fdid }) => {
-  const [{ votes, loading, error, isUpvoted }, setState] = useState({
+  const [{ votes, isLoading, error, isUpvoted }, setState] = useState({
     votes: upvotes,
     isUpvoted: false,
-    loading: false,
+    isLoading: false,
   })
 
   const { loadingUser, user, setUser } = useUser()
@@ -35,7 +34,7 @@ const UpvoteButton = ({ upvotes, fdid }) => {
     event.preventDefault()
     setState((prevState) => ({
       ...prevState,
-      loading: true,
+      isLoading: true,
     }))
 
     try {
@@ -45,11 +44,13 @@ const UpvoteButton = ({ upvotes, fdid }) => {
       const userRef = doc(db, 'users', user?.id)
       await updateDoc(userRef, {
         upvoted: isUpvoted ? arrayRemove(fdid) : arrayUnion(fdid),
+        updated: new Date().toISOString(),
       })
 
       const fdRef = doc(db, 'feedbacks', fdid)
       await updateDoc(fdRef, {
         upvotes: isUpvoted ? increment(-1) : increment(1),
+        updated: new Date().toISOString(),
       })
 
       const upvotedFeedbacks = isUpvoted
@@ -64,7 +65,6 @@ const UpvoteButton = ({ upvotes, fdid }) => {
         isUpvoted: !isUpvoted,
       }))
     } catch (error) {
-      console.log(error)
       setState((prevState) => ({
         ...prevState,
         error: error.message,
@@ -72,7 +72,7 @@ const UpvoteButton = ({ upvotes, fdid }) => {
     } finally {
       setState((prevState) => ({
         ...prevState,
-        loading: false,
+        isLoading: false,
       }))
     }
   }
@@ -82,17 +82,17 @@ const UpvoteButton = ({ upvotes, fdid }) => {
       <button
         type="button"
         onClick={onClick}
-        disabled={loading}
+        disabled={isLoading}
         className={`${
           isUpvoted
             ? 'bg-blue-900 text-white'
             : `bg-indigo-300 text-indigo-800 ${
-                !loading && 'hover:bg-indigo-400'
+                !isLoading && 'hover:bg-indigo-400'
               }`
-        } rounded-10 text-small min-w-[70px] py-3 px-4 leading-3 flex-inline justify-evenly relative z-10`}
+        } rounded-10 text-[13px] min-w-[70px] py-3 px-4 leading-3 flex-inline justify-evenly relative z-10`}
       >
         <ArrowUp color={isUpvoted ? '#FFFFFF' : '#4661E6'} />
-        {loading ? '...' : votes}
+        {isLoading ? '...' : votes}
       </button>
       {error && (
         <span className="ml-2 text-xs text-red-900">

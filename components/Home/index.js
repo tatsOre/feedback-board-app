@@ -1,10 +1,11 @@
 import { useEffect, useReducer, useState } from 'react'
+import Link from 'next/link'
+import FeedbackCard from '../FeedbackCard'
 import Filter from '../Filter'
+import Loader from '../Shared/loader'
 import NavLink from '../NavLink'
 import RoadmapStatus from './roadmap-status'
 import Select from '../Select'
-import Link from 'next/link'
-import FeedbackCard from '../FeedbackCard'
 import { getCommentsLength } from '../../utils'
 
 const reducer = (state, action) => {
@@ -61,14 +62,14 @@ export default function Home({ data }) {
     requests: data,
   }
   const [state, dispatch] = useReducer(reducer, initialState)
-  const [showMenu, setShowMenu] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   useEffect(() => {
-    document.body.style.overflow = showMenu ? 'hidden' : 'unset'
+    document.body.style.overflow = isMenuOpen ? 'hidden' : 'unset'
     return () => (document.body.style.overflow = '')
-  }, [showMenu])
+  }, [isMenuOpen])
 
-  if (!data) return <p>...Loading</p>
+  if (!data) return <Loader />
 
   const SuggLength = state.suggestions?.length || 0
 
@@ -81,9 +82,16 @@ export default function Home({ data }) {
     { label: 'Feature', value: 'feature' },
   ]
 
+  const sortOptions = [
+    { label: 'Most Upvotes', value: 'MOST_UPVOTES' },
+    { label: 'Least Upvotes', value: 'LEAST_UPVOTES' },
+    { label: 'Most Comments', value: 'MOST_COMMENTS' },
+    { label: 'Least Comments', value: 'LEAST_COMMENTS' },
+  ]
+
   const onTabChange = ({ target }) => {
     dispatch({ type: 'CHANGE_FILTER_VALUE', payload: target.value })
-    setShowMenu(false)
+    setIsMenuOpen(false)
   }
 
   const onSelectChange = (option) => {
@@ -102,42 +110,37 @@ export default function Home({ data }) {
         <button
           className="mobile-nav-button"
           type="button"
-          onClick={() => setShowMenu(!showMenu)}
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
-          <div className={`bar ${showMenu ? 'animate' : ''}`}></div>
+          <div className={`bar ${isMenuOpen ? 'animate' : ''}`}></div>
         </button>
       </header>
 
       <aside className="lg:order-3 col-span-3 md:col-span-2 lg:col-span-1 md:ml-3 bg-indigo-lighter">
         <nav
           className={`${
-            showMenu ? 'show' : 'hide'
+            isMenuOpen ? 'show' : 'hide'
           } mobile-nav md:flex md:flex-row lg:flex-col lg:space-y-6`}
         >
           <Filter
             options={filterOptions}
-            checkedValue={state.filter}
+            checked={state.filter}
             onChange={onTabChange}
           />
           <RoadmapStatus data={state.requests} />
         </nav>
-        <div className={`${showMenu ? 'mobile-nav-backdrop' : ''}`}></div>
+        <div className={`${isMenuOpen ? 'mobile-nav-backdrop' : ''}`}></div>
       </aside>
 
       <section className="home-suggestions-section col-span-3 md:col-span-3 lg:row-span-4 md:pt-10 lg:pt-0">
-        <header className="flex items-center bg-indigo-800 md:rounded-10 px-6 py-2 md:pr-4 md:pl-9 md:py-4 md:mb-6">
-          <h2 className="hidden md:block text-white font-bold text-lg mr-11 leading-loose">
+        <header className="flex bg-indigo-800 md:rounded-10 px-6 py-2 md:pr-4 md:pl-9 md:py-4 md:mb-6">
+          <h2 className="hidden md:block text-white font-bold text-lg mr-11">
             {SuggLength} Suggestion
             {SuggLength > 1 || !SuggLength ? 's' : ''}
           </h2>
 
           <Select
-            options={[
-              { label: 'Most Upvotes', value: 'MOST_UPVOTES' },
-              { label: 'Least Upvotes', value: 'LEAST_UPVOTES' },
-              { label: 'Most Comments', value: 'MOST_COMMENTS' },
-              { label: 'Least Comments', value: 'LEAST_COMMENTS' },
-            ]}
+            options={sortOptions}
             selected={state.sort}
             onChange={onSelectChange}
             labelDetail="Sort by:"
@@ -173,5 +176,3 @@ export default function Home({ data }) {
     </main>
   )
 }
-// section lg:pl-5 header lg:h-[140px]
-// aside lg:w-1/4 md:h-44 lg:h-full

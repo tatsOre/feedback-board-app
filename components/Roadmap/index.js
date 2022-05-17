@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import { toCapitalize } from '../../utils/index'
-import GoBack from '../Buttons/GoBack'
+import GoBackButton from '../Buttons/GoBack'
 import NavLink from '../NavLink'
 import RoadmapCard from './roadmap-card'
 
@@ -18,7 +18,7 @@ const RoadmapPage = ({ data }) => {
     <main className="container lg:px-4 md:pt-14 lg:pt-20">
       <header className="flex items-center justify-between text-white bg-indigo-900 md:rounded-10 p-6 md:p-7">
         <div>
-          <GoBack light />
+          <GoBackButton light />
           <h1 className="text-lg md:text-2xl">Roadmap</h1>
         </div>
 

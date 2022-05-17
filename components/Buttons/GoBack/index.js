@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import { ArrowLeft } from '../../Arrows'
 
-export default function GoBack({ light }) {
+export default function GoBackButton({ light }) {
   const router = useRouter()
   return (
     <button

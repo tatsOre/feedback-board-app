@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { createFeedback, updateFeedback } from '../../services/firebase-client'
 import Button from '../Buttons/Default'
-import GoBack from '../Buttons/GoBack'
+import GoBackButton from '../Buttons/GoBack'
 
 function getInitialState(data, edit) {
   let values = {
@@ -171,7 +171,7 @@ function Edit({ data, edit, user }) {
 export default function Form({ data, edit }) {
   return (
     <main className="max-w-[540px] mx-auto p-6 md:pt-14 lg:pt-20">
-      <GoBack />
+      <GoBackButton />
       <Edit data={data} edit={edit} />
     </main>
   )

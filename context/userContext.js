@@ -20,7 +20,6 @@ export default function CreateUserContext({ children }) {
     } else {
       setUser(null)
     }
-
     setLoadingUser(false)
   }
 
