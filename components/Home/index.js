@@ -7,6 +7,7 @@ import NavLink from '../NavLink'
 import RoadmapStatus from './roadmap-status'
 import Select from '../Select'
 import { getCommentsLength } from '../../utils'
+import { FILTER_OPTIONS, SORT_OPTIONS } from './index-utils'
 
 const reducer = (state, action) => {
   let data
@@ -58,8 +59,8 @@ export default function Home({ data }) {
   const initialState = {
     filter: 'all',
     sort: 'MOST_UPVOTES',
-    suggestions: data?.suggestion,
-    requests: data,
+    suggestions: data && (data.suggestion || []),
+    requests: data || [],
   }
   const [state, dispatch] = useReducer(reducer, initialState)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -71,23 +72,7 @@ export default function Home({ data }) {
 
   if (!data) return <Loader />
 
-  const SuggLength = state.suggestions?.length || 0
-
-  const filterOptions = [
-    { label: 'All', value: 'all' },
-    { label: 'UI', value: 'ui' },
-    { label: 'UX', value: 'ux' },
-    { label: 'Enhancement', value: 'enhancement' },
-    { label: 'Bug', value: 'bug' },
-    { label: 'Feature', value: 'feature' },
-  ]
-
-  const sortOptions = [
-    { label: 'Most Upvotes', value: 'MOST_UPVOTES' },
-    { label: 'Least Upvotes', value: 'LEAST_UPVOTES' },
-    { label: 'Most Comments', value: 'MOST_COMMENTS' },
-    { label: 'Least Comments', value: 'LEAST_COMMENTS' },
-  ]
+  const SuggLength = state.suggestions.length
 
   const onTabChange = ({ target }) => {
     dispatch({ type: 'CHANGE_FILTER_VALUE', payload: target.value })
@@ -99,9 +84,9 @@ export default function Home({ data }) {
   }
 
   return (
-    <main className="home container grid lg:gap-x-4 xl:gap-x-8 grid-cols-3 grid-rows-[72px_auto] md:grid-rows-[178px_auto] lg:grid-cols-4 lg:grid-rows-none md:pt-14 lg:pt-24">
-      <header className="col-span-4 md:col-span-1 md:rounded-10 lg:mb-6 py-3 md:p-6">
-        <h1 className="text-base md:text-xl text-white font-bold leading-5 md:leading-7">
+    <main className="home container grid lg:gap-x-4 xl:gap-x-8 grid-cols-3 grid-rows-[auto_auto] md:grid-rows-[minmax(178px, auto)_auto] lg:grid-cols-4 lg:grid-rows-none md:pt-14 lg:pt-24">
+      <header className="col-span-3 md:col-span-1 md:rounded-10 lg:mb-6 py-3 md:p-6">
+        <h1 className="text-base md:text-xl text-white leading-5 md:leading-7">
           Frontend Mentor
           <small className="font-normal text-small md:text-base opacity-75 block">
             Feedback Board
@@ -116,14 +101,14 @@ export default function Home({ data }) {
         </button>
       </header>
 
-      <aside className="lg:order-3 col-span-3 md:col-span-2 lg:col-span-1 md:ml-3 bg-indigo-lighter">
+      <aside className="lg:order-3 col-span-3 md:col-span-2 lg:col-span-1 md:ml-3 lg:ml-0 bg-indigo-lighter">
         <nav
           className={`${
             isMenuOpen ? 'show' : 'hide'
           } mobile-nav md:flex md:flex-row lg:flex-col lg:space-y-6`}
         >
           <Filter
-            options={filterOptions}
+            options={FILTER_OPTIONS}
             checked={state.filter}
             onChange={onTabChange}
           />
@@ -145,7 +130,7 @@ export default function Home({ data }) {
           </h2>
 
           <Select
-            options={sortOptions}
+            options={SORT_OPTIONS}
             selected={state.sort}
             onChange={onSelectChange}
             labelDetail="Sort by:"
