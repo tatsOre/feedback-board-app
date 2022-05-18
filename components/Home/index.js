@@ -1,4 +1,5 @@
 import { useEffect, useReducer, useState } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import FeedbackCard from '../FeedbackCard'
 import Filter from '../Filter'
@@ -154,11 +155,19 @@ export default function Home({ data }) {
               <FeedbackCard key={data.id} feedback={data} link />
             ))
           ) : (
-            <div className="bg-white rounded-10 text-center py-20 px-7 md:py-24 md:px-44">
-              <p className="text-indigo-800 font-bold text-lg md:text-2xl tracking-tight mt-6">
+            <div className="bg-white flex flex-col items-center rounded-10 py-20 px-7 md:py-24 md:px-44">
+              <div className="relative w-[102px] h-[108px] md:w-[130px] md:h-[137px]">
+                <Image
+                  src="/assets/suggestions/illustration-empty.svg"
+                  layout="fill"
+                  objectFit="cover"
+                  alt=""
+                />
+              </div>
+              <p className="text-indigo-800 font-bold text-lg md:text-2xl tracking-tight mt-10 md:mt-14">
                 There is no feedback yet.
               </p>
-              <p className="text-indigo-500 text-small mt-2 mb-5">
+              <p className="text-indigo-500 text-center text-small mt-2 mb-5">
                 Got a suggestion? Found a bug that needs to be squashed? We love
                 hearing about new ideas to improve our app.
               </p>

@@ -30,10 +30,11 @@ In this application users should be able to:
 - Filter suggestions by category
 - Add comments and replies to a product feedback request
 - Upvote product feedback requests
-- Keep track of any changes building out a full-stack app with Firestore
+- Keep track of any changes
 
 #### Expected Behaviour
-
+- New feedbacks author
+  - Current user will be "logged-in" using mockup data to populate the user data for any new comments/replies or the author when creating a new feedback request.
 - Suggestions page
   - Only product feedback requests with a status of `suggestion` should be shown on the Suggestions page.
 - Roadmap
@@ -45,8 +46,8 @@ In this application users should be able to:
   - If a piece of feedback has its status updated to `planned`/`in-progress`/`live` it moves through to the roadmap and should show up in the correct column based on its new status.
   - Only the feedbacks created by the current user are editable.
 - Add comments/replies
-  - Current user will be "logged-in" using mockup data to populate the user data for any new comments or replies or the author when creating a new feedback request.
   - Any comment/reply can have a maximum of 250 characters.
+  - Current user will not see the comment form in their own feedbacks.
 
 ### Screenshot
 
@@ -73,7 +74,10 @@ In this application users should be able to:
 ### Continued development
 Currently working on: 
 - Create/Edit feedback implementation, form validation and styling
-- Redirections and 404 page
+- Error UI handling
+- Redirections on error and 404 page
+- Testing
+- Documentation
 
 ## Author
 

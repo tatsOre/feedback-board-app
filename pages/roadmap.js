@@ -2,12 +2,11 @@ import Head from 'next/head'
 import RoadmapPage from '../components/Roadmap'
 import { getAllFeedbacks } from '../services/firebase'
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   try {
     const data = await getAllFeedbacks()
     return {
       props: { data },
-      revalidate: 10,
     }
   } catch (error) {
     console.log(error)

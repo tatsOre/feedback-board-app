@@ -22,7 +22,7 @@ export default function FeedbackCard({ feedback, link }) {
           </a>
         </Link>
       )}
-      <div className="w-full md:w-auto md:ml-10">
+      <div className="w-full md:w-[80%] md:ml-10">
         <h3 className="text-sm lg:text-lg mb-2 text-indigo-800 group-hover:text-blue-900">
           {title}
         </h3>
