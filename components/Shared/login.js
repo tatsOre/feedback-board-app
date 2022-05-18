@@ -3,7 +3,7 @@ import { useUser } from '../../context/userContext'
 
 export default function Login({ breakpoint }) {
   const { user } = useUser()
-  return (
+  return user ? (
     <div
       className={`login ${
         breakpoint == 'md' ? 'tablet' : ''
@@ -21,5 +21,5 @@ export default function Login({ breakpoint }) {
         For testing purposes you are logged in as: <b>{user?.name}</b>
       </p>
     </div>
-  )
+  ) : null
 }

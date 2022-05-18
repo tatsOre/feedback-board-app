@@ -27,7 +27,7 @@ export default function Form({ data, edit }) {
     getInitialState(data, edit)
   )
 
-  const [showModal, setShowModal] = useState(true)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const { user } = useUser()
   const router = useRouter()
@@ -75,7 +75,7 @@ export default function Form({ data, edit }) {
   )
 
   return (
-    <main className="max-w-[540px] mx-auto p-6 md:pt-14 lg:pt-20">
+    <main className="max-w-[calc(540px+3rem)] mx-auto p-6 md:pt-14 lg:pt-20">
       <GoBackButton />
       <form
         onSubmit={onSubmit}
@@ -175,7 +175,7 @@ export default function Form({ data, edit }) {
           {edit && (
             <Button
               type="button"
-              onClick={() => setShowModal(true)}
+              onClick={() => setIsModalOpen(true)}
               variant="danger"
               label="Delete"
             />
@@ -183,8 +183,12 @@ export default function Form({ data, edit }) {
         </div>
       </form>
 
-      {showModal && (
-        <DeleteFeedbackModal fdid={data?.id} setShowModal={setShowModal} />
+      {isModalOpen && (
+        <DeleteFeedbackModal
+          fdid={data?.id}
+          isOpen={isModalOpen}
+          setIsOpen={setIsModalOpen}
+        />
       )}
     </main>
   )

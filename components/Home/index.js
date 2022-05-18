@@ -67,8 +67,11 @@ export default function Home({ data }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   useEffect(() => {
-    document.body.style.overflow = isMenuOpen ? 'hidden' : 'unset'
-    return () => (document.body.style.overflow = '')
+    document.body.style.position = isMenuOpen ? 'fixed' : 'static'
+    document.body.style.overflowY = 'scroll'
+    return () => {
+      document.body.style.position = 'static'
+    }
   }, [isMenuOpen])
 
   if (!data) return <Loader />
