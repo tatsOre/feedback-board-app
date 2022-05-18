@@ -1,10 +1,10 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import { useEffect } from 'react'
 
 export default function Custom404() {
   useEffect(() => {
     document.title = 'Not Found | Feedback Board App'
-    document.body.style.backgroundColor = '#FFFFFF'
   }, [])
 
   return (
@@ -26,13 +26,13 @@ export default function Custom404() {
       </p>
       <p className="text-sm md:text-lg text-indigo-900">
         Visit the{' '}
-        <a href="/" className="font-semibold text-indigo-800">
-          homepage
-        </a>{' '}
+        <Link href="/" passHref>
+          <a className="font-semibold text-indigo-800">homepage</a>
+        </Link>{' '}
         or...{' '}
-        <a href="/feedback/new" className="font-semibold text-violet-900">
-          leave a feedback!
-        </a>
+        <Link href="/feedback/new" passHref>
+          <a className="font-semibold text-violet-900">leave a feedback!</a>
+        </Link>
       </p>
     </main>
   )
