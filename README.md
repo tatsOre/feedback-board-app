@@ -1,6 +1,6 @@
 # Frontend Mentor - Product feedback app
 
-This is a solution to the [Product feedback app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/product-feedback-app-wbvUYqjR6).
+This is a solution to the <a href="https://www.frontendmentor.io/challenges/product-feedback-app-wbvUYqjR6" target="_blank">Product feedback app challenge on Frontend Mentor</a>.
 
 ## Table of contents
 
@@ -49,11 +49,11 @@ In this application users should be able to:
 
 ### Screenshot
 
-![](./screenshot.jpg)
+![Design preview for the Product feedback app coding challenge](https://github.com/tatsOre/feedback-board-app/blob/main/preview.jpg)
 
 ### Links
 
-- Live Site URL: [Add live site URL here](https://feedback-board-app.vercel.app/)
+- Live Site URL: [Feedback Board App](https://feedback-board-app.vercel.app/)
 
 ## The process
 
@@ -65,7 +65,7 @@ In this application users should be able to:
 - [React](https://reactjs.org/) - JS library
 - [Next.js](https://nextjs.org/) - React framework
 - [Tailwind](https://tailwindcss.com/) - For styles
-- [Firestore](https://firebase.google.com/) - Firebase
+- [Firestore](https://firebase.google.com/) - Firebase/Firestore
 
 ### What I learned
 
