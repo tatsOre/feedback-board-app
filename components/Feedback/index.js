@@ -26,7 +26,7 @@ export default function Feedback() {
   if (loadingData && !data) return <Loader />
   if (!loadingData && !data) return <p>Something went wrong</p>
 
-  const charsLeft = 225 - content.length
+  const charsLeft = 250 - content.length
   const commentsLength = getCommentsLength(data.comments)
 
   const onSubmit = async (event) => {
@@ -107,7 +107,7 @@ export default function Feedback() {
             className="w-full text-[13px] md:text-[15px] bg-indigo-100 rounded-5 p-4 mb-4 text-indigo-800 border border-indigo-100 hover:border-blue-900 cursor-pointer"
             placeholder="Type your comment here"
             rows="3"
-            maxLength="225"
+            maxLength="250"
           />
           {contentError && (
             <span className="w-full text-[13px] text-red-900 -mt-2">

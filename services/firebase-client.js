@@ -4,6 +4,7 @@ import {
   arrayRemove,
   arrayUnion,
   collection,
+  deleteDoc,
   doc,
   getDoc,
   getDocs,
@@ -16,7 +17,6 @@ import {
 export async function createFeedback(data) {
   const app = createFirebaseApp()
   const db = getFirestore(app)
-
   const q = query(collection(db, 'feedbacks'), where('slug', '==', data.slug))
   const snapshot = await getDocs(q)
 
@@ -107,6 +107,20 @@ export async function updateFeedbackReplies(data, reply, cmid) {
   }).catch((error) => {
     throw new Error(error.message)
   })
-  console.log(updatedComments)
   return updatedComments
+}
+
+export async function deleteFeedback(fdid, user) {
+  const app = createFirebaseApp()
+  const db = getFirestore(app)
+
+  const docRef = doc(db, 'feedbacks', fdid)
+  await deleteDoc(docRef).catch((error) => {
+    throw new Error(error.message)
+  })
+  await updateDoc(doc(db, 'users', user.id), {
+    upvoted: arrayRemove(fdid),
+  }).catch((error) => {
+    throw new Error(error.message)
+  })
 }

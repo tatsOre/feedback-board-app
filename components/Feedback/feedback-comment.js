@@ -80,10 +80,12 @@ const Comment = ({ comment, cmid }) => {
           className="col-span-3 md:col-start-2 md:col-span-2 md:flex md:space-x-4 mt-6 md:mb-2"
         >
           <textarea
-            name="new-comment"
+            required
+            name="new-reply"
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            aria-label="Add a new comment"
+            aria-label={`Add a new reply to username:${comment.user.username}`}
+            maxLength="250"
             className="w-full mb-3 md:mb-0 p-2 md:p-4 bg-indigo-100 text-indigo-800 md:text-sm rounded-5 border border-indigo-100 hover:border-blue-900 cursor-pointer"
           />
           <Button type="submit" label="Post Reply" variant="primary" />
