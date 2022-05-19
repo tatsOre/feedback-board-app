@@ -375,6 +375,59 @@ input[type='radio']:focus + label {
   border-bottom: 1px solid var(--color-indigo-400);
 }
 
+/* relative w-10 h-10 mr-4 md:mr-8 */
+.feedback-comments-section img {
+  border-radius: 50%;
+}
+
+/* .feedback-reply:last-of-type .comment-user-container::before {
+  content: '';
+  width: 1px;
+  
+ border-left: solid 1px var(--color-indigo-400);
+  position: absolute;
+  top: 80px;
+  left: 20px;
+  bottom: 0;
+} */
+
+.feedback-comment,
+.comment-reply {
+  position: relative;
+}
+
+.feedback-comment.with-replies::after,
+.comment-reply::after,
+.comment-reply:last-of-type:after {
+  content: '';
+  position: absolute;
+  width: 1px;
+  border-left: solid 1px var(--color-indigo-400);
+}
+
+.comment-reply::after {
+  top: 0;
+  bottom: 0;
+}
+
+.comment-reply:last-of-type:after {
+  top: -50px;
+  height: 70px;
+}
+
+@media (min-width: 720px) {
+  .feedback-comment.with-replies::after,
+  .comment-reply::after,
+  .comment-reply:last-of-type:after {
+    left: 20px;
+  }
+
+  .feedback-comment.with-replies::after {
+    top: 90px;
+    height: 40%;
+  }
+}
+
 /*  Styles for Upvote Button */
 .roadmap-feedback-card button svg,
 .feedback-card button svg {
@@ -496,26 +549,6 @@ input[type='radio']:focus + label {
   }
 }
 
-/* Skeleton */
-.skeleton {
-  display: block;
-  width: 100%;
-  border-radius: 5px;
-
-  background-image: linear-gradient(270deg, #111111, #333333, #333333, #111111);
-  background-size: 400% 100%;
-  animation: loading 8s ease-in-out infinite;
-}
-
-@keyframes loading {
-  0% {
-    background-position: 200% 0;
-  }
-  100% {
-    background-position: -200% 0;
-  }
-}
-
 /* Login Mockup */
 @media (max-width: 719px) {
   .login {
@@ -568,7 +601,8 @@ input[type='radio']:focus + label {
   top: 40vh;
   left: 50vw; /* move to the middle of the screen (assumes relative parent is the body/viewport) */
   transform: translate(
-    -50%, -50%
+    -50%,
+    -50%
   ); /* move backwards 50% of this element's width */
   box-shadow: 0px 10px 40px -7px rgba(55, 63, 104, 0.350492);
 }

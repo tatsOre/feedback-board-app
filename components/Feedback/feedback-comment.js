@@ -39,16 +39,16 @@ const Comment = ({ comment, cmid }) => {
     <article
       className={`${
         comment.replyingTo
-          ? 'feedback-reply pt-6 pl-6 md:pl-11 lg:pl-12'
-          : 'feedback-comment py-6'
+          ? 'comment-reply mt-6 pl-6 md:pl-11 lg:pl-12'
+          : `feedback-comment ${comment.replies?.length ? 'with-replies' : ''} py-6`
       } text-[13px] grid grid-cols-[auto_minmax(100px,_1fr)_100px]`}
-    >
-      <div className="relative w-10 h-10 mr-4 md:mr-8 rounded-full overflow-hidden">
+    > 
+      <div className="comment-user-container mr-4 md:mr-8">
         <Image
           src={`/${comment.user?.image}`}
-          layout="fill"
-          objectFit="cover"
           alt={`${comment.user?.name} profile pic`}
+          width={40}
+          height={40}
         />
       </div>
       <h3 className="text-indigo-800 md:text-sm leading-5">
@@ -86,6 +86,7 @@ const Comment = ({ comment, cmid }) => {
             onChange={(e) => setContent(e.target.value)}
             aria-label={`Add a new reply to username:${comment.user.username}`}
             maxLength="250"
+            placeholder={`Replying to ${comment.user.username}`}
             className="w-full mb-3 md:mb-0 p-2 md:p-4 bg-indigo-100 text-indigo-800 md:text-sm rounded-5 border border-indigo-100 hover:border-blue-900 cursor-pointer"
           />
           <Button type="submit" label="Post Reply" variant="primary" />
