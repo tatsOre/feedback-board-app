@@ -27,24 +27,24 @@ export default function DeleteFeedbackModal({ fdid, isOpen, setIsOpen }) {
         aria-describedby="dialog_desc"
       >
         <h2 id="dialog_label" className="text-center text-xl text-indigo-800 mb-2">
-          Confirmation
+          Delete feedback
         </h2>
 
         <p id="dialog_desc" className="text-center text-indigo-500">
-          Are you sure you want to delete this feedback request?
+          Are you sure you want to delete this feedback request? This can&#39;t be undone.
         </p>
 
         <div className="dialog_form_actions flex justify-evenly mt-6">
           <Button
             type="button"
             variant="secondary"
-            label="Cancel"
+            label="No, cancel"
             onClick={() => setIsOpen(false)}
           />
           <Button
             type="button"
             variant="danger"
-            label="Delete"
+            label="Yes, delete"
             aria-controls="notes"
             onClick={handleDeleteFeedback}
           />

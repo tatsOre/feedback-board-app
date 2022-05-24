@@ -6,12 +6,15 @@ import { createFeedback, updateFeedback } from '../../services/firebase-client'
 
 import Button from '../Buttons/Default'
 import GoBackButton from '../Buttons/GoBack'
+import Select from '../Select'
 import DeleteFeedbackModal from './delete-feedback'
+
+import { CATEGORY_OPTIONS, STATUS_OPTIONS } from './form-utils'
 
 function getInitialState(data, edit) {
   let values = {
     title: data?.title || '',
-    category: data?.category || 'Feature',
+    category: data?.category || 'feature',
     description: data?.description || '',
   }
   if (edit) values = { ...values, status: data?.status }
@@ -37,6 +40,20 @@ export default function Form({ data, edit }) {
     setState((prevState) => ({
       ...prevState,
       values: { ...prevState.values, [name]: value },
+    }))
+  }
+
+  const onCategoryChange = (value) => {
+    setState((prevState) => ({
+      ...prevState,
+      values: { ...prevState.values, category: value },
+    }))
+  }
+
+  const onStatusChange = (value) => {
+    setState((prevState) => ({
+      ...prevState,
+      values: { ...prevState.values, status: value },
     }))
   }
 
@@ -99,48 +116,38 @@ export default function Form({ data, edit }) {
             value={values.title}
             name="title"
             onChange={onChange}
-            className="w-full bg-indigo-100 rounded-5 px-4 py-2 mt-3"
+            className="w-full h-12 bg-indigo-100 rounded-5 px-4 py-2 mt-3 border border-indigo-100 hover:border-blue-900 hover:cursor-pointer"
           />
         </label>
         {errors.title ? <InputError /> : null}
 
-        <label className="font-bold text-indigo-800 mt-6 leading-5">
+        <label className="w-full font-bold text-indigo-800 mt-6 leading-5">
           Category{' '}
           <small className="block font-normal text-indigo-500">
             Choose a category for your feedback
           </small>
-          <select
-            className="w-full py-2 pl-4 mt-3 border border-blue-500 rounded-5"
-            value={values.category}
-            name="category"
-            onChange={onChange}
-          >
-            <option value="feature">Feature</option>
-            <option value="ui">UI</option>
-            <option value="ux">UX</option>
-            <option value="enhancement">Enhancement</option>
-            <option value="bug">Bug</option>
-          </select>
         </label>
 
+        <Select
+          options={CATEGORY_OPTIONS}
+          selected={values.category}
+          onChange={onCategoryChange}
+        />
+
         {edit && (
-          <label className="w-full font-bold text-indigo-800 mt-6 leading-5">
-            Update Status{' '}
-            <small className="block font-normal text-indigo-500">
-              Change feedback state
-            </small>
-            <select
-              className="w-full py-2 pl-4 mt-3 border border-blue-500 rounded-5"
-              value={values.status}
-              name="status"
-              onChange={onChange}
-            >
-              <option value="suggestion">Suggestion</option>
-              <option value="planned">Planned</option>
-              <option value="in-progress">In-Progress</option>
-              <option value="live">Live</option>
-            </select>
-          </label>
+          <>
+            <label className="w-full font-bold text-indigo-800 mt-6 leading-5">
+              Update Status{' '}
+              <small className="block font-normal text-indigo-500">
+                Change feedback state
+              </small>
+            </label>
+            <Select
+              options={STATUS_OPTIONS}
+              selected={values.status}
+              onChange={onStatusChange}
+            />
+          </>
         )}
 
         <label className="font-bold text-indigo-800 mt-6 leading-5">
@@ -155,7 +162,7 @@ export default function Form({ data, edit }) {
             name="description"
             onChange={onChange}
             rows="4"
-            className="bg-indigo-100 w-full rounded-5 px-4 py-2 mt-3"
+            className="bg-indigo-100 w-full rounded-5 px-4 py-2 mt-3 border border-indigo-100 hover:border-blue-900 hover:cursor-pointer"
           />
         </label>
         {errors.description ? <InputError /> : null}

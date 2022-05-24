@@ -156,7 +156,11 @@ export default function Home({ data }) {
             ))
           ) : (
             <div className="bg-white flex flex-col items-center rounded-10 py-20 px-7 md:py-24 md:px-44">
-              <div className="relative w-[102px] h-[108px] md:w-[130px] md:h-[137px]">
+              <div
+                aria-hidden="true"
+                role="img"
+                className="relative w-[102px] h-[108px] md:w-[130px] md:h-[137px]"
+              >
                 <Image
                   src="/assets/suggestions/illustration-empty.svg"
                   layout="fill"

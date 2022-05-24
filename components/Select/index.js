@@ -15,18 +15,17 @@ const Select = ({ options, selected, onChange, labelDetail, disabled }) => {
     const handleOutsideClick = ({ target }) => {
       if (isOpen && me.current && !me.current.contains(target)) setIsOpen(false)
     }
-    document.body.style.overflowY = isOpen ? 'scroll' : ''
-
     document.addEventListener('click', handleOutsideClick)
     return () => document.removeEventListener('click', handleOutsideClick)
   }, [isOpen])
 
   const onToggleButton = () => setIsOpen(!isOpen)
 
-  const onSelectClick = (index, value) => {
+  const onSelectClick = (event, index, value) => {
     setSelectedIndex(index)
     onChange(value)
-    setIsOpen(!isOpen)
+    setIsOpen(false)
+    event.stopPropagation()
   }
 
   const onKeyDown = (event) => {
@@ -82,7 +81,7 @@ const Select = ({ options, selected, onChange, labelDetail, disabled }) => {
               className={selectedIndex === index ? 'selected' : ''}
               role="option"
               aria-selected={selectedIndex === index}
-              onClick={() => onSelectClick(index, value)}
+              onClick={(e) => onSelectClick(e, index, value)}
             >
               {label}
             </li>
