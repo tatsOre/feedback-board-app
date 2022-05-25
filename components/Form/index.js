@@ -104,7 +104,7 @@ export default function Form({ data, edit }) {
           {edit ? `Edit '${data.title}'` : 'Create New Feedback'}
         </h1>
         {errors && errors.submit && (
-          <p className="font-bold text-red-900">Error {errors.submit}</p>
+          <p className="text-red-900 font-semibold">Error: {errors.submit}</p>
         )}
         <label className="font-bold text-indigo-800 mt-6 leading-5">
           Feedback Title{' '}

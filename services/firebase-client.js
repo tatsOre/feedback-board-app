@@ -14,10 +14,21 @@ import {
   where,
 } from 'firebase/firestore'
 
+/**
+ * Create a new document in the 'feedbacks' collection
+ * @param   {Object}  data  Form input values
+ * @returns {Object}
+ *    Error:   if the document already exists | values are missing
+ *    Success: id and slug of the newly document
+ */
 export async function createFeedback(data) {
   const app = createFirebaseApp()
   const db = getFirestore(app)
   const q = query(collection(db, 'feedbacks'), where('slug', '==', data.slug))
+
+  if (!data.title || !data.description) {
+    throw new Error('Missing title or description')
+  }
   const snapshot = await getDocs(q)
 
   if (!snapshot.empty) {
@@ -35,10 +46,21 @@ export async function createFeedback(data) {
   return { id: docRef.id, slug: data.slug }
 }
 
+/**
+ * Update a feedback document
+ * @param   {Object}  data  Newly provided data
+ * @returns {Object}
+ *    Error:   if the document does not exist | values are missing | Firestore error
+ *    Success: nothing
+ */
 export async function updateFeedback(data) {
   const app = createFirebaseApp()
   const db = getFirestore(app)
   const docRef = doc(db, 'feedbacks', data.id)
+
+  if (!data.title || !data.description) {
+    throw new Error('Missing title or description')
+  }
   const docSnap = await getDoc(docRef)
 
   if (!docSnap.exists()) {
@@ -52,6 +74,14 @@ export async function updateFeedback(data) {
   })
 }
 
+/**
+ * Get document by field
+ * @param   {String}  field  Could be slug or title
+ * @param   {String}  value  Value to look for
+ * @returns {Object}
+ *    Error:   if the document does not exist
+ *    Success: feedback document with Firestore ID
+ */
 export async function getFeedbackByField(field, value) {
   const app = createFirebaseApp()
   const db = getFirestore(app)
