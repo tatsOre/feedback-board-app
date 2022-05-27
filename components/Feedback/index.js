@@ -60,7 +60,7 @@ export default function Feedback() {
     <main className="p-6 md:p-10 max-w-[calc(730px+5rem)] mx-auto">
       <nav className="flex justify-between mb-6">
         <GoBackButton />
-        {user?.username === data.author && (
+        {user?.userId === data.author && (
           <Link
             href={{ pathname: '/feedback/edit/[id]', query: { id: data.id } }}
             as={`/edit/${data.slug}`}
@@ -88,7 +88,7 @@ export default function Feedback() {
         </section>
       ) : null}
 
-      {user?.username !== data.author && (
+      {user?.userId !== data.author && (
         <form
           onSubmit={onSubmit}
           className="bg-white rounded-10 p-6 md:px-8 mt-6 flex flex-wrap justify-between items-center"

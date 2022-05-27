@@ -1,4 +1,5 @@
 import dashify from 'dashify'
+import { FirebaseError } from 'firebase/app'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { useUser } from '../../context/userContext'
@@ -6,6 +7,7 @@ import { createFeedback, updateFeedback } from '../../services/firebase-client'
 
 import Button from '../Buttons/Default'
 import GoBackButton from '../Buttons/GoBack'
+import ErrorAlert from '../Error'
 import Select from '../Select'
 import DeleteFeedbackModal from './delete-feedback'
 
@@ -20,13 +22,13 @@ function getInitialState(data, edit) {
   if (edit) values = { ...values, status: data?.status }
   return {
     loading: false,
-    errors: {},
+    error: null,
     values,
   }
 }
 
 export default function Form({ data, edit }) {
-  const [{ values, loading, errors }, setState] = useState(() =>
+  const [{ values, loading, error }, setState] = useState(() =>
     getInitialState(data, edit)
   )
 
@@ -72,24 +74,20 @@ export default function Form({ data, edit }) {
       } else {
         await createFeedback({
           ...values,
-          author: user.username,
+          author: user.userId,
           slug,
         })
       }
       router.push(`/feedback/detail/${slug}`)
-    } catch (error) {
+    } catch (err) {
       setState((prevState) => ({
         ...prevState,
-        errors: { submit: error.message },
+        error: { name: err.name, message: err.message },
       }))
     } finally {
       setState((prevState) => ({ ...prevState, loading: false }))
     }
   }
-
-  const InputError = () => (
-    <span className="text-red-900">Can&quot;t be empty</span>
-  )
 
   return (
     <main className="max-w-[calc(540px+3rem)] mx-auto p-6 md:pt-14 lg:pt-20">
@@ -103,9 +101,7 @@ export default function Form({ data, edit }) {
         <h1 className="text-lg md:text-2xl text-indigo-800">
           {edit ? `Edit '${data.title}'` : 'Create New Feedback'}
         </h1>
-        {errors && errors.submit && (
-          <p className="text-red-900 font-semibold">Error: {errors.submit}</p>
-        )}
+        {error && <ErrorAlert error={error} />}
         <label className="font-bold text-indigo-800 mt-6 leading-5">
           Feedback Title{' '}
           <small className="block font-normal text-indigo-500">
@@ -119,7 +115,6 @@ export default function Form({ data, edit }) {
             className="w-full h-12 bg-indigo-100 rounded-5 px-4 py-2 mt-3 border border-indigo-100 hover:border-blue-900 hover:cursor-pointer"
           />
         </label>
-        {errors.title ? <InputError /> : null}
 
         <label className="w-full font-bold text-indigo-800 mt-6 leading-5">
           Category{' '}
@@ -165,7 +160,6 @@ export default function Form({ data, edit }) {
             className="bg-indigo-100 w-full rounded-5 px-4 py-2 mt-3 border border-indigo-100 hover:border-blue-900 hover:cursor-pointer"
           />
         </label>
-        {errors.description ? <InputError /> : null}
 
         <div className="w-full flex flex-col mt-9 md:mt-6 md:flex-row-reverse space-y-4 md:space-y-0 ">
           <Button

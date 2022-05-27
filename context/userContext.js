@@ -1,7 +1,13 @@
 import { createContext, useContext, useEffect, useState } from 'react'
-import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import { createFirebaseApp } from '../firebase/clientApp'
-import { doc, getDoc, getFirestore } from 'firebase/firestore'
+import {
+  collection,
+  getDocs,
+  getFirestore,
+  query,
+  where,
+} from 'firebase/firestore'
 
 export const UserContext = createContext()
 
@@ -12,19 +18,35 @@ export default function CreateUserContext({ children }) {
   const getLoggedInUser = async (uid) => {
     const app = createFirebaseApp()
     const db = getFirestore(app)
-    const docRef = doc(db, 'users', uid)
-    const docSnap = await getDoc(docRef)
-    if (docSnap.exists()) {
-      const doc = {...docSnap.data(), id: docSnap.id}
-      setUser(doc)
-    } else {
+
+    const q = query(collection(db, 'users'), where('userId', '==', uid))
+    const snapshot = await getDocs(q)
+
+    if (snapshot.empty) {
       setUser(null)
+    } else {
+      const docs = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+      setUser(docs[0])
     }
     setLoadingUser(false)
   }
 
+  const signIn = () => {
+    const app = createFirebaseApp()
+    const auth = getAuth()
+    signInWithEmailAndPassword(
+      auth,
+      process.env.NEXT_PUBLIC_USER_EMAIL,
+      process.env.NEXT_PUBLIC_USER_PASSWORD
+    )
+      .then((userCredential) => {
+        getLoggedInUser(userCredential.user.uid)
+      })
+      .catch((error) => console.log(error))
+  }
+
   useEffect(() => {
-    getLoggedInUser('YIUtfVspL7sqQ8Uhsh7c')
+    signIn()
     return () => setUser(null)
   }, [])
 
