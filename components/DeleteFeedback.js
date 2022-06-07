@@ -1,8 +1,7 @@
-import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { useUser } from '../../context/userContext'
-import { deleteFeedback } from '../../services/firebase-client'
-import Button from '../Buttons/Default'
+import { useUser } from '../context/UserProvider'
+import { deleteFeedback } from '../services/firebase-client'
+import Button from './Buttons/Default'
 
 export default function DeleteFeedbackModal({ fdid, isOpen, setIsOpen }) {
   const { user } = useUser()

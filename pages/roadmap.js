@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import RoadmapPage from '../components/Roadmap'
+import Roadmap from '../components/Roadmap'
 import { getAllFeedbacks } from '../services/firebase'
 
 export const getServerSideProps = async () => {
@@ -20,7 +20,7 @@ export default function Page(props) {
       <Head>
         <title>Feedback Board App - Roadmap</title>
       </Head>
-      <RoadmapPage {...props} />
+      <Roadmap {...props} />
     </>
   )
 }

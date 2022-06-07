@@ -1,15 +1,15 @@
 import Head from 'next/head'
 import Form from '../../../components/Form'
-import { getFeedbackById } from '../../../services/firebase'
+import { getFeedbackByField} from '../../../services/firebase'
 
 export async function getServerSideProps({ params }) {
   try {
-    const data = await getFeedbackById(params.id)
+    const data = await getFeedbackByField('slug', params.slug)
     return {
       props: { data },
     }
   } catch (error) {
-    console.log(`Error in edit/[${params.id}] page:`, error)
+    console.log(`Error in edit/[${params.slug}] page:`, error)
     return { notFound: true }
   }
 }

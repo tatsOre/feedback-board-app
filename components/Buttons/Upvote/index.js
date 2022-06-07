@@ -9,22 +9,23 @@ import {
   increment,
 } from 'firebase/firestore'
 
-import { useUser } from '../../../context/userContext'
+import { useUser } from '../../../context/UserProvider'
 import { ArrowUp } from '../../Arrows'
 
-const UpvoteButton = ({ upvotes, fdid }) => {
-  const [{ votes, isLoading, error, isUpvoted }, setState] = useState({
+export default function Upvote({ upvotes, fdid }) {
+  const [{ votes, isLoading, isUpvoted, error }, setState] = useState({
     votes: upvotes,
-    isUpvoted: false,
     isLoading: false,
+    isUpvoted: false,
+    error: '',
   })
 
   const { loadingUser, user, setUser } = useUser()
 
   useEffect(() => {
     if (!loadingUser && user) {
-      setState((prevState) => ({
-        ...prevState,
+      setState((state) => ({
+        ...state,
         isUpvoted: user.upvoted.includes(fdid),
       }))
     }
@@ -32,15 +33,12 @@ const UpvoteButton = ({ upvotes, fdid }) => {
 
   const onClick = async (event) => {
     event.preventDefault()
-    setState((prevState) => ({
-      ...prevState,
-      isLoading: true,
-    }))
+    setState((state) => ({ ...state, isLoading: true }))
 
     try {
       const app = createFirebaseApp()
       const db = getFirestore(app)
-
+      // make updateUpvotes => promise.All(feedback, user)
       const userRef = doc(db, 'users', user?.id)
       await updateDoc(userRef, {
         upvoted: isUpvoted ? arrayRemove(fdid) : arrayUnion(fdid),
@@ -57,23 +55,17 @@ const UpvoteButton = ({ upvotes, fdid }) => {
         ? user.upvoted.filter((f) => f !== fdid)
         : [...user.upvoted, fdid]
 
-      setUser((prevState) => ({ ...prevState, upvoted: upvotedFeedbacks }))
+      setUser((state) => ({ ...state, upvoted: upvotedFeedbacks }))
 
-      setState((prevState) => ({
-        ...prevState,
+      setState((state) => ({
+        ...state,
         votes: isUpvoted ? votes - 1 : votes + 1,
-        isUpvoted: !isUpvoted,
+        isUpvoted: !state.isUpvoted,
       }))
     } catch (error) {
-      setState((prevState) => ({
-        ...prevState,
-        error: error.message,
-      }))
+      setState((state) => ({ ...state, error: error.message }))
     } finally {
-      setState((prevState) => ({
-        ...prevState,
-        isLoading: false,
-      }))
+      setState((state) => ({ ...state, isLoading: false }))
     }
   }
 
@@ -83,6 +75,7 @@ const UpvoteButton = ({ upvotes, fdid }) => {
         type="button"
         onClick={onClick}
         disabled={isLoading}
+        aria-label="upvote"
         className={`${
           isUpvoted
             ? 'bg-blue-900 text-white'
@@ -95,12 +88,10 @@ const UpvoteButton = ({ upvotes, fdid }) => {
         {isLoading ? '...' : votes}
       </button>
       {error && (
-        <span className="ml-2 text-xs text-red-900">
+        <strong className="ml-2 text-xs text-red-900 font-normal">
           Error: Please try again
-        </span>
+        </strong>
       )}
     </>
   )
 }
-
-export default UpvoteButton

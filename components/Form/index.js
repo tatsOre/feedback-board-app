@@ -2,16 +2,16 @@ import dashify from 'dashify'
 import { FirebaseError } from 'firebase/app'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import { useUser } from '../../context/userContext'
+import { useUser } from '../../context/UserProvider'
 import { createFeedback, updateFeedback } from '../../services/firebase-client'
 
 import Button from '../Buttons/Default'
 import GoBackButton from '../Buttons/GoBack'
 import ErrorAlert from '../Error'
-import Select from '../Select'
-import DeleteFeedbackModal from './delete-feedback'
+import DropdownSelect from '../Select'
+import DeleteFeedbackModal from '../DeleteFeedback'
 
-import { CATEGORY_OPTIONS, STATUS_OPTIONS } from './form-utils'
+import { CATEGORY_OPTIONS, STATUS_OPTIONS } from '../../constants'
 
 function getInitialState(data, edit) {
   let values = {
@@ -39,58 +39,50 @@ export default function Form({ data, edit }) {
 
   const onChange = (event) => {
     const { name, value } = event.target
-    setState((prevState) => ({
-      ...prevState,
-      values: { ...prevState.values, [name]: value },
+    setState((state) => ({
+      ...state,
+      values: { ...state.values, [name]: value },
     }))
   }
 
   const onCategoryChange = (value) => {
-    setState((prevState) => ({
-      ...prevState,
-      values: { ...prevState.values, category: value },
+    setState((state) => ({
+      ...state,
+      values: { ...state.values, category: value },
     }))
   }
 
   const onStatusChange = (value) => {
-    setState((prevState) => ({
-      ...prevState,
-      values: { ...prevState.values, status: value },
+    setState((state) => ({
+      ...state,
+      values: { ...state.values, status: value },
     }))
   }
 
   const onSubmit = async (event) => {
     event.preventDefault()
-    setState((prevState) => ({ ...prevState, loading: true }))
+    setState((state) => ({ ...state, loading: true }))
 
     try {
       const slug = dashify(values.title)
       if (edit) {
-        await updateFeedback({
-          ...data,
-          ...values,
-          slug,
-        })
+        await updateFeedback({ ...data, ...values, slug })
       } else {
-        await createFeedback({
-          ...values,
-          author: user.userId,
-          slug,
-        })
+        await createFeedback({ ...values, author: user.userId, slug })
       }
       router.push(`/feedback/detail/${slug}`)
     } catch (err) {
-      setState((prevState) => ({
-        ...prevState,
+      setState((state) => ({
+        ...state,
         error: { name: err.name, message: err.message },
       }))
     } finally {
-      setState((prevState) => ({ ...prevState, loading: false }))
+      setState((state) => ({ ...state, loading: false }))
     }
   }
 
   return (
-    <main className="max-w-[calc(540px+3rem)] mx-auto p-6 md:pt-14 lg:pt-20">
+    <main className="max-w-[calc(540px+3rem)] mx-auto p-6 md:pt-14 lg:pt-20 text-indigo-500 font-normal">
       <GoBackButton />
       <form
         onSubmit={onSubmit}
@@ -102,11 +94,12 @@ export default function Form({ data, edit }) {
           {edit ? `Edit '${data.title}'` : 'Create New Feedback'}
         </h1>
         {error && <ErrorAlert error={error} />}
-        <label className="font-bold text-indigo-800 mt-6 leading-5">
-          Feedback Title{' '}
-          <small className="block font-normal text-indigo-500">
-            Add a short, descriptive headline
-          </small>
+
+        <h2 className="font-bold text-indigo-800 mt-6 leading-5">
+          Feedback Title
+        </h2>
+        <label>
+          Add a short, descriptive headline
           <input
             required
             value={values.title}
@@ -116,41 +109,35 @@ export default function Form({ data, edit }) {
           />
         </label>
 
-        <label className="w-full font-bold text-indigo-800 mt-6 leading-5">
-          Category{' '}
-          <small className="block font-normal text-indigo-500">
-            Choose a category for your feedback
-          </small>
-        </label>
+        <h2 className="font-bold text-indigo-800 mt-6 leading-5">Category</h2>
 
-        <Select
+        <DropdownSelect
           options={CATEGORY_OPTIONS}
           selected={values.category}
           onChange={onCategoryChange}
+          label="Choose a category for your feedback"
         />
 
         {edit && (
           <>
-            <label className="w-full font-bold text-indigo-800 mt-6 leading-5">
-              Update Status{' '}
-              <small className="block font-normal text-indigo-500">
-                Change feedback state
-              </small>
-            </label>
-            <Select
+            <h2 className="font-bold text-indigo-800 mt-6 leading-5">
+              Update Status
+            </h2>
+            <DropdownSelect
               options={STATUS_OPTIONS}
               selected={values.status}
               onChange={onStatusChange}
+              label="Change feedback state"
             />
           </>
         )}
 
-        <label className="font-bold text-indigo-800 mt-6 leading-5">
-          Feedback Detail{' '}
-          <small className="block font-normal text-indigo-500">
-            Include any specific comments on what should be improved, added,
-            etc.
-          </small>
+        <h2 className="font-bold text-indigo-800 mt-6 leading-5">
+          Feedback Detail
+        </h2>
+
+        <label>
+          Include any specific comments on what should be improved, added, etc.
           <textarea
             required
             value={values.description}
@@ -176,9 +163,9 @@ export default function Form({ data, edit }) {
           {edit && (
             <Button
               type="button"
-              onClick={() => setIsModalOpen(true)}
               variant="danger"
               label="Delete"
+              onClick={() => setIsModalOpen(true)}
             />
           )}
         </div>

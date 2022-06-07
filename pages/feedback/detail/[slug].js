@@ -1,14 +1,10 @@
-import Feedback from '../../../components/Feedback'
-import FeedbackProvider from '../../../context/feedbackContext'
+import Feedback from '../../../components/FeedbackDetail'
+import FeedbackProvider from '../../../context/FeedbackProvider'
 
-export default function Page(props) {
+export default function Page() {
   return (
-    <FeedbackProvider slug={props.slug}>
-      <Feedback slug={props.slug} />
+    <FeedbackProvider>
+      <Feedback />
     </FeedbackProvider>
   )
-}
-
-Page.getInitialProps = async (context) => {
-  return context.query
 }

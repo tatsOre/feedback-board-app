@@ -1,6 +1,73 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import useClickOutside from '../../hooks/useClickOutside'
 
-const Select = ({ options, selected, onChange, labelDetail, disabled }) => {
+function counter() {
+  let count = 0
+
+  function increment() {
+    return (count += 1)
+  }
+  function reset() {
+    return (count = 1)
+  }
+  return { increment, reset }
+}
+
+const { increment: generateId } = counter()
+
+const useElementIds = ({
+  id = `dropdown-${generateId()}`,
+  labelId,
+  menuId,
+  toggleButtonId,
+}) => {
+  const elementIdsRef = useRef({
+    id,
+    labelId: labelId || `${id}-label`,
+    menuId: menuId || `${id}-menu`,
+    toggleButtonId: toggleButtonId || `${id}-toggle-button`,
+  })
+  return elementIdsRef.current
+}
+
+const useElementsProps = ({ setIsOpen }) => {
+  const elementIds = useElementIds({})
+  const onToggleButton = () => setIsOpen((state) => !state)
+
+  const getButtonProps = useCallback(
+    () => ({
+      id: elementIds.toggleButtonId,
+      'aria-labelledby': `${elementIds.labelId} ${elementIds.toggleButtonId}`,
+      'aria-haspopup': 'listbox',
+      type: 'button',
+      onClick: onToggleButton,
+    }),
+    [elementIds]
+  )
+
+  const getLabelProps = useCallback(
+    () => ({ id: elementIds.labelId, htmlFor: elementIds.toggleButtonId }),
+    [elementIds]
+  )
+
+  const getMenuProps = useCallback(
+    () => ({
+      id: elementIds.menuId,
+      role: 'listbox',
+      'aria-labelledby': elementIds.labelId,
+      tabIndex: '-1',
+    }),
+    [elementIds]
+  )
+
+  return {
+    getButtonProps,
+    getLabelProps,
+    getMenuProps,
+  }
+}
+
+const DropdownSelect = ({ options, selected, onChange, label, disabled }) => {
   const [isOpen, setIsOpen] = useState(false)
 
   const initialSelectedItemIndex = options.findIndex(
@@ -11,15 +78,16 @@ const Select = ({ options, selected, onChange, labelDetail, disabled }) => {
 
   const me = useRef()
 
-  useEffect(() => {
-    const handleOutsideClick = ({ target }) => {
-      if (isOpen && me.current && !me.current.contains(target)) setIsOpen(false)
-    }
-    document.addEventListener('click', handleOutsideClick)
-    return () => document.removeEventListener('click', handleOutsideClick)
-  }, [isOpen])
+  const { getButtonProps, getLabelProps, getMenuProps } = useElementsProps({
+    setIsOpen,
+  })
 
-  const onToggleButton = () => setIsOpen(!isOpen)
+  useEffect(() => {
+    const { reset } = counter()
+    return reset()
+  }, [])
+
+  useClickOutside(me, () => setIsOpen(false))
 
   const onSelectClick = (event, index, value) => {
     setSelectedIndex(index)
@@ -54,26 +122,17 @@ const Select = ({ options, selected, onChange, labelDetail, disabled }) => {
 
   return (
     <div ref={me} id="dropdown-container" className={`${isOpen ? 'open' : ''}`}>
+      <label {...getLabelProps()}>{label}</label>
       <button
-        type="button"
-        id="dropdown-toggle-button"
-        aria-haspopup="listbox"
         aria-expanded={isOpen}
-        aria-labelledby="dropdown-label dropdown-toggle-button"
-        onClick={onToggleButton}
-        onKeyDown={onKeyDown}
         disabled={disabled}
+        onKeyDown={onKeyDown}
+        {...getButtonProps()}
       >
-        {labelDetail && <span>{labelDetail} </span>}
         {options[selectedIndex]?.label}
       </button>
 
-      <ul
-        id="dropdown-menu"
-        role="listbox"
-        aria-labelledby="dropdown-label"
-        tabIndex="-1"
-      >
+      <ul {...getMenuProps()}>
         {isOpen &&
           options.map(({ label, value }, index) => (
             <li
@@ -91,4 +150,4 @@ const Select = ({ options, selected, onChange, labelDetail, disabled }) => {
   )
 }
 
-export default Select
+export default DropdownSelect

@@ -35,7 +35,6 @@
   small {
     font-size: 100%;
   }
-
   button {
     cursor: pointer;
     color: #fff;
@@ -140,6 +139,7 @@
   .mobile-nav-button .bar,
   .mobile-nav-button .bar:after,
   .mobile-nav-button .bar:before {
+    display: block;
     background: var(--color-white);
     width: 20px;
     height: 3px;
@@ -209,38 +209,38 @@
   position: relative;
 }
 
-.home-suggestions-section #dropdown-toggle-button {
+.home-suggestions-section button[id^='dropdown-'] {
   font-weight: bold;
   font-size: 14px;
   padding-block: 0.5rem;
 }
 
-.home-suggestions-section #dropdown-toggle-button::after {
+.home-suggestions-section button[id^='dropdown-']::after {
   content: url('/assets/shared/icon-arrow-down-white.svg');
   margin-left: 10px;
 }
 
 .home-suggestions-section
   #dropdown-container.open
-  #dropdown-toggle-button::after {
+  button[id^='dropdown-']::after {
   content: url('/assets/shared/icon-arrow-up-white.svg');
   margin-left: 10px;
 }
 
-.home-suggestions-section #dropdown-toggle-button span {
+.home-suggestions-section label[id^='dropdown-'] {
   font-weight: normal;
 }
 
-.home-suggestions-section #dropdown-toggle-button[aria-expanded='true'] {
+.home-suggestions-section button[id^='dropdown-'][aria-expanded='true'] {
   opacity: 0.75;
 }
 
-.home-suggestions-section #dropdown-toggle-button:disabled {
+.home-suggestions-section button[id^='dropdown-']:disabled {
   opacity: 0.75;
   cursor: text;
 }
 
-#dropdown-container #dropdown-menu {
+#dropdown-container ul[id^='dropdown-'] {
   position: absolute;
   top: 4.5rem;
   width: 255px;
@@ -251,7 +251,7 @@
   border-radius: 10px;
 }
 
-#dropdown-container #dropdown-menu li {
+#dropdown-container ul[id^='dropdown-'] li {
   color: var(--color-indigo-500);
   font-weight: normal;
   padding-block: 0.8rem;
@@ -262,21 +262,21 @@
   align-items: center;
 }
 
-#dropdown-container #dropdown-menu li.highlighted,
-#dropdown-container #dropdown-menu li:hover {
+#dropdown-container ul[id^='dropdown-'] li.highlighted,
+#dropdown-container ul[id^='dropdown-'] li:hover {
   color: var(--color-violet-900);
 }
 
-#dropdown-container #dropdown-menu li.selected::after {
+#dropdown-container ul[id^='dropdown-'] li.selected::after {
   content: url('/assets/shared/icon-check.svg');
 }
 
-#dropdown-container #dropdown-menu li:not(:last-of-type) {
+#dropdown-container ul[id^='dropdown-'] li:not(:last-of-type) {
   border-bottom: 1px solid var(--color-indigo-400);
 }
 
 /* Form Create/Edit Dropdown */
-[class^='form-'] #dropdown-toggle-button {
+[class^='form-'] button[id^='dropdown-'] {
   font-size: 15px;
   font-weight: normal;
   text-align: left;
@@ -287,31 +287,36 @@
   width: 100%;
   height: 48px;
   padding-inline: 1.5rem;
+  margin-block-start: 0.5rem;
 }
 
-[class^='form-'] #dropdown-toggle-button:hover {
+[class^='form-'] label[id^='dropdown-'] {
+  color: var(--color-indigo-500);
+}
+
+[class^='form-'] button[id^='dropdown-']:hover {
   border: 1px solid var(--color-blue-900);
 }
 
-[class^='form-'] #dropdown-container #dropdown-menu {
-  top: 4rem;
+[class^='form-'] #dropdown-container ul[id^='dropdown-'] {
+  top: 5.5rem;
   width: 100%;
 }
 
-[class^='form-'] #dropdown-container #dropdown-menu li {
+[class^='form-'] #dropdown-container ul[id^='dropdown-'] li {
   font-size: 1rem;
 }
 
-[class^='form-'] #dropdown-toggle-button::after {
+[class^='form-'] button[id^='dropdown-']::after {
   content: url('/assets/shared/icon-arrow-down.svg');
 }
 
-[class^='form-'] #dropdown-container.open #dropdown-toggle-button::after {
+[class^='form-'] #dropdown-container.open button[id^='dropdown-']::after {
   content: url('/assets/shared/icon-arrow-up.svg');
 }
 
-[class^='form-'] #dropdown-toggle-button::after,
-[class^='form-'] #dropdown-container.open #dropdown-toggle-button::after {
+[class^='form-'] button[id^='dropdown-']::after,
+[class^='form-'] #dropdown-container.open button[id^='dropdown-']::after {
   position: absolute;
   right: 1.5rem;
 }
@@ -437,12 +442,12 @@ input[type='radio']:focus + label {
 
 .comment-reply::after {
   top: 0;
-  bottom: 0;
+  bottom: -25px;
 }
 
 .comment-reply:last-of-type:after {
-  top: -50px;
-  height: 70px;
+  top: 0px;
+  height: 20px;
 }
 
 @media (min-width: 720px) {
@@ -454,7 +459,12 @@ input[type='radio']:focus + label {
 
   .feedback-comment.with-replies::after {
     top: 90px;
-    height: 40%;
+    bottom: 45%;
+  }
+
+  .comment-reply:last-of-type:after {
+    top: -20px;
+    height: 40px;
   }
 }
 

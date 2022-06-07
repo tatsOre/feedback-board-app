@@ -22,13 +22,13 @@ import {
  *    Success: id and slug of the newly document
  */
 export async function createFeedback(data) {
-  const app = createFirebaseApp()
-  const db = getFirestore(app)
-  const q = query(collection(db, 'feedbacks'), where('slug', '==', data.slug))
-
   if (!data.title || !data.description) {
     throw new Error('Missing title or description')
   }
+
+  const app = createFirebaseApp()
+  const db = getFirestore(app)
+  const q = query(collection(db, 'feedbacks'), where('slug', '==', data.slug))
   const snapshot = await getDocs(q)
 
   if (!snapshot.empty) {
@@ -54,13 +54,13 @@ export async function createFeedback(data) {
  *    Success: nothing
  */
 export async function updateFeedback(data) {
-  const app = createFirebaseApp()
-  const db = getFirestore(app)
-  const docRef = doc(db, 'feedbacks', data.id)
-
   if (!data.title || !data.description) {
     throw new Error('Missing title or description')
   }
+
+  const app = createFirebaseApp()
+  const db = getFirestore(app)
+  const docRef = doc(db, 'feedbacks', data.id)
   const docSnap = await getDoc(docRef)
 
   if (!docSnap.exists()) {
@@ -85,7 +85,6 @@ export async function updateFeedback(data) {
 export async function getFeedbackByField(field, value) {
   const app = createFirebaseApp()
   const db = getFirestore(app)
-
   const q = query(collection(db, 'feedbacks'), where(field, '==', value))
   const snapshot = await getDocs(q)
 
@@ -94,6 +93,25 @@ export async function getFeedbackByField(field, value) {
   }
   const docs = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
   return docs[0]
+}
+
+/**
+ * Get document by id
+ * @param   {String}  id  Feedback Document ID
+ * @returns {Object}
+ *    Error:   if the document does not exist
+ *    Success: Firestore Document
+ */
+export async function getFeedbackById(fdid) {
+  const app = createFirebaseApp()
+  const db = getFirestore(app)
+  const docRef = doc(db, 'feedbacks', fdid)
+  const docSnap = await getDoc(docRef)
+
+  if (!docSnap.exists()) {
+    throw new Error('The document does not exist')
+  }
+  return { ...docSnap.data(), id: docSnap.id }
 }
 
 export async function updateFeedbackComments(data, content, user) {
@@ -110,13 +128,18 @@ export async function updateFeedbackComments(data, content, user) {
       username: user.username,
     },
   }
-  await updateDoc(fdRef, {
-    updated: new Date().toISOString(),
-    comments: arrayUnion(comment),
-  }).catch((error) => {
-    throw new Error(error.message)
-  })
-  return comment
+
+  let updatedDoc = null
+  try {
+    await updateDoc(fdRef, {
+      updated: new Date().toISOString(),
+      comments: arrayUnion(comment),
+    })
+    updatedDoc = await getFeedbackById(data.id)
+  } catch (error) {
+    console.log(error)
+  }
+  return updatedDoc
 }
 
 export async function updateFeedbackReplies(data, reply, cmid) {

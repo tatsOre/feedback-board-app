@@ -1,9 +1,9 @@
 import Image from 'next/image'
-import { useUser } from '../../context/userContext'
+import { useUser } from '../../context/UserProvider'
 
 export default function Login({ breakpoint }) {
   const { loadingUser, user } = useUser()
-  
+
   return (
     <div
       className={`login ${

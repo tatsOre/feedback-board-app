@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Footer from '../components/Shared/footer'
-import UserProvider from '../context/userContext'
+import UserProvider from '../context/UserProvider'
 import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }) {
@@ -12,8 +12,8 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <UserProvider>
         <Component {...pageProps} />
-        <Footer />
       </UserProvider>
+      <Footer />
     </>
   )
 }

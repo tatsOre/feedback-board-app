@@ -4,7 +4,7 @@ import { ArrowLeft } from '../../Arrows'
 export default function GoBackButton({ light }) {
   return (
     <Link href="/" passHref>
-      <a className={`text-sm hover:underline font-bold ${!light ? 'text-indigo-500' : ''}`}
+      <a className={`text-sm hover:underline font-bold ${light ? 'text-white' : 'text-indigo-500'}`}
       >
         <ArrowLeft
           className="mb-1 mr-3"

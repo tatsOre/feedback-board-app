@@ -1,16 +1,16 @@
-const colors = {
-  primary: { base: 'bg-violet-900', hover: 'hover:bg-violet-500' },
-  secondary: { base: 'bg-indigo-800', hover: 'hover:bg-indigo-600' },
-  danger: { base: 'bg-red-900', hover: 'hover:bg-red-500' },
-}
+import { COLOR_THEME } from '../../../constants'
 
-export default function Button(props) {
-  const variant = props.variant ? props.variant : 'primary'
-  const styles = `${colors[variant].base} ${colors[variant].hover} 
-    rounded-10 text-[13px] md:text-sm leading-3 h-10 md:h-11 px-4 md:px-6 min-w-max`
+export default function Button({ type, label, variant = 'primary', onClick }) {
+  const colors = `${COLOR_THEME[variant].base} ${COLOR_THEME[variant].hover} `
+  const styles =
+    'rounded-10 text-[13px] md:text-sm leading-3 h-10 md:h-11 px-4 md:px-6 min-w-max'
   return (
-    <button {...props} className={styles}>
-      {props.label || 'Button Label'}
+    <button
+      type={type}
+      className={colors + styles}
+      onClick={type == 'button' ? onClick : null}
+    >
+      {label || 'Button Label'}
     </button>
   )
 }
