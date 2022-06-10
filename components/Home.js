@@ -78,7 +78,7 @@ export default function Home({ data }) {
 
   const SuggLength = state.suggestions.length
 
-  const onTabChange = ({ target }) => {
+  const onTagChange = ({ target }) => {
     dispatch({ type: 'CHANGE_FILTER_VALUE', payload: target.value })
     setIsMenuOpen(false)
   }
@@ -113,9 +113,9 @@ export default function Home({ data }) {
           } mobile-nav md:flex md:flex-row lg:flex-col lg:space-y-6`}
         >
           <FilterTags
-            options={FILTER_OPTIONS}
+            items={FILTER_OPTIONS}
             checked={state.filter}
-            onChange={onTabChange}
+            onChange={onTagChange}
           />
           <RoadmapStatus data={state.requests} />
           <Login />
@@ -137,6 +137,7 @@ export default function Home({ data }) {
           </h2>
 
           <DropdownSelect
+            id="dropdown-sort"
             options={SORT_OPTIONS}
             selected={state.sort}
             onChange={onSelectChange}

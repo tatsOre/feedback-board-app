@@ -1,8 +1,7 @@
 import { useEffect } from 'react'
-import { useFeedbackData } from '../context/FeedbackProvider'
-import { useUser } from '../context/UserProvider'
 
-import { getCommentsLength } from '../utils'
+import useFeedbackData from '../hooks/useFeedbackData'
+import useUser from '../hooks/useUser'
 
 import AddComment from './AddComment'
 import Comment from './FeedbackComment'
@@ -11,16 +10,18 @@ import FeedbackCard from './FeedbackCard'
 import Loader from './Shared/loader'
 import StyledLink from './Link'
 
+import { getCommentsLength } from '../utils'
+
 export default function Feedback() {
-  const { data, loadingData } = useFeedbackData()
-  const { user } = useUser()
+  const { data, isLoading } = useFeedbackData()
+  const { user } = useUser
 
   useEffect(() => {
     if (data) document.title = `Feedback Board ${'- ' + data.title}`
-  }, [loadingData])
+  }, [data])
 
-  if (loadingData && !data) return <Loader />
-  if (!loadingData && !data) {
+  if (isLoading && !data) return <Loader />
+  if (!isLoading && !data) {
     // redirect and sendAlert
     return <p>Something went wrong</p>
   }
@@ -32,11 +33,9 @@ export default function Feedback() {
       <nav className="flex justify-between mb-6">
         <GoBackButton />
         {user?.userId === data.author && (
-          <StyledLink
-            href={`/feedback/edit/${data.slug}`}
-            label="Edit Feedback"
-            variant="tertiary"
-          />
+          <StyledLink href={`/feedback/edit/${data.slug}`} variant="tertiary">
+            Edit Feedback
+          </StyledLink>
         )}
       </nav>
 
@@ -57,7 +56,7 @@ export default function Feedback() {
         </section>
       ) : null}
 
-      {user?.userId !== data.author && <AddComment user={user} />}
+      {user?.userId !== data.author && <AddComment />}
     </main>
   )
 }

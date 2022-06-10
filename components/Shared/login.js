@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { useUser } from '../../context/UserProvider'
+import useUser from 'hooks/useUser'
 
 export default function Login({ breakpoint }) {
   const { loadingUser, user } = useUser()

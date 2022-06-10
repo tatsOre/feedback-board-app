@@ -83,4 +83,4 @@ Currently working on:
 
 [LinkedIn](https://www.linkedin.com/in/tatiana-orejuela-zapata/) | [Github](https://github.com/tatsOre)
 
-##### May, 2022.
+##### 2022.

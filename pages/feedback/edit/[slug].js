@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import Form from '../../../components/Form'
+import Form from '../../../components/FeedbackForm'
 import { getFeedbackByField} from '../../../services/firebase'
 
 export async function getServerSideProps({ params }) {

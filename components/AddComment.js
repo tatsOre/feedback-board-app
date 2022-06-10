@@ -1,16 +1,21 @@
 import { useState } from 'react'
-import { useFeedbackData } from '../context/FeedbackProvider'
+
+import useFeedbackData from '../hooks/useFeedbackData'
+import useUser from '../hooks/useUser'
+
 import { updateFeedbackComments } from '../services/firebase-client'
 
 import Button from './Buttons/Default'
+import ErrorMessage from './Error/DefaultError'
 
-export default function AddComment({ user }) {
+export default function AddComment() {
   const [{ content, error }, setComment] = useState({
     content: '',
     error: '',
   })
 
   const { data, setData } = useFeedbackData()
+  const { user } = useUser()
 
   const charsLeft = 250 - content.length
 
@@ -41,18 +46,15 @@ export default function AddComment({ user }) {
         value={content}
         onChange={onChange}
         aria-label={`Add a new comment to ${data?.title || 'feedback'}`}
-        className={`w-full text-[13px] md:text-[15px] text-indigo-800 bg-indigo-100 rounded-5 p-4 mb-4 ${
+        className={`w-full text-[13px] md:text-[15px] text-indigo-800 bg-indigo-100 rounded-5 p-4 mb-2 ${
           error ? 'border-red-900' : 'border-indigo-100 hover:border-blue-900'
         } border cursor-pointer`}
         placeholder="Type your comment here"
         rows="3"
         maxLength="250"
       />
-      {error ? (
-        <strong className="w-full font-normal text-[13px] text-red-900 -mt-2">
-          {error}
-        </strong>
-      ) : null}
+      {error && <ErrorMessage text={error} style={{ width: '100%' }} />}
+
       <p className="text-indigo-500 text-[13px]">
         {charsLeft} character{charsLeft > 1 || !charsLeft ? 's' : ''} left
       </p>

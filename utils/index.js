@@ -14,3 +14,13 @@ export const getCommentsLength = (comments) => {
     return acc + (comment.replies?.length || 0)
   }, comments.length || 0)
 }
+
+export const getRandomNumber = (min, max) => {
+  let difference = max - min
+
+  let rand = Math.random()
+
+  rand = Math.floor(rand * difference)
+
+  return rand + min
+}

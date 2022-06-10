@@ -1,12 +1,12 @@
 import { useRouter } from 'next/router'
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 import { getFeedbackByField } from '../services/firebase-client'
 
 export const FeedbackContext = createContext()
 
 export default function FeedbackProvider({ children }) {
   const [data, setData] = useState(null)
-  const [loadingData, setLoadingData] = useState(true)
+  const [isLoading, setIsLoading] = useState(true)
   const router = useRouter()
 
   const getFeedbackObject = async () => {
@@ -16,7 +16,7 @@ export default function FeedbackProvider({ children }) {
     } catch (error) {
       setData(null)
     } finally {
-      setLoadingData(false)
+      setIsLoading(false)
     }
   }
 
@@ -25,10 +25,8 @@ export default function FeedbackProvider({ children }) {
   }, [])
 
   return (
-    <FeedbackContext.Provider value={{ data, setData, loadingData }}>
+    <FeedbackContext.Provider value={{ data, setData, isLoading }}>
       {children}
     </FeedbackContext.Provider>
   )
 }
-
-export const useFeedbackData = () => useContext(FeedbackContext)

@@ -1,37 +1,26 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import { createFirebaseApp } from '../firebase/clientApp'
-import {
-  collection,
-  getDocs,
-  getFirestore,
-  query,
-  where,
-} from 'firebase/firestore'
+import { getUserByField } from '../services/firebase-client'
 
 export const UserContext = createContext()
 
 export default function UserProvider({ children }) {
   const [user, setUser] = useState()
   const [loadingUser, setLoadingUser] = useState(true)
-
+console.log('trying to reach me')
   const getLoggedInUser = async (uid) => {
-    const app = createFirebaseApp()
-    const db = getFirestore(app)
-
-    const q = query(collection(db, 'users'), where('userId', '==', uid))
-    const snapshot = await getDocs(q)
-
-    if (snapshot.empty) {
+    try {
+      const data = await getUserByField('userId', uid)
+      setUser(data)
+    } catch (err) {
       setUser(null)
-    } else {
-      const docs = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-      setUser(docs[0])
+    } finally {
+      setLoadingUser(false)
     }
-    setLoadingUser(false)
   }
 
-  const signIn = () => {
+  const logInMock = () => {
     const app = createFirebaseApp()
     const auth = getAuth()
     signInWithEmailAndPassword(
@@ -46,7 +35,7 @@ export default function UserProvider({ children }) {
   }
 
   useEffect(() => {
-    signIn()
+    logInMock()
     return () => setUser(null)
   }, [])
 
@@ -57,4 +46,4 @@ export default function UserProvider({ children }) {
   )
 }
 
-export const useUser = () => useContext(UserContext)
+

@@ -41,7 +41,7 @@
     font-weight: bold;
   }
   button:disabled {
-    cursor: progress;
+    cursor: not-allowed;
   }
   input {
     margin: 0;
@@ -209,38 +209,41 @@
   position: relative;
 }
 
-.home-suggestions-section button[id^='dropdown-'] {
+#dropdown-sort-toggle-button {
   font-weight: bold;
   font-size: 14px;
   padding-block: 0.5rem;
+  margin-block-start: 0.1rem;
 }
 
-.home-suggestions-section button[id^='dropdown-']::after {
+#dropdown-sort-toggle-button::after {
   content: url('/assets/shared/icon-arrow-down-white.svg');
   margin-left: 10px;
 }
 
-.home-suggestions-section
-  #dropdown-container.open
-  button[id^='dropdown-']::after {
+#dropdown-sort-toggle-button[aria-expanded='true']::after {
   content: url('/assets/shared/icon-arrow-up-white.svg');
   margin-left: 10px;
 }
 
-.home-suggestions-section label[id^='dropdown-'] {
+#dropdown-sort-label {
   font-weight: normal;
+  font-size: 13px;
+  color: var(--color-white);
+  margin-inline-end: 0.5rem;
+  cursor: pointer;
 }
 
-.home-suggestions-section button[id^='dropdown-'][aria-expanded='true'] {
+.home-suggestions-section #dropdown-container.open #dropdown-sort-label,
+#dropdown-sort-toggle-button[aria-expanded='true'] {
   opacity: 0.75;
 }
 
-.home-suggestions-section button[id^='dropdown-']:disabled {
+#dropdown-sort-toggle-button:disabled {
   opacity: 0.75;
-  cursor: text;
 }
 
-#dropdown-container ul[id^='dropdown-'] {
+#dropdown-sort-menu {
   position: absolute;
   top: 4.5rem;
   width: 255px;
@@ -251,7 +254,7 @@
   border-radius: 10px;
 }
 
-#dropdown-container ul[id^='dropdown-'] li {
+#dropdown-sort-menu li {
   color: var(--color-indigo-500);
   font-weight: normal;
   padding-block: 0.8rem;
@@ -262,16 +265,16 @@
   align-items: center;
 }
 
-#dropdown-container ul[id^='dropdown-'] li.highlighted,
-#dropdown-container ul[id^='dropdown-'] li:hover {
+#dropdown-sort-menu li.highlighted,
+#dropdown-sort-menu li:hover {
   color: var(--color-violet-900);
 }
 
-#dropdown-container ul[id^='dropdown-'] li.selected::after {
+#dropdown-sort-menu li.selected::after {
   content: url('/assets/shared/icon-check.svg');
 }
 
-#dropdown-container ul[id^='dropdown-'] li:not(:last-of-type) {
+#dropdown-sort-menu li:not(:last-of-type) {
   border-bottom: 1px solid var(--color-indigo-400);
 }
 
@@ -459,12 +462,12 @@ input[type='radio']:focus + label {
 
   .feedback-comment.with-replies::after {
     top: 90px;
-    bottom: 45%;
+    height: 30%;
   }
 
   .comment-reply:last-of-type:after {
-    top: -20px;
-    height: 40px;
+    top: -60px;
+    height: 80px;
   }
 }
 

@@ -9,6 +9,7 @@ import {
   getDoc,
   getDocs,
   getFirestore,
+  increment,
   query,
   updateDoc,
   where,
@@ -163,6 +164,36 @@ export async function updateFeedbackReplies(data, reply, cmid) {
   return updatedComments
 }
 
+export async function updateUpvotes(uid, fdid, isUpvoted) {
+  const app = createFirebaseApp()
+  const db = getFirestore(app)
+
+  const userRef = doc(db, 'users', uid)
+  const fdRef = doc(db, 'feedbacks', fdid)
+
+  await Promise.all([
+    updateDoc(userRef, {
+      upvoted: isUpvoted ? arrayRemove(fdid) : arrayUnion(fdid),
+      updated: new Date().toISOString(),
+    }),
+    updateDoc(fdRef, {
+      upvotes: isUpvoted ? increment(-1) : increment(1),
+      updated: new Date().toISOString(),
+    }),
+  ])
+
+  const [userSnap, fdSnap] = await Promise.all([getDoc(userRef), getDoc(fdRef)])
+
+  if (!userSnap.exists() || !fdSnap.exists()) {
+    throw new Error('Something went wrong, try later.')
+  }
+
+  return [
+    { ...userSnap.data(), id: userSnap.id },
+    { ...fdSnap.data(), id: fdSnap.id },
+  ]
+}
+
 export async function deleteFeedback(fdid, user) {
   const app = createFirebaseApp()
   const db = getFirestore(app)
@@ -176,4 +207,18 @@ export async function deleteFeedback(fdid, user) {
   }).catch((error) => {
     throw new Error(error.message)
   })
+}
+
+export async function getUserByField(field, value) {
+  const app = createFirebaseApp()
+  const db = getFirestore(app)
+
+  const q = query(collection(db, 'users'), where(field, '==', value))
+  const snapshot = await getDocs(q)
+
+  if (snapshot.empty) {
+    throw new Error('The document does not exist')
+  }
+  const docs = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+  return docs[0]
 }

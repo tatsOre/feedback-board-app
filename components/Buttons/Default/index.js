@@ -1,16 +1,24 @@
 import { COLOR_THEME } from '../../../constants'
 
-export default function Button({ type, label, variant = 'primary', onClick }) {
-  const colors = `${COLOR_THEME[variant].base} ${COLOR_THEME[variant].hover} `
+export default function Button({
+  children,
+  disabled,
+  type,
+  onClick,
+  variant = 'primary',
+}) {
+  const THEME = COLOR_THEME
+  const colors = `${THEME[variant].base} ${THEME[variant].hover} `
   const styles =
     'rounded-10 text-[13px] md:text-sm leading-3 h-10 md:h-11 px-4 md:px-6 min-w-max'
   return (
     <button
-      type={type}
+      type={type || 'button'}
       className={colors + styles}
-      onClick={type == 'button' ? onClick : null}
+      disabled={disabled}
+      onClick={type !== 'submit' ? onClick : null}
     >
-      {label || 'Button Label'}
+      {children || 'Click'}
     </button>
   )
 }

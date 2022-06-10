@@ -1,3 +1,4 @@
+import React from 'react'
 import Head from 'next/head'
 import Footer from '../components/Shared/footer'
 import UserProvider from '../context/UserProvider'

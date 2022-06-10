@@ -3,35 +3,25 @@ import useClickOutside from '../../hooks/useClickOutside'
 
 function counter() {
   let count = 0
-
-  function increment() {
-    return (count += 1)
-  }
-  function reset() {
-    return (count = 1)
-  }
+  const increment = () => (count += 1)
+  const reset = () => (count = 0)
   return { increment, reset }
 }
 
 const { increment: generateId } = counter()
 
-const useElementIds = ({
-  id = `dropdown-${generateId()}`,
-  labelId,
-  menuId,
-  toggleButtonId,
-}) => {
+const useElementIds = ({ id = `dropdown-${generateId()}` }) => {
   const elementIdsRef = useRef({
     id,
-    labelId: labelId || `${id}-label`,
-    menuId: menuId || `${id}-menu`,
-    toggleButtonId: toggleButtonId || `${id}-toggle-button`,
+    labelId: `${id}-label`,
+    menuId: `${id}-menu`,
+    toggleButtonId: `${id}-toggle-button`,
   })
   return elementIdsRef.current
 }
 
-const useElementsProps = ({ setIsOpen }) => {
-  const elementIds = useElementIds({})
+const useElementsProps = ({ id, setIsOpen }) => {
+  const elementIds = useElementIds({ id })
   const onToggleButton = () => setIsOpen((state) => !state)
 
   const getButtonProps = useCallback(
@@ -67,32 +57,40 @@ const useElementsProps = ({ setIsOpen }) => {
   }
 }
 
-const DropdownSelect = ({ options, selected, onChange, label, disabled }) => {
+const DropdownSelect = ({
+  id,
+  options,
+  selected,
+  onChange,
+  label,
+  disabled,
+}) => {
   const [isOpen, setIsOpen] = useState(false)
 
   const initialSelectedItemIndex = options.findIndex(
     (obj) => obj.value === selected
   )
-
   const [selectedIndex, setSelectedIndex] = useState(initialSelectedItemIndex)
 
   const me = useRef()
 
+  useEffect(() => {
+    const { reset } = counter()
+    return () => reset()
+  }, [])
+
   const { getButtonProps, getLabelProps, getMenuProps } = useElementsProps({
+    id,
     setIsOpen,
   })
 
-  useEffect(() => {
-    const { reset } = counter()
-    return reset()
-  }, [])
-
-  useClickOutside(me, () => setIsOpen(false))
+  const closeDropdown = () => setIsOpen(false)
+  useClickOutside(me, closeDropdown)
 
   const onSelectClick = (event, index, value) => {
     setSelectedIndex(index)
     onChange(value)
-    setIsOpen(false)
+    closeDropdown()
     event.stopPropagation()
   }
 

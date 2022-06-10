@@ -1,9 +1,13 @@
 import Image from 'next/image'
 import { useState } from 'react'
-import { useFeedbackData } from '../context/FeedbackProvider'
-import { useUser } from '../context/UserProvider'
+
+import useUser from '../hooks/useUser'
+import useFeedbackData from '../hooks/useFeedbackData'
+
 import { updateFeedbackReplies } from '../services/firebase-client'
 import Button from './Buttons/Default'
+import ErrorMessage from './Error/DefaultError'
+
 
 export default function Comment({ comment, cmid }) {
   const [reply, setReply] = useState({
@@ -38,7 +42,7 @@ export default function Comment({ comment, cmid }) {
     try {
       const updatedComments = await updateFeedbackReplies(data, newReply, cmid)
       setData((data) => ({ ...data, comments: updatedComments }))
-      setReply((state) => ({ ...state, content: '' }))
+      setReply((state) => ({ ...state, show: false, content: '' }))
     } catch (error) {
       setReply((state) => ({ ...state, error: error.message }))
     }
@@ -105,14 +109,18 @@ export default function Comment({ comment, cmid }) {
                   : 'border-indigo-100 hover:border-blue-900'
               }`}
             />
-            <Button type="submit" label="Post Reply" variant="primary" />
+            <Button
+              type="submit"
+              label="Post Reply"
+              disabled={reply.error && true}
+              variant="primary"
+            />
           </form>
-
-          {reply.error ? (
-            <strong className="col-span-3 md:col-start-2 md:col-span-2 font-normal text-[13px] text-red-900">
-              {reply.error}
-            </strong>
-          ) : null}
+          {reply.error && (
+            <div className="col-span-3 md:col-start-2 md:col-span-2">
+              <ErrorMessage text={reply.error} />
+            </div>
+          )}
         </>
       )}
 
