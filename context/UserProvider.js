@@ -8,7 +8,7 @@ export const UserContext = createContext()
 export default function UserProvider({ children }) {
   const [user, setUser] = useState()
   const [loadingUser, setLoadingUser] = useState(true)
-console.log('trying to reach me')
+
   const getLoggedInUser = async (uid) => {
     try {
       const data = await getUserByField('userId', uid)

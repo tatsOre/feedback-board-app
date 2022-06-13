@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { useUser } from '../context/UserProvider'
+import useUser from 'hooks/useUser'
 import { deleteFeedback } from '../services/firebase-client'
 import Button from './Buttons/Default'
 

@@ -17,6 +17,8 @@ export default function AddComment() {
   const { data, setData } = useFeedbackData()
   const { user } = useUser()
 
+  if (!data) return
+
   const charsLeft = 250 - content.length
 
   const onChange = ({ target }) =>
@@ -45,7 +47,7 @@ export default function AddComment() {
       <textarea
         value={content}
         onChange={onChange}
-        aria-label={`Add a new comment to ${data?.title || 'feedback'}`}
+        aria-label={`Add a new comment to ${data.title || 'feedback'}`}
         className={`w-full text-[13px] md:text-[15px] text-indigo-800 bg-indigo-100 rounded-5 p-4 mb-2 ${
           error ? 'border-red-900' : 'border-indigo-100 hover:border-blue-900'
         } border cursor-pointer`}
@@ -58,7 +60,7 @@ export default function AddComment() {
       <p className="text-indigo-500 text-[13px]">
         {charsLeft} character{charsLeft > 1 || !charsLeft ? 's' : ''} left
       </p>
-      <Button type="submit" label="Post Comment" variant="primary" />
+      <Button type="submit">Post Comment</Button>
     </form>
   )
 }

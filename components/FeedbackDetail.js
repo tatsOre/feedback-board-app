@@ -14,7 +14,7 @@ import { getCommentsLength } from '../utils'
 
 export default function Feedback() {
   const { data, isLoading } = useFeedbackData()
-  const { user } = useUser
+  const { user } = useUser()
 
   useEffect(() => {
     if (data) document.title = `Feedback Board ${'- ' + data.title}`

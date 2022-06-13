@@ -12,7 +12,6 @@ import ErrorMessage from './Error/DefaultError'
 
 import { CATEGORY_OPTIONS, STATUS_OPTIONS } from '../constants'
 
-
 const getInitialState = (data, edit) => {
   let values = {
     title: data?.title || '',

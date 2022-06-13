@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react'
 
-//import FeedbackCard from '../components/FeedbackDetail'
+import FeedbackCard from '../components/FeedbackCard'
 
 const MOCK_DATA = {
   id: 1,
@@ -33,10 +33,14 @@ const MOCK_DATA = {
     },
   ],
 }
+jest.mock('../hooks/useUser', () => ({
+  __esModule: true,
+  default: () => jest.fn(() => ({ user: null })),
+}))
 
 describe('', () => {
   it('', () => {
-    //const { container, debug } = render(<FeedbackCard data={MOCK_DATA} />)
+    const { container, debug } = render(<FeedbackCard data={MOCK_DATA} />)
     //debug()
   })
 })

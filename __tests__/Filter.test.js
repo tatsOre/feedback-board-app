@@ -24,6 +24,7 @@ describe('Filter Component', () => {
 
     const checked = screen.getByRole('radio', { checked: true })
 
+    expect(checked).toBeInTheDocument()
     expect(checked.value).toEqual(initialState)
   })
 
