@@ -1,6 +1,6 @@
 import { ArrowUp } from '../../Arrows'
 
-import useFeedbackUpvote from '../../../hooks/useFeedbackUpvote'
+import useFeedbackUpvote from '../../../lib/hooks/useFeedbackUpvote'
 
 export default function UpvoteButton({ upvotes, fdid }) {
   const { votes, isUpvoted, isLoading, onClick } = useFeedbackUpvote(

@@ -1,26 +1,26 @@
 import Head from 'next/head'
+import { useRouter } from 'next/router'
+import useSWR from 'swr'
+import { AxiosAPIService } from 'lib/services/axios'
 import Form from '../../../components/FeedbackForm'
-import { getFeedbackByField} from '../../../services/firebase'
 
-export async function getServerSideProps({ params }) {
-  try {
-    const data = await getFeedbackByField('slug', params.slug)
-    return {
-      props: { data },
-    }
-  } catch (error) {
-    console.log(`Error in edit/[${params.slug}] page:`, error)
-    return { notFound: true }
-  }
-}
+export default function Page() {
+  const router = useRouter()
+  const { slug } = router.query
 
-export default function Page(props) {
+  const { data, error } = useSWR(
+    slug ? `/feedbacks/slug?q=${slug}` : null,
+    AxiosAPIService.get
+  )
+  if (!data) return <p>Loading...</p>
+  if (error) return <p>Failed to load</p>
+
   return (
     <>
       <Head>
-        <title>Edit - {props.data.title}</title>
+        <title>Edit - {data.title}</title>
       </Head>
-      <Form {...props} edit />
+      <Form data={data} edit={true} />
     </>
   )
 }

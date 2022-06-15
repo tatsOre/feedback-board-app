@@ -1,26 +1,28 @@
 import Head from 'next/head'
-import Roadmap from '../components/Roadmap'
-import { getAllFeedbacks } from '../services/firebase'
+import dbConnect from 'lib/db/dbConnect'
+import { reduceFeedbacksData } from 'lib/utils'
 
-export const getServerSideProps = async () => {
-  try {
-    const data = await getAllFeedbacks()
-    return {
-      props: { data },
-    }
-  } catch (error) {
-    console.log(error)
-    return { notFound: true }
-  }
+import Feedback from 'models/Feedback'
+import Roadmap from '../components/Roadmap'
+
+export async function getServerSideProps() {
+  await dbConnect()
+  const docs = await Feedback.find({})
+    .sort({ upvotes: 'desc' })
+    .select('title description category comments upvotes slug status')
+
+  const response = reduceFeedbacksData(docs)
+
+  return { props: { data: response } }
 }
 
-export default function Page(props) {
+export default function Page({ data }) {
   return (
     <>
       <Head>
         <title>Feedback Board App - Roadmap</title>
       </Head>
-      <Roadmap {...props} />
+      <Roadmap data={data} />
     </>
   )
 }

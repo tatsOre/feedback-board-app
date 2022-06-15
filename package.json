@@ -1,6 +1,6 @@
 {
   "name": "feedback-board-app",
-  "version": "0.1.2",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -10,12 +10,13 @@
     "test": "jest --watch"
   },
   "dependencies": {
+    "axios": "^0.27.2",
     "dashify": "^2.0.0",
-    "firebase": "^9.7.0",
-    "firebase-admin": "^10.1.0",
+    "mongoose": "^6.0.11",
     "next": "latest",
     "react": "^18.1.0",
-    "react-dom": "^18.1.0"
+    "react-dom": "^18.1.0",
+    "swr": "^1.0.1"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.4",

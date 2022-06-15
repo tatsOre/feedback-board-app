@@ -8,6 +8,9 @@
     font-family: 'Jost', sans-serif;
     background-color: #f7f8fd;
   }
+  main {
+    min-height: 95vh;
+  }
   h1,
   h2,
   h3,
@@ -200,7 +203,7 @@
   .home > header {
     background-image: url('/assets/suggestions/desktop/background-header.png');
     background-size: cover;
-    min-height: 137px;
+    height: 100%;
   }
 }
 
@@ -238,12 +241,12 @@
 #dropdown-container.open #dropdown-sort-label,
 #dropdown-sort-toggle-button[aria-expanded='true'] {
   opacity: 0.75;
-  cursor: not-allowed;
 }
 
 #dropdown-sort-label.disabled,
 #dropdown-sort-toggle-button:disabled {
   opacity: 0.75;
+  cursor: not-allowed;
 }
 
 #dropdown-sort-menu,

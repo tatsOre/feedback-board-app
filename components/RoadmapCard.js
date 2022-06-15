@@ -1,11 +1,11 @@
 import Link from 'next/link'
+import { toCapitalize } from 'lib/utils'
 import UpvoteButton from './Buttons/Upvote'
-import { getCommentsLength, toCapitalize } from './../utils'
 
 export default function RoadmapCard({ data }) {
   const { category, comments, description, id, slug, status, title, upvotes } =
     data
-  const commentsLength = getCommentsLength(comments)
+
   const categoryText = ['ux', 'ui'].includes(category)
     ? category.toUpperCase()
     : toCapitalize(category)
@@ -33,10 +33,10 @@ export default function RoadmapCard({ data }) {
       <p
         aria-label="comments"
         className={`${
-          commentsLength ? 'text-indigo-800' : 'text-[#898EAC]'
+          comments ? 'text-indigo-800' : 'text-[#898EAC]'
         } comments float-right mt-2 font-bold lg:text-base text-indigo-800`}
       >
-        {commentsLength}
+        {comments}
       </p>
     </article>
   )

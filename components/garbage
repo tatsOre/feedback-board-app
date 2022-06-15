@@ -1,0 +1,33 @@
+    console.log('Houston')
+    try {
+      let newDoc = null
+      console.log('Entre al try')
+      const slug = dashify(values.title)
+      setState((state) => ({ ...state, isLoading: true }))
+      if (edit) {
+        const payload = {
+          ...values,
+          slug,
+        }
+        console.log('edit', payload, data.id)
+        newDoc = await AxiosAPIService.update(data.id, payload)
+      } else {
+        console.log('new')
+        /*         await AxiosAPIService.post({
+          ...values,
+          slug,
+          author: user.id,
+        }) */
+        console.log(values)
+      }
+      mutate(`/feedbacks/slug?q=${slug}`, newDoc, false)
+      //router.push(`/feedback/detail/${slug}`)
+    } catch (error) {
+      console.log('algo se jodio')
+      console.log(error) // send ErrorAlert
+    } finally {
+      console.log('me queden finally')
+      setState((state) => ({ ...state, isLoading: false }))
+    }
+
+    console.log('Final del submit')

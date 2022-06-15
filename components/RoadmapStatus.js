@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { Fragment } from 'react'
-import { toCapitalize } from '../utils'
+
+import { toCapitalize } from 'lib/utils'
 
 export default function RoadmapStatus({ data }) {
   return (

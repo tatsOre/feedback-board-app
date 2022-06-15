@@ -1,12 +1,12 @@
 import Link from 'next/link'
 import UpvoteButton from './Buttons/Upvote'
-import { getCommentsLength, toCapitalize } from '../utils'
+import { toCapitalize } from 'lib/utils'
 
 /* span elem is used as link instead of article since button is not allowed as content for a element */
 
-export default function FeedbackCard({ data, link }) {
-  const { category, comments, description, id, slug, title, upvotes } = data
-  const commentsLength = getCommentsLength(comments)
+export default function FeedbackCard({ data = {}, link }) {
+  const { category, comments, description, _id, slug, title, upvotes } = data
+
   const categoryText = ['ux', 'ui'].includes(category)
     ? category.toUpperCase()
     : toCapitalize(category)
@@ -34,14 +34,14 @@ export default function FeedbackCard({ data, link }) {
         </p>
       </div>
 
-      <UpvoteButton upvotes={upvotes} fdid={id} />
+      <UpvoteButton upvotes={upvotes} fdid={_id} />
       <p
         aria-label="comments"
         className={`${
-          commentsLength ? 'text-indigo-800' : 'text-[#898EAC]'
+          comments ? 'text-indigo-800' : 'text-[#898EAC]'
         } comments ml-auto md:my-auto font-bold lg:text-base`}
       >
-        {commentsLength}
+        {comments}
       </p>
     </article>
   )

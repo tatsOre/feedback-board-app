@@ -1,52 +1,42 @@
 import dashify from 'dashify'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
+import { mutate } from 'swr'
 
-import { createFeedback, updateFeedback } from '../services/firebase-client'
-import useUser from 'hooks/useUser'
 import Button from './Buttons/Default'
 import GoBackButton from './Buttons/GoBack'
 import DropdownSelect from './Select'
 import DeleteFeedbackModal from './DeleteFeedback'
 import ErrorMessage from './Error/DefaultError'
 
-import { CATEGORY_OPTIONS, STATUS_OPTIONS } from '../constants'
-
-const getInitialState = (data, edit) => {
-  let values = {
-    title: data?.title || '',
-    category: data?.category || 'feature',
-    description: data?.description || '',
-  }
-  if (edit) values = { ...values, status: data?.status }
-
-  return {
-    loading: false,
-    error: {},
-    values,
-  }
-}
+import { CATEGORY_OPTIONS, STATUS_OPTIONS } from 'lib/constants'
+import useUser from 'lib/hooks/useUser'
+import { AxiosAPIService } from 'lib/services/axios'
 
 const useFormValidation = (data) => {
   let errors = {}
   let isFormValid = true
 
-  for (const key in data) {
-    if (!data[key]) {
-      isFormValid = false
-      errors[key] = `${key} can't be empty`
-    }
+  if (!data.title) {
+    errors['title'] = "Title can't be empty"
+  }
+
+  if (!data.description) {
+    errors['description'] = "Description can't be empty"
   }
   return { isFormValid, errors }
 }
 
 export default function Form({ data, edit }) {
-  const [{ values, loading, error }, setState] = useState(() =>
-    getInitialState(data, edit)
-  )
-
+  const [{ values, isLoading, error }, setState] = useState({
+    values: { ...data },
+    isLoading: false,
+    error: {},
+  })
   const [isModalOpen, setModalOpen] = useState(false)
+
   const { user } = useUser()
+
   const router = useRouter()
 
   const handleCloseModal = () => setModalOpen(false)
@@ -77,25 +67,31 @@ export default function Form({ data, edit }) {
 
   const onSubmit = async (event) => {
     event.preventDefault()
-
     const { isFormValid, errors } = useFormValidation(values)
     if (!isFormValid) {
       return setState((state) => ({ ...state, error: errors }))
     }
 
+    let doc = {}
+
     try {
       const slug = dashify(values.title)
-      setState((state) => ({ ...state, loading: true }))
+      const payload = { ...values, slug }
+
       if (edit) {
-        await updateFeedback({ ...data, ...values, slug })
+        doc = await AxiosAPIService.update(data._id, payload)
       } else {
-        await createFeedback({ ...values, author: user.userId, slug })
+        doc = await AxiosAPIService.post({
+          ...payload,
+          author: user.id,
+        })
       }
-      router.push(`/feedback/detail/${slug}`)
-    } catch (err) {
-      console.log(err) // send ErrorAlert
+      mutate(`/feedbacks/slug?q=${doc.slug}`, doc, false)
+      router.push(`/feedback/detail/${doc.slug}`)
+    } catch (error) {
+      console.log(error) // Create Alert
     } finally {
-      setState((state) => ({ ...state, loading: false }))
+      setState((state) => ({ ...state, isLoading: false }))
     }
   }
 
@@ -171,7 +167,7 @@ export default function Form({ data, edit }) {
         {error.description && <ErrorMessage text={error.description} />}
 
         <div className="w-full flex flex-col mt-9 md:mt-6 md:flex-row-reverse space-y-4 md:space-y-0 ">
-          <Button type="submit" variant="primary">
+          <Button type="submit" disabled={isLoading}>
             {edit ? 'Save Changes' : 'Add Feedback'}
           </Button>
           <Button variant="secondary" onClick={() => router.back()}>
@@ -186,7 +182,7 @@ export default function Form({ data, edit }) {
       </form>
 
       {isModalOpen && (
-        <DeleteFeedbackModal fdid={data?.id} closeModal={handleCloseModal} />
+        <DeleteFeedbackModal fdid={data._id} closeModal={handleCloseModal} />
       )}
     </main>
   )

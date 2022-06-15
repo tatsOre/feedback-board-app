@@ -1,14 +1,15 @@
 import { useEffect, useReducer, useState } from 'react'
 import Image from 'next/image'
+
 import { AddFeedback } from './Link'
 import FeedbackCard from './FeedbackCard'
 import FilterTags from './Filter'
 import Loader from './Shared/loader'
-import Login from './Shared/login'
+import Login from './LoginMock'
 import RoadmapStatus from './RoadmapStatus'
 import DropdownSelect from './Select'
-import { getCommentsLength } from './../utils'
-import { FILTER_OPTIONS, SORT_OPTIONS } from './../constants'
+
+import { FILTER_OPTIONS, SORT_OPTIONS } from 'lib/constants'
 
 const reducer = (state, action) => {
   let data
@@ -36,19 +37,11 @@ const reducer = (state, action) => {
       return { ...state, sort: type, suggestions: data }
 
     case 'MOST_COMMENTS':
-      data = [...state.suggestions].sort((a, b) => {
-        const aComments = getCommentsLength(a.comments)
-        const bComments = getCommentsLength(b.comments)
-        return bComments - aComments
-      })
+      data = [...state.suggestions].sort((a, b) => b.comments - a.comments)
       return { ...state, sort: type, suggestions: data }
 
     case 'LEAST_COMMENTS':
-      data = [...state.suggestions].sort((a, b) => {
-        const aComments = getCommentsLength(a.comments)
-        const bComments = getCommentsLength(b.comments)
-        return aComments - bComments
-      })
+      data = [...state.suggestions].sort((a, b) => a.comments - b.comments)
       return { ...state, sort: type, suggestions: data }
 
     default:
@@ -57,13 +50,12 @@ const reducer = (state, action) => {
 }
 
 export default function Home({ data }) {
-  const initialState = {
+  const [state, dispatch] = useReducer(reducer, {
     filter: 'all',
     sort: 'MOST_UPVOTES',
-    suggestions: data && (data.suggestion || []),
+    suggestions: data?.suggestion || [],
     requests: data || [],
-  }
-  const [state, dispatch] = useReducer(reducer, initialState)
+  })
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   useEffect(() => {
@@ -83,12 +75,10 @@ export default function Home({ data }) {
     setIsMenuOpen(false)
   }
 
-  const onSelectChange = (option) => {
-    dispatch({ type: option })
-  }
+  const onSelectChange = (option) => dispatch({ type: option })
 
   return (
-    <main className="home container grid lg:gap-x-4 xl:gap-x-8 grid-cols-3 grid-rows-[auto_auto] md:grid-rows-[minmax(178px, auto)_auto] lg:grid-cols-4 lg:grid-rows-none md:pt-14 lg:pt-24">
+    <main className="home container grid lg:gap-x-4 lg:gap-y-6 xl:gap-x-8 grid-cols-3 grid-rows-[auto_auto] md:grid-rows-[minmax(178px, auto)_auto] lg:grid-cols-4 lg:grid-rows-[138px_auto] md:pt-14 lg:pt-24">
       <header className="col-span-3 md:col-span-1 md:rounded-10 lg:mb-6 py-3 md:p-6">
         <h1 className="text-base md:text-xl text-white leading-5 md:leading-7">
           Frontend Mentor
@@ -96,6 +86,7 @@ export default function Home({ data }) {
             Feedback Board
           </small>
         </h1>
+
         <button
           className="mobile-nav-button"
           type="button"
@@ -180,7 +171,7 @@ export default function Home({ data }) {
         </div>
       </section>
 
-      <Login breakpoint="md" />
+      <Login device="md" />
     </main>
   )
 }

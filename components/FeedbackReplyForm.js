@@ -1,9 +1,10 @@
+import useUser from 'lib/hooks/useUser'
 import { useState } from 'react'
 
-import useUser from '../hooks/useUser'
-import useFeedbackData from '../hooks/useFeedbackData'
 
-import { updateFeedbackReplies } from '../services/firebase-client'
+//import useFeedbackData from '../hooks/useFeedbackData'
+
+//import { updateFeedbackReplies } from '../services/firebase-client'
 
 import Button from './Buttons/Default'
 import ErrorMessage from './Error/DefaultError'
@@ -14,7 +15,7 @@ function ReplyForm({ comment, cmid, closeForm }) {
     error: '',
   })
 
-  const { data, setData } = useFeedbackData()
+  //const { data, setData } = useFeedbackData()
   const { user } = useUser()
 
   const onChange = ({ target }) =>
@@ -35,8 +36,8 @@ function ReplyForm({ comment, cmid, closeForm }) {
       },
     }
     try {
-      const updatedComments = await updateFeedbackReplies(data, newReply, cmid)
-      setData((data) => ({ ...data, comments: updatedComments }))
+      //const updatedComments = await updateFeedbackReplies(data, newReply, cmid)
+      //setData((data) => ({ ...data, comments: updatedComments }))
       setReply({ content: '', error: '' })
       closeForm()
     } catch (error) {
@@ -61,7 +62,7 @@ function ReplyForm({ comment, cmid, closeForm }) {
               : 'border-indigo-100 hover:border-blue-900'
           }`}
         />
-        <Button type="submit" disabled={reply.error && true}>
+        <Button type="submit" disabled={Boolean(reply.error)}>
           Post Reply
         </Button>
       </form>

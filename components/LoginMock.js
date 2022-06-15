@@ -1,13 +1,13 @@
 import Image from 'next/image'
-import useUser from 'hooks/useUser'
+import useUser from '../lib/hooks/useUser'
 
-export default function Login({ breakpoint }) {
-  const { loadingUser, user } = useUser()
+export default function Login({ device }) {
+  const { loadingUser, user } =  useUser()
 
   return (
     <div
       className={`login ${
-        breakpoint == 'md' ? 'tablet' : ''
+        device == 'md' ? 'tablet' : ''
       } items-center p-3 mt-6 lg:mt-6 rounded-10 border border-blue-500 text-blue-500 text-[13px]`}
     >
       {user ? (

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import useClickOutside from '../../hooks/useClickOutside'
+
+import useClickOutside from '../../lib/hooks/useClickOutside'
 
 function counter() {
   let count = 0
@@ -49,13 +50,11 @@ const useElementsProps = ({ id, items, initialSelected, onSelect }) => {
         newIndex =
           selectedIndex === items.length - 1 ? selectedIndex : selectedIndex + 1
         setSelectedIndex(newIndex)
-
         break
       case 'ArrowUp':
         event.preventDefault()
         newIndex = selectedIndex - 1 <= 0 ? 0 : selectedIndex - 1
         setSelectedIndex(newIndex)
-
         break
 
       case 'Enter':

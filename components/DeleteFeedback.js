@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
-import useUser from 'hooks/useUser'
-import { deleteFeedback } from '../services/firebase-client'
+import useUser from 'lib/hooks/useUser'
 import Button from './Buttons/Default'
+import { AxiosAPIService } from 'lib/services/axios'
 
 export default function DeleteFeedbackModal({ fdid, closeModal }) {
   const { user } = useUser()
@@ -9,10 +9,10 @@ export default function DeleteFeedbackModal({ fdid, closeModal }) {
 
   const handleDeleteFeedback = async () => {
     try {
-      await deleteFeedback(fdid, user)
+      await AxiosAPIService.delete(fdid, user.id)
       router.push('/')
     } catch (error) {
-      console.log(error)
+      console.log(error) // Send Alert
     }
   }
 

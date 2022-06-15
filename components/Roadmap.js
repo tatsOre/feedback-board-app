@@ -1,10 +1,12 @@
 import { useState } from 'react'
-import { toCapitalize } from '../utils'
+
+import { ROADMAP_SECTION_TAGLINES } from 'lib/constants'
+import { toCapitalize } from 'lib/utils'
+
 import { AddFeedback } from './Link'
 import GoBackButton from './Buttons/GoBack'
 import RoadmapCard from './RoadmapCard'
 
-import { ROADMAP_SECTION_TAGLINES } from '../constants'
 
 export default function Roadmap({ data }) {
   const [activeTab, setActiveTab] = useState('planned')

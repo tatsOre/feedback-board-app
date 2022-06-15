@@ -1,23 +1,13 @@
 import { useState } from 'react'
 
-import useFeedbackData from '../hooks/useFeedbackData'
-import useUser from '../hooks/useUser'
-
-import { updateFeedbackComments } from '../services/firebase-client'
-
 import Button from './Buttons/Default'
 import ErrorMessage from './Error/DefaultError'
 
-export default function AddComment() {
+export default function AddComment({ data, user }) {
   const [{ content, error }, setComment] = useState({
     content: '',
     error: '',
   })
-
-  const { data, setData } = useFeedbackData()
-  const { user } = useUser()
-
-  if (!data) return
 
   const charsLeft = 250 - content.length
 
@@ -30,8 +20,8 @@ export default function AddComment() {
       return setComment((state) => ({ ...state, error: "Can't be empty!" }))
 
     try {
-      const updatedDoc = await updateFeedbackComments(data, comment, user)
-      setData(updatedDoc)
+      //const updatedDoc = await updateFeedbackComments(data, comment, user)
+      // setData(updatedDoc)
       setComment({ content: '', error: '' })
     } catch (error) {
       setComment((state) => ({ ...state, error: error.message }))
