@@ -57,8 +57,8 @@ export default function Roadmap({ data }) {
                   <p className="text-indigo-500 text-small md:text-sm lg:text-base pb-6">
                     {ROADMAP_SECTION_TAGLINES[status]}
                   </p>
-                  {data[status].map((fd) => (
-                    <RoadmapCard key={fd.id} data={fd} />
+                  {data[status].map((item) => (
+                    <RoadmapCard key={item._id} data={item} />
                   ))}
                 </div>
               )

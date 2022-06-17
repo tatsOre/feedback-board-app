@@ -17,7 +17,7 @@ export default async function handler(req, res) {
         const { fdid } = req.body
 
         const user = await User.findByIdAndUpdate(id, {
-          $addToSet: { upvoted: mongoose.Types.ObjectId(fdid) },
+          $pull: { upvoted: mongoose.Types.ObjectId(fdid) },
         })
 
         if (!user) {
@@ -27,7 +27,7 @@ export default async function handler(req, res) {
         }
 
         const doc = await Feedback.findByIdAndUpdate(fdid, {
-          $inc: { upvotes: 1 },
+          $inc: { upvotes: -1 },
         })
 
         if (!doc) {

@@ -3,7 +3,7 @@ import { toCapitalize } from 'lib/utils'
 import UpvoteButton from './Buttons/Upvote'
 
 export default function RoadmapCard({ data }) {
-  const { category, comments, description, id, slug, status, title, upvotes } =
+  const { category, comments, description, _id, slug, status, title, upvotes } =
     data
 
   const categoryText = ['ux', 'ui'].includes(category)
@@ -29,7 +29,7 @@ export default function RoadmapCard({ data }) {
         {categoryText}
       </p>
 
-      <UpvoteButton upvotes={upvotes} fdid={id} />
+      <UpvoteButton upvotes={upvotes} fdid={_id} />
       <p
         aria-label="comments"
         className={`${
