@@ -142,7 +142,7 @@ export default function Home({ data }) {
         <div className="py-8 px-6 md:p-0 space-y-6">
           {SuggLength ? (
             state.suggestions.map((data) => (
-              <FeedbackCard key={data.id} data={data} link />
+              <FeedbackCard key={data._id} data={data} link />
             ))
           ) : (
             <div className="bg-white flex flex-col items-center rounded-10 py-20 px-7 md:py-24 md:px-44">

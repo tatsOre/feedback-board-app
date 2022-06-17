@@ -1,5 +1,5 @@
-import dbConnect from '../../../lib/db/dbConnect'
-import User from '../../../models/User'
+import dbConnect from '../../../../lib/db/dbConnect'
+import User from '../../../../models/User'
 
 export default async function handler(req, res) {
   const {
@@ -12,7 +12,7 @@ export default async function handler(req, res) {
   switch (method) {
     case 'GET':
       try {
-        const doc = await User.findOne({ username: 'velvetround' })
+        const doc = await User.findById(id)
         if (!doc) {
           return res.status(400).json({ success: false })
         }

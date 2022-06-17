@@ -1,12 +1,54 @@
 import { ArrowUp } from '../../Arrows'
 
-import useFeedbackUpvote from '../../../lib/hooks/useFeedbackUpvote'
+import { useState, useEffect } from 'react'
+import useUser from 'lib/hooks/useUser'
+import { AxiosAPIService } from 'lib/services/axios'
+
+//import useFeedbackUpvote from '../../../lib/hooks/useFeedbackUpvote'
 
 export default function UpvoteButton({ upvotes, fdid }) {
-  const { votes, isUpvoted, isLoading, onClick } = useFeedbackUpvote(
-    upvotes,
-    fdid
-  )
+  const [{ votes, isLoading, isUpvoted }, setState] = useState({
+    votes: upvotes,
+    isLoading: false,
+    isUpvoted: false,
+  })
+
+  const { loadingUser, user, setUser } = useUser()
+
+  useEffect(() => {
+    if (!loadingUser && user) {
+      setState((state) => ({
+        ...state,
+        isUpvoted: user.upvoted?.includes(fdid),
+      }))
+    }
+  }, [user, loadingUser])
+
+  const onClick = async (event) => {
+    event.preventDefault()
+    setState((state) => ({ ...state, isLoading: true }))
+
+    try {
+      const url = `/users/${user._id}/upvote`
+
+      const updatedDoc = await AxiosAPIService.post(url, {
+        fdid,
+      })
+
+      setState((state) => ({
+        ...state,
+        votes: updatedDoc.upvotes,
+        isUpvoted: user.upvoted.includes(fdid),
+      }))
+
+      /*       setUser(updatedUser)
+       */
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setState((state) => ({ ...state, isLoading: false }))
+    }
+  }
 
   return (
     <button

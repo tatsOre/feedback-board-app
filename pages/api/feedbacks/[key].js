@@ -86,3 +86,13 @@ export default async function handler(req, res) {
       break
   }
 }
+
+
+/*
+
+       const doc = await Feedback.updateOne(
+          { _id: fdid },
+          { $inc: { upvotes: isUpvoted ? -1 : 1 } }
+        )
+
+*/

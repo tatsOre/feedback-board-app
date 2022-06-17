@@ -15,11 +15,7 @@ const UserSchema = new mongoose.Schema(
       required: [true, 'Please provide a username for the user.'],
       maxlength: [60, "User's username cannot be more than 60 characters."],
     },
-    upvotes: [{ type: mongoose.Schema.ObjectId, ref: 'Feedback' }],
-    comments: {
-      type: Array,
-      default: [],
-    },
+    upvoted: [{ type: mongoose.Schema.ObjectId, ref: 'Feedback' }],
     requests: [{ type: mongoose.Schema.ObjectId, ref: 'Feedback' }],
   },
   { timestamps: true }

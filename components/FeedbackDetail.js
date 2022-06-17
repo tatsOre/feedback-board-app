@@ -17,7 +17,7 @@ export default function FeedbackPost({ data }) {
       <nav className="flex justify-between mb-6">
         <GoBackButton />
         {user?.id === data.author && (
-          <StyledLink href={`/feedback/edit/${data.slug}`} variant="tertiary">
+          <StyledLink href={`/feedback/${data.slug}/edit`} variant="tertiary">
             Edit Feedback
           </StyledLink>
         )}
@@ -34,7 +34,7 @@ export default function FeedbackPost({ data }) {
             <Comment
               comment={c}
               cmid={c.id}
-              key={`feedback-${data.id}-comment-${index}`}
+              key={`feedback-${data._id}-comment-${index}`}
             />
           ))}
         </section>

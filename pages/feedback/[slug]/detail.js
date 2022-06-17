@@ -1,8 +1,9 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
+
 import { AxiosAPIService } from 'lib/services/axios'
-import Form from '../../../components/FeedbackForm'
+import FeedbackPost from '../../../components/FeedbackDetail'
 
 export default function Page() {
   const router = useRouter()
@@ -18,9 +19,9 @@ export default function Page() {
   return (
     <>
       <Head>
-        <title>Edit - {data.title}</title>
+        <title>Feedback Board - {data?.title}</title>
       </Head>
-      <Form data={data} edit={true} />
+      <FeedbackPost data={data} />
     </>
   )
 }

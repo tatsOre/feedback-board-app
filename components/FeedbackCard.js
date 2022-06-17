@@ -18,7 +18,7 @@ export default function FeedbackCard({ data = {}, link }) {
       } feedback-card w-full flex flex-wrap items-center md:items-start bg-white text-[13px] rounded-10 p-6 md:px-8`}
     >
       {link && (
-        <Link href={`/feedback/detail/${slug}`} passHref>
+        <Link href={`/feedback/${slug}/detail`} passHref>
           <a aria-label={`link to ${title}`}>
             <span className="full-link"></span>
           </a>

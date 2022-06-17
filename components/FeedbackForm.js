@@ -81,13 +81,13 @@ export default function Form({ data, edit }) {
       if (edit) {
         doc = await AxiosAPIService.update(data._id, payload)
       } else {
-        doc = await AxiosAPIService.post({
+        doc = await AxiosAPIService.post('/feedbacks', {
           ...payload,
           author: user.id,
         })
       }
       mutate(`/feedbacks/slug?q=${doc.slug}`, doc, false)
-      router.push(`/feedback/detail/${doc.slug}`)
+      router.push(`/feedback/${doc.slug}/detail`)
     } catch (error) {
       console.log(error) // Create Alert
     } finally {
