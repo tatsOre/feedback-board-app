@@ -1,21 +1,16 @@
-import useUser from 'lib/hooks/useUser'
 import { useState } from 'react'
-
-
-//import useFeedbackData from '../hooks/useFeedbackData'
-
-//import { updateFeedbackReplies } from '../services/firebase-client'
-
+import { mutate } from 'swr'
+import { AxiosAPIService } from 'lib/services/axios'
+import useUser from 'lib/hooks/useUser'
 import Button from './Buttons/Default'
 import ErrorMessage from './Error/DefaultError'
 
-function ReplyForm({ comment, cmid, closeForm }) {
+function ReplyForm({ fdid, cmid, replyingTo, closeForm }) {
   const [reply, setReply] = useState({
     content: '',
     error: '',
   })
 
-  //const { data, setData } = useFeedbackData()
   const { user } = useUser()
 
   const onChange = ({ target }) =>
@@ -26,18 +21,16 @@ function ReplyForm({ comment, cmid, closeForm }) {
     if (!reply.content)
       return setReply((state) => ({ ...state, error: "Can't be empty!" }))
 
-    const newReply = {
-      content: reply.content,
-      replyingTo: comment.user.username,
-      user: {
-        image: user.image,
-        name: user.name,
-        username: user.username,
-      },
-    }
     try {
-      //const updatedComments = await updateFeedbackReplies(data, newReply, cmid)
-      //setData((data) => ({ ...data, comments: updatedComments }))
+      const doc = await AxiosAPIService.post(`/feedbacks/${fdid}/reply`, {
+        cmid,
+        reply: {
+          content: reply.content,
+          replyingTo,
+          user: user._id,
+        },
+      })
+      mutate(`/feedbacks/slug?q=${doc.slug}`, doc, false)
       setReply({ content: '', error: '' })
       closeForm()
     } catch (error) {
@@ -53,9 +46,9 @@ function ReplyForm({ comment, cmid, closeForm }) {
         <textarea
           value={reply.content}
           onChange={onChange}
-          aria-label={`Add a new reply to username:${comment.user.username}`}
+          aria-label={`Add a new reply to username:${replyingTo}`}
           maxLength="250"
-          placeholder={`Replying to @${comment.user.username}`}
+          placeholder={`Replying to @${replyingTo}`}
           className={`w-full mb-3 md:mb-0 p-2 md:p-4 bg-indigo-100 text-indigo-800 md:text-sm rounded-5 border cursor-pointer ${
             reply.error
               ? 'border-red-900'

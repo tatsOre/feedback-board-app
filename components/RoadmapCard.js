@@ -17,7 +17,7 @@ export default function RoadmapCard({ data }) {
       <p className={`status text-indigo-500 mb-3`}>{toCapitalize(status)}</p>
 
       <h3 className="text-sm lg:text-lg mb-2">
-        <Link href={`/feedback/detail/${slug}`} passHref>
+        <Link href={`/feedback/${slug}/detail`} passHref>
           <a className="text-indigo-800 hover:text-blue-900 hover:cursor-pointer">
             {title}
           </a>

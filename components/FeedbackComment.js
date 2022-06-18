@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 import FeedbackReplyForm from './FeedbackReplyForm'
 
-export default function Comment({ comment, cmid }) {
+export default function Comment({ fdid, comment, cmid }) {
   const [isFormOpen, setFormOpen] = useState(false)
 
   const toggleButton = () => setFormOpen((state) => !state)
@@ -55,8 +55,9 @@ export default function Comment({ comment, cmid }) {
 
       {isFormOpen && (
         <FeedbackReplyForm
-          comment={comment}
+          fdid={fdid}
           cmid={cmid}
+          replyingTo={comment.replyingTo || comment.user.username}
           closeForm={closeForm}
         />
       )}
@@ -65,9 +66,10 @@ export default function Comment({ comment, cmid }) {
         {comment.replies?.length
           ? comment.replies.map((reply, index) => (
               <Comment
-                key={`comment-${comment.id}-reply-${index}`}
+                key={`c-${comment._id}-rep-${index}`}
+                fdid={fdid}
+                cmid={cmid}
                 comment={reply}
-                cmid={comment.id}
               />
             ))
           : null}

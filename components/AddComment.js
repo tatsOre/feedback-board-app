@@ -1,5 +1,6 @@
 import { useState } from 'react'
-
+import { mutate } from 'swr'
+import { AxiosAPIService } from 'lib/services/axios'
 import Button from './Buttons/Default'
 import ErrorMessage from './Error/DefaultError'
 
@@ -20,8 +21,12 @@ export default function AddComment({ data, user }) {
       return setComment((state) => ({ ...state, error: "Can't be empty!" }))
 
     try {
-      //const updatedDoc = await updateFeedbackComments(data, comment, user)
-      // setData(updatedDoc)
+      const comments = [...data.comments, { content, user: user._id }]
+
+      const doc = await AxiosAPIService.update(data._id, { comments })
+
+      mutate(`/feedbacks/slug?q=${data.slug}`, doc, false)
+
       setComment({ content: '', error: '' })
     } catch (error) {
       setComment((state) => ({ ...state, error: error.message }))

@@ -30,17 +30,13 @@ export default function FeedbackPost({ data }) {
           <h2 className="text-indigo-800 text-lg">
             {commentsLength} Comment{commentsLength > 1 ? 's' : ''}
           </h2>
-          {data.comments.map((c, index) => (
-            <Comment
-              comment={c}
-              cmid={c.id}
-              key={`feedback-${data._id}-comment-${index}`}
-            />
+          {data.comments.map((c) => (
+            <Comment fdid={data._id} comment={c} cmid={c._id} key={c._id} />
           ))}
         </section>
       ) : null}
 
-      {user?.id !== data.author && <AddComment data={data} />}
+      {user?.id !== data.author && <AddComment data={data} user={user} />}
     </main>
   )
 }

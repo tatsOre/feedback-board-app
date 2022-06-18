@@ -1,5 +1,5 @@
-import dbConnect from '../../../lib/db/dbConnect'
 import mongoose from 'mongoose'
+import dbConnect from 'lib/db/dbConnect'
 import Feedback from 'models/Feedback'
 import User from 'models/User'
 
@@ -16,22 +16,7 @@ export default async function handler(req, res) {
       // http://localhost:3000/api/feedbacks/slug?q=hola
       try {
         const doc = await Feedback.findOne({ [key]: q })
-          .populate({
-            path: 'comments',
-            populate: {
-              path: 'user',
-              model: 'User',
-              select: 'image name username',
-            },
-          })
-          .populate({
-            path: 'comments.replies',
-            populate: {
-              path: 'user',
-              model: 'User',
-              select: 'image name username',
-            },
-          })
+
         if (!doc) {
           return res.status(400).json({ success: false })
         }
@@ -86,13 +71,3 @@ export default async function handler(req, res) {
       break
   }
 }
-
-
-/*
-
-       const doc = await Feedback.updateOne(
-          { _id: fdid },
-          { $inc: { upvotes: isUpvoted ? -1 : 1 } }
-        )
-
-*/

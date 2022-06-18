@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+import mongoose, { mongo } from 'mongoose'
 
 const FeedbackSchema = new mongoose.Schema(
   {
@@ -58,6 +58,35 @@ const FeedbackSchema = new mongoose.Schema(
   },
   { timestamps: true }
 )
+
+function populateDocHook(next) {
+  this.populate({
+    path: 'comments',
+    populate: {
+      path: 'user',
+      model: 'User',
+      select: 'image name username',
+    },
+  }).populate({
+    path: 'comments.replies',
+    populate: {
+      path: 'user',
+      model: 'User',
+      select: 'image name username',
+    },
+  })
+  next()
+}
+
+FeedbackSchema.pre('findOne', populateDocHook)
+FeedbackSchema.pre('findOneAndUpdate', populateDocHook)
+
+FeedbackSchema.statics.getCommentId = function () {
+  // const [ { count } ] = await Feedback.getCommentId()
+  return this.aggregate([
+    { $group: { _id: null, count: { $sum: { $size: '$comments' } } } },
+  ])
+}
 
 // we don't want to create a new model every single time we hit an API route in Next.js:
 export default mongoose.models.Feedback ||
