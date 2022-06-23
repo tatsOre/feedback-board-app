@@ -2,7 +2,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
 
-import { AxiosAPIService } from 'lib/services/axios'
+import { AxiosAPIService } from '../../../lib/services/axios'
 import FeedbackPost from '../../../components/FeedbackDetail'
 
 export default function Page() {

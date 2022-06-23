@@ -1,0 +1,17 @@
+{
+  "success": true,
+  "data": {
+    "_id": "62aa672c91db101eea23c8c1",
+    "author": "62a8912aec3546861ad8b8ed",
+    "title": "Check and fix style details",
+    "slug": "check-and-fix-style-details",
+    "description": "Check Figma file for more info",
+    "category": "feature",
+    "status": "suggestion",
+    "upvotes": 2,
+    "comments": [],
+    "createdAt": "2022-06-15T23:11:40.547Z",
+    "updatedAt": "2022-06-17T23:58:46.091Z",
+    "__v": 0
+  }
+}

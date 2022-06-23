@@ -1,5 +1,5 @@
-import dbConnect from 'lib/db/dbConnect'
-import Feedback from 'models/Feedback'
+import dbConnect from '../../../../lib/db/dbConnect'
+import Feedback from '../../../../models/Feedback'
 
 export default async function handler(req, res) {
   const {

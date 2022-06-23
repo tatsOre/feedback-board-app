@@ -1,0 +1,16 @@
+{
+  "success": true,
+  "data": {
+    "_id": "62a8912aec3546861ad8b8ed",
+    "image": "user-images/image-zena.jpg",
+    "name": "Zena Kelley",
+    "username": "velvetround",
+    "comments": [],
+    "requests": ["62aa672c91db101eea23c8c1"],
+    "createdAt": "2022-06-14T13:46:18.239Z",
+    "updatedAt": "2022-06-23T22:39:55.935Z",
+    "__v": 0,
+    "upvoted": ["62aa672c91db101eea23c8c1"],
+    "id": "62a8912aec3546861ad8b8ed"
+  }
+}

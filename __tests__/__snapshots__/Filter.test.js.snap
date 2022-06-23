@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FilterTags /> renders with the selected option passed via props 1`] = `
+<div>
+  <fieldset
+    class="bg-white rounded-10 w-full md:w-1/2 lg:w-full p-5"
+  >
+    <legend
+      class="invisible h-0"
+    >
+      Filter by category:
+    </legend>
+    <input
+      checked=""
+      id="filter-option-all"
+      name="category"
+      tabindex="1"
+      type="radio"
+      value="all"
+    />
+    <label
+      class="text-white bg-blue-900 rounded-10 inline-block px-4 py-2 md:py-1.5 mr-2 mb-3 text-sm font-semibold"
+      for="filter-option-all"
+    >
+      All
+    </label>
+    <input
+      id="filter-option-ui"
+      name="category"
+      tabindex="2"
+      type="radio"
+      value="ui"
+    />
+    <label
+      class="text-blue-900 bg-indigo-100 hover:bg-indigo-300 cursor-pointer rounded-10 inline-block px-4 py-2 md:py-1.5 mr-2 mb-3 text-sm font-semibold"
+      for="filter-option-ui"
+    >
+      UI
+    </label>
+    <input
+      id="filter-option-ux"
+      name="category"
+      tabindex="3"
+      type="radio"
+      value="ux"
+    />
+    <label
+      class="text-blue-900 bg-indigo-100 hover:bg-indigo-300 cursor-pointer rounded-10 inline-block px-4 py-2 md:py-1.5 mr-2 mb-3 text-sm font-semibold"
+      for="filter-option-ux"
+    >
+      UX
+    </label>
+    <input
+      id="filter-option-enhancement"
+      name="category"
+      tabindex="4"
+      type="radio"
+      value="enhancement"
+    />
+    <label
+      class="text-blue-900 bg-indigo-100 hover:bg-indigo-300 cursor-pointer rounded-10 inline-block px-4 py-2 md:py-1.5 mr-2 mb-3 text-sm font-semibold"
+      for="filter-option-enhancement"
+    >
+      Enhancement
+    </label>
+    <input
+      id="filter-option-bug"
+      name="category"
+      tabindex="5"
+      type="radio"
+      value="bug"
+    />
+    <label
+      class="text-blue-900 bg-indigo-100 hover:bg-indigo-300 cursor-pointer rounded-10 inline-block px-4 py-2 md:py-1.5 mr-2 mb-3 text-sm font-semibold"
+      for="filter-option-bug"
+    >
+      Bug
+    </label>
+    <input
+      id="filter-option-feature"
+      name="category"
+      tabindex="6"
+      type="radio"
+      value="feature"
+    />
+    <label
+      class="text-blue-900 bg-indigo-100 hover:bg-indigo-300 cursor-pointer rounded-10 inline-block px-4 py-2 md:py-1.5 mr-2 mb-3 text-sm font-semibold"
+      for="filter-option-feature"
+    >
+      Feature
+    </label>
+  </fieldset>
+</div>
+`;

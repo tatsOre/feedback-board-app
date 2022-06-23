@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { toCapitalize } from 'lib/utils'
+import { toCapitalize } from '../lib/utils'
 import UpvoteButton from './Buttons/Upvote'
 
 export default function RoadmapCard({ data }) {

@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import { ArrowUp } from '../../Arrows'
-import { AxiosAPIService } from 'lib/services/axios'
-import useUser from 'lib/hooks/useUser'
+import { AxiosAPIService } from '../../../lib/services/axios'
+import useUser from '../../../lib/hooks/useUser'
+
 
 // todo: check cache/time to update
 

@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
-import dbConnect from 'lib/db/dbConnect'
-import Feedback from 'models/Feedback'
-import User from 'models/User'
+import dbConnect from '../../../../lib/db/dbConnect'
+import Feedback from '../../../../models/Feedback'
+import User from '../../../../models/User'
 
 export default async function handler(req, res) {
   const {

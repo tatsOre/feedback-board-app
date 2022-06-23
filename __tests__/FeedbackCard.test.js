@@ -1,46 +1,39 @@
-import { render } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
+import '@testing-library/jest-dom'
 
 import FeedbackCard from '../components/FeedbackCard'
 
-const MOCK_DATA = {
-  id: 1,
-  title: 'Add tags for solutions',
-  category: 'enhancement',
-  status: 'suggestion',
-  description: 'Easier to search for solutions based on a specific stack.',
-  upvotes: 0,
-  author: 'admin',
-  comments: [
-    {
-      id: 1,
-      content:
-        'Awesome idea! Trying to find framework-specific projects within the hubs can be tedious',
-      user: {
-        image: 'user-images/image-suzanne.jpg',
-        name: 'Suzanne Chang',
-        username: 'upbeat1811',
-      },
-    },
-    {
-      id: 2,
-      content:
-        'Please use fun, color-coded labels to easily identify them at a glance',
-      user: {
-        image: 'user-images/image-thomas.jpg',
-        name: 'Thomas Hood',
-        username: 'brawnybrave',
-      },
-    },
-  ],
-}
-jest.mock('../hooks/useUser', () => ({
-  __esModule: true,
-  default: () => jest.fn(() => ({ user: null })),
-}))
+import MOCK_FEEDBACK_DATA from '../__mocks__/mock-feedbacks.json'
 
-describe('', () => {
-  it('', () => {
-    const { container, debug } = render(<FeedbackCard data={MOCK_DATA} />)
-    //debug()
+describe('<FeedbackCard />', () => {
+  const {
+    data: { suggestion },
+  } = MOCK_FEEDBACK_DATA
+
+  it('renders with correct data and UI', () => {
+    const { container } = render(<FeedbackCard data={suggestion[0]} />)
+
+    expect(container).toMatchSnapshot()
+
+    expect(screen.queryByRole('link')).not.toBeInTheDocument()
+
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
+      suggestion[0].title
+    )
+  })
+
+  it('renders with correct data and UI with link to Feedback Post', () => {
+    const { container } = render(<FeedbackCard data={suggestion[1]} link />)
+
+    expect(container).toMatchSnapshot()
+
+    expect(screen.getByRole('link')).toHaveAttribute(
+      'href',
+      `/feedback/${suggestion[1].slug}/detail`
+    )
+
+    expect(screen.getByRole('heading', { level: 3 })).toHaveTextContent(
+      suggestion[1].title
+    )
   })
 })

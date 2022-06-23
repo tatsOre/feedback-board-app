@@ -9,7 +9,7 @@ import Login from './LoginMock'
 import RoadmapStatus from './RoadmapStatus'
 import DropdownSelect from './Select'
 
-import { FILTER_OPTIONS, SORT_OPTIONS } from 'lib/constants'
+import { FILTER_OPTIONS, SORT_OPTIONS } from '../lib/constants'
 
 const reducer = (state, action) => {
   let data

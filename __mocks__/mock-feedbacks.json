@@ -1,0 +1,163 @@
+{
+  "success": true,
+  "data": {
+    "planned": [
+      {
+        "_id": "62a89896ec3546861ad8b94f",
+        "title": "More comprehensive reports",
+        "slug": "more-comprehensive-reports",
+        "description": "It would be great to see a more detailed breakdown of solutions.",
+        "status": "planned",
+        "category": "feature",
+        "comments": 2,
+        "upvotes": 123
+      },
+      {
+        "_id": "62a89896ec3546861ad8b952",
+        "title": "Learning paths",
+        "slug": "learning-paths",
+        "description": "Sequenced projects for different goals to help people improve.",
+        "status": "planned",
+        "category": "feature",
+        "comments": 1,
+        "upvotes": 28
+      }
+    ],
+    "in-progress": [
+      {
+        "_id": "62a89896ec3546861ad8b955",
+        "title": "One-click portfolio generation",
+        "slug": "one-click-portfolio-generation",
+        "description": "Add ability to create professional looking portfolio from profile.",
+        "status": "in-progress",
+        "category": "feature",
+        "comments": 1,
+        "upvotes": 62
+      },
+      {
+        "_id": "62a89896ec3546861ad8b958",
+        "title": "Bookmark challenges",
+        "slug": "bookmark-challenges",
+        "description": "Be able to bookmark challenges to take later on.",
+        "status": "in-progress",
+        "category": "feature",
+        "comments": 1,
+        "upvotes": 31
+      },
+      {
+        "_id": "62a89896ec3546861ad8b95a",
+        "title": "Animated solution screenshots",
+        "slug": "animated-solution-screenshots",
+        "description": "Screenshots of solutions with animations don’t display correctly.",
+        "status": "in-progress",
+        "category": "bug",
+        "comments": 0,
+        "upvotes": 9
+      }
+    ],
+    "live": [
+      {
+        "_id": "62a89896ec3546861ad8b95e",
+        "title": "Add micro-interactions",
+        "slug": "add-micro-interactions",
+        "description": "Small animations at specific points can add delight.",
+        "status": "live",
+        "category": "enhancement",
+        "comments": 2,
+        "upvotes": 71
+      }
+    ],
+    "suggestion": [
+      {
+        "_id": "62a89895ec3546861ad8b937",
+        "title": "Add tags for solutions",
+        "slug": "add-tags-for-solutions",
+        "description": "Easier to search for solutions based on a specific stack.",
+        "status": "suggestion",
+        "category": "enhancement",
+        "comments": 2,
+        "upvotes": 112
+      },
+      {
+        "_id": "62a89896ec3546861ad8b93d",
+        "title": "Add a dark theme option",
+        "slug": "add-a-dark-theme-option",
+        "description": "It would help people with light sensitivities and who prefer dark mode.",
+        "status": "suggestion",
+        "category": "feature",
+        "comments": 4,
+        "upvotes": 98
+      },
+      {
+        "_id": "62a89896ec3546861ad8b940",
+        "title": "Q&A within the challenge hubs",
+        "slug": "q-a-within-the-challenge-hubs",
+        "description": "Challenge-specific Q&A would make for easy reference.",
+        "status": "suggestion",
+        "category": "feature",
+        "comments": 1,
+        "upvotes": 69
+      },
+      {
+        "_id": "62a89896ec3546861ad8b944",
+        "title": "Add image/video upload to feedback",
+        "slug": "add-image-video-upload-to-feedback",
+        "description": "Images and screencasts can enhance comments on solutions.",
+        "status": "suggestion",
+        "category": "enhancement",
+        "comments": 2,
+        "upvotes": 51
+      },
+      {
+        "_id": "62a89896ec3546861ad8b949",
+        "title": "Ability to follow others",
+        "slug": "ability-to-follow-others",
+        "description": "Stay updated on comments and solutions other people post.",
+        "status": "suggestion",
+        "category": "feature",
+        "comments": 3,
+        "upvotes": 42
+      },
+      {
+        "_id": "62a89896ec3546861ad8b94b",
+        "title": "Preview images not loading",
+        "slug": "preview-images-not-loading",
+        "description": "Challenge preview images are missing when you apply a filter.",
+        "status": "suggestion",
+        "category": "bug",
+        "comments": 0,
+        "upvotes": 5
+      },
+      {
+        "_id": "62aa672c91db101eea23c8c1",
+        "title": "Check and fix style details",
+        "slug": "check-and-fix-style-details",
+        "description": "Check Figma file for more info",
+        "status": "suggestion",
+        "category": "feature",
+        "comments": 0,
+        "upvotes": 2
+      },
+      {
+        "_id": "62ac9866ab6d55c01ed5d815",
+        "title": "Feedback to test comments",
+        "slug": "feedback-to-test-comments",
+        "description": "I will ask and answer myself.",
+        "status": "suggestion",
+        "category": "feature",
+        "comments": 8,
+        "upvotes": 0
+      },
+      {
+        "_id": "62b4eb8d41d462a3acd8ce11",
+        "title": "new",
+        "slug": "new",
+        "description": "Testing new routes",
+        "status": "suggestion",
+        "category": "feature",
+        "comments": 0,
+        "upvotes": 0
+      }
+    ]
+  }
+}

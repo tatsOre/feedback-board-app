@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
-import { ROADMAP_SECTION_TAGLINES } from 'lib/constants'
-import { toCapitalize } from 'lib/utils'
+import { ROADMAP_SECTION_TAGLINES } from '../lib/constants'
+import { toCapitalize } from '../lib/utils'
 
 import { AddFeedback } from './Link'
 import GoBackButton from './Buttons/GoBack'

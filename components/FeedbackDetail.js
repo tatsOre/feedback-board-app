@@ -4,8 +4,8 @@ import GoBackButton from './Buttons/GoBack'
 import FeedbackCard from './FeedbackCard'
 import StyledLink from './Link'
 
-import useUser from 'lib/hooks/useUser'
-import { getCommentsLength } from 'lib/utils'
+import useUser from '../lib/hooks/useUser'
+import { getCommentsLength } from '../lib/utils'
 
 export default function FeedbackPost({ data }) {
   const { user } = useUser()
@@ -36,7 +36,7 @@ export default function FeedbackPost({ data }) {
         </section>
       ) : null}
 
-      {user?.id !== data.author && <AddComment data={data} user={user} />}
+      {user && user._id !== data.author && <AddComment data={data} user={user} />}
     </main>
   )
 }

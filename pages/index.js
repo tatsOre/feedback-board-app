@@ -1,8 +1,7 @@
 import Head from 'next/head'
-import dbConnect from 'lib/db/dbConnect'
-import { reduceFeedbacksData } from 'lib/utils'
-
-import Feedback from 'models/Feedback'
+import dbConnect from '../lib/db/dbConnect'
+import { reduceFeedbacksData } from '../lib/utils'
+import Feedback from '../models/Feedback'
 import Home from '../components/Home'
 
 export async function getServerSideProps() {

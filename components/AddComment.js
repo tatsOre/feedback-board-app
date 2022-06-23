@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { mutate } from 'swr'
-import { AxiosAPIService } from 'lib/services/axios'
+import { AxiosAPIService } from '../lib/services/axios'
 import Button from './Buttons/Default'
 import ErrorMessage from './Error/DefaultError'
 

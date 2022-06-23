@@ -73,11 +73,13 @@ In this application users should be able to:
 
 ### Continued development
 Currently working on: 
-- Create/Edit feedback implementation, form validation and styling
 - Error UI handling
-- Redirections on error and 404 page
 - Testing
 - Documentation
+
+### Links
+- [A guide to module mocking with Jest](https://www.emgoto.com/mocking-with-jest/) - A guide to module mocking with Jest
+- [Common mistakes with React Testing Library](https://kentcdodds.com/blog/common-mistakes-with-react-testing-library) - Common mistakes with React Testing Library
 
 ## Author
 

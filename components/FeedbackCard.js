@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import UpvoteButton from './Buttons/Upvote'
-import { toCapitalize } from 'lib/utils'
+import { toCapitalize } from '../lib/utils'
 
 /* span elem is used as link instead of article since button is not allowed as content for a element */
 
@@ -25,9 +25,13 @@ export default function FeedbackCard({ data = {}, link }) {
         </Link>
       )}
       <div className="w-full md:w-[80%] md:ml-10">
-        <h3 className="text-sm lg:text-lg mb-2 text-indigo-800 group-hover:text-blue-900">
-          {title}
-        </h3>
+        {link ? (
+          <h3 className="text-sm lg:text-lg mb-2 text-indigo-800 group-hover:text-blue-900">
+            {title}
+          </h3>
+        ) : (
+          <h1 className="text-sm lg:text-lg mb-2 text-indigo-800">{title}</h1>
+        )}
         <p className="text-indigo-500">{description}</p>
         <p className="w-min rounded-10 bg-indigo-300 px-4 py-1.5 mt-2 mb-4 md:mt-3 lg:text-small font-semibold text-blue-900">
           {categoryText}

@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { COLOR_THEME as THEME } from 'lib/constants'
+import { COLOR_THEME as THEME } from '../lib/constants'
 
 function StyledLink({ href, children, variant }) {
   const colors = `${THEME[variant].base} ${THEME[variant].hover} `

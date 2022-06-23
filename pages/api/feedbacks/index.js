@@ -1,7 +1,7 @@
 import dbConnect from '../../../lib/db/dbConnect'
-import Feedback from 'models/Feedback'
-import User from 'models/User'
-import { reduceFeedbacksData } from 'lib/utils'
+import Feedback from '../../../models/Feedback'
+import User from '../../../models/User'
+import { reduceFeedbacksData } from '../../../lib/utils'
 
 export default async function handler(req, res) {
   const { method } = req

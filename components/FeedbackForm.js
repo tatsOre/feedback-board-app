@@ -9,9 +9,9 @@ import DropdownSelect from './Select'
 import DeleteFeedbackModal from './DeleteFeedback'
 import ErrorMessage from './Error/DefaultError'
 
-import { CATEGORY_OPTIONS, STATUS_OPTIONS } from 'lib/constants'
-import useUser from 'lib/hooks/useUser'
-import { AxiosAPIService } from 'lib/services/axios'
+import { CATEGORY_OPTIONS, STATUS_OPTIONS } from '../lib/constants'
+import useUser from '../lib/hooks/useUser'
+import { AxiosAPIService } from '../lib/services/axios'
 
 const useFormValidation = (data) => {
   let errors = {}

@@ -1,15 +1,15 @@
-import { cleanup, fireEvent, render, screen } from '@testing-library/react'
-
+import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import Button from '../components/Buttons/Default'
 
 describe('Default Button', () => {
-  afterEach(cleanup)
-
   const handleClick = jest.fn()
 
-  it('render with correct label', () => {
+  it('renders with correct label', () => {
+    const ERROR = { message: true }
+
     render(
-      <Button type="submit" onClick={handleClick}>
+      <Button type="submit" disabled={ERROR}>
         Send
       </Button>
     )
@@ -19,9 +19,11 @@ describe('Default Button', () => {
     expect(button).toBeInTheDocument()
 
     expect(button).toHaveAttribute('type', 'submit')
+
+    expect(button).toBeDisabled()
   })
 
-  it('render with default label and type when no props are passed', () => {
+  it('renders with default label and type when no props are passed', () => {
     render(<Button onClick={handleClick}></Button>)
 
     const button = screen.getByText(/Click/)
@@ -31,12 +33,12 @@ describe('Default Button', () => {
     expect(button).toHaveAttribute('type', 'button')
   })
 
-  it('calls onClick prop when clicked', () => {
+  it('calls onClick prop when clicked', async () => {
     render(<Button onClick={handleClick}>Delete</Button>)
 
     const button = screen.getByText(/Delete/)
 
-    fireEvent.click(button)
+    await userEvent.click(button)
 
     expect(handleClick).toHaveBeenCalledTimes(1)
   })

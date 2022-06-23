@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
-import useUser from 'lib/hooks/useUser'
+import { AxiosAPIService } from '../lib/services/axios'
+import useUser from '../lib/hooks/useUser'
 import Button from './Buttons/Default'
-import { AxiosAPIService } from 'lib/services/axios'
 
 export default function DeleteFeedbackModal({ fdid, closeModal }) {
   const { user } = useUser()

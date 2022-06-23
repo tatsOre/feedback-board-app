@@ -1,20 +1,16 @@
-import { cleanup, fireEvent, render, screen } from '@testing-library/react'
-
+import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import FilterTags from '../components/Filter'
+import { FILTER_OPTIONS as ITEMS } from '../lib/constants'
+import { getRandomNumber } from '../lib/utils'
 
-import { FILTER_OPTIONS as ITEMS } from '../constants'
-
-import { getRandomNumber } from '../utils'
-
-describe('Filter Component', () => {
-  afterEach(cleanup)
-
+describe('<FilterTags />', () => {
   const initialState = ITEMS[0].value
 
   const handleChange = jest.fn()
 
-  it('render with the selected option passed via props', () => {
-    render(
+  it('renders with the selected option passed via props', () => {
+    const { container } = render(
       <FilterTags
         items={ITEMS}
         checked={initialState}
@@ -22,13 +18,18 @@ describe('Filter Component', () => {
       />
     )
 
+    expect(container).toMatchSnapshot()
+
     const checked = screen.getByRole('radio', { checked: true })
 
-    expect(checked).toBeInTheDocument()
     expect(checked.value).toEqual(initialState)
+
+    expect(screen.getAllByRole('radio', { checked: false })).toHaveLength(
+      ITEMS.length - 1
+    )
   })
 
-  it('calls onChange prop when clicked', () => {
+  it('calls onChange prop when clicked', async () => {
     render(
       <FilterTags
         items={ITEMS}
@@ -36,23 +37,16 @@ describe('Filter Component', () => {
         onChange={handleChange}
       />
     )
+    const index = getRandomNumber(1, ITEMS.length)
 
-    const checked = screen.getByRole('radio', { checked: true })
+    const input = screen.getByLabelText(ITEMS[index].label)
 
-    fireEvent.click(checked)
-
-    expect(handleChange).toHaveBeenCalledTimes(0)
-
-    const newIndex = getRandomNumber(1, ITEMS.length)
-
-    const newChecked = screen.getByLabelText(ITEMS[newIndex].label)
-
-    fireEvent.click(newChecked)
+    await userEvent.click(input)
 
     expect(handleChange).toHaveBeenCalledTimes(1)
   })
 
-  it('', () => {
+  it('rerenders the updated props correctly', () => {
     const { rerender } = render(
       <FilterTags
         items={ITEMS}
@@ -60,27 +54,26 @@ describe('Filter Component', () => {
         onChange={handleChange}
       />
     )
+    const index = getRandomNumber(1, ITEMS.length)
 
-    let checked = screen.getByRole('radio', { checked: true })
-
-    expect(checked.value).toEqual(initialState)
-
-    const newIndex = getRandomNumber(1, ITEMS.length)
-
-    const newChecked = screen.getByLabelText(ITEMS[newIndex].label, {
+    const selected = screen.getByLabelText(ITEMS[index].label, {
       selector: 'input',
     })
 
     rerender(
       <FilterTags
         items={ITEMS}
-        checked={newChecked.value}
+        checked={selected.value}
         onChange={handleChange}
       />
     )
 
-    checked = screen.getByRole('radio', { checked: true })
+    const checked = screen.getByRole('radio', { checked: true })
 
-    expect(checked.value).toEqual(ITEMS[newIndex].value)
+    expect(checked.value).toEqual(ITEMS[index].value)
+
+    expect(screen.getAllByRole('radio', { checked: false })).toHaveLength(
+      ITEMS.length - 1
+    )
   })
 })
