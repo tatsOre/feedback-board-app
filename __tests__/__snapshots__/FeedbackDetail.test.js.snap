@@ -1,0 +1,449 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders feedback with authenticated user as author 1`] = `
+<div>
+  <main
+    class="p-6 md:p-10 max-w-[calc(730px+5rem)] mx-auto"
+  >
+    <nav
+      class="flex justify-between mb-6"
+    >
+      <a
+        class="text-sm hover:underline font-bold text-indigo-500"
+        href="/"
+      >
+        <svg
+          class="mb-1 mr-3"
+          height="10"
+          width="7"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M6 9L2 5l4-4"
+            fill="none"
+            fill-rule="evenodd"
+            stroke="#4661E6"
+            stroke-width="2"
+          />
+        </svg>
+        Go Back
+      </a>
+      <a
+        class="bg-blue-900 hover:bg-blue-500 text-white text-[13px] md:text-sm font-bold px-6 py-2.5 rounded-10 inline-block min-w-fit"
+        href="/feedback/check-and-fix-style-details/edit"
+      >
+        Edit Feedback
+      </a>
+    </nav>
+    <article
+      class=" feedback-card w-full flex flex-wrap items-center md:items-start bg-white text-[13px] rounded-10 p-6 md:px-8"
+    >
+      <div
+        class="w-full md:w-[80%] md:ml-10"
+      >
+        <h1
+          class="text-sm lg:text-lg mb-2 text-indigo-800"
+        >
+          Check and fix style details
+        </h1>
+        <p
+          class="text-indigo-500"
+        >
+          Check Figma file for more info
+        </p>
+        <p
+          class="w-min rounded-10 bg-indigo-300 px-4 py-1.5 mt-2 mb-4 md:mt-3 lg:text-small font-semibold text-blue-900"
+        >
+          Feature
+        </p>
+      </div>
+      <button
+        aria-label="upvote"
+        class="bg-blue-900 text-white rounded-10 text-[13px] min-w-[70px] py-3 px-4 leading-3 flex-inline justify-evenly relative z-10"
+        type="button"
+      >
+        <svg
+          height="7"
+          width="10"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M1 6l4-4 4 4"
+            fill="none"
+            fill-rule="evenodd"
+            stroke="#FFFFFF"
+            stroke-width="2"
+          />
+        </svg>
+        2
+      </button>
+      <p
+        aria-label="comments"
+        class="text-[#898EAC] comments ml-auto md:my-auto font-bold lg:text-base"
+      >
+        0
+      </p>
+    </article>
+  </main>
+</div>
+`;
+
+exports[`renders feedback with authenticated user but different owner 1`] = `
+<div>
+  <main
+    class="p-6 md:p-10 max-w-[calc(730px+5rem)] mx-auto"
+  >
+    <nav
+      class="flex justify-between mb-6"
+    >
+      <a
+        class="text-sm hover:underline font-bold text-indigo-500"
+        href="/"
+      >
+        <svg
+          class="mb-1 mr-3"
+          height="10"
+          width="7"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M6 9L2 5l4-4"
+            fill="none"
+            fill-rule="evenodd"
+            stroke="#4661E6"
+            stroke-width="2"
+          />
+        </svg>
+        Go Back
+      </a>
+    </nav>
+    <article
+      class=" feedback-card w-full flex flex-wrap items-center md:items-start bg-white text-[13px] rounded-10 p-6 md:px-8"
+    >
+      <div
+        class="w-full md:w-[80%] md:ml-10"
+      >
+        <h1
+          class="text-sm lg:text-lg mb-2 text-indigo-800"
+        >
+          Add a dark theme option
+        </h1>
+        <p
+          class="text-indigo-500"
+        >
+          It would help people with light sensitivities and who prefer dark mode.
+        </p>
+        <p
+          class="w-min rounded-10 bg-indigo-300 px-4 py-1.5 mt-2 mb-4 md:mt-3 lg:text-small font-semibold text-blue-900"
+        >
+          Feature
+        </p>
+      </div>
+      <button
+        aria-label="upvote"
+        class="bg-indigo-300 text-indigo-800 hover:bg-indigo-400 rounded-10 text-[13px] min-w-[70px] py-3 px-4 leading-3 flex-inline justify-evenly relative z-10"
+        type="button"
+      >
+        <svg
+          height="7"
+          width="10"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M1 6l4-4 4 4"
+            fill="none"
+            fill-rule="evenodd"
+            stroke="#4661E6"
+            stroke-width="2"
+          />
+        </svg>
+        98
+      </button>
+      <p
+        aria-label="comments"
+        class="text-indigo-800 comments ml-auto md:my-auto font-bold lg:text-base"
+      >
+        4
+      </p>
+    </article>
+    <section
+      class="bg-white rounded-10 p-6 pb-0 md:px-8 mt-6"
+      id="feedback-comments-section"
+    >
+      <h2
+        class="text-indigo-800 text-lg"
+      >
+        4
+         Comment
+        s
+      </h2>
+      <article
+        class="feedback-comment  py-6 text-[13px] grid grid-cols-[auto_minmax(100px,_1fr)_100px]"
+      >
+        <div
+          class="comment-user-container mr-4 md:mr-8"
+        >
+          <span
+            style="box-sizing: border-box; display: inline-block; overflow: hidden; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;"
+          >
+            <span
+              style="box-sizing: border-box; display: block; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;"
+            >
+              <img
+                alt=""
+                aria-hidden="true"
+                src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%2740%27%20height=%2740%27/%3e"
+                style="display: block; max-width: 100%; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;"
+              />
+            </span>
+            <img
+              alt="Elijah Moss profile pic"
+              data-nimg="intrinsic"
+              decoding="async"
+              src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+              style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+            />
+            <noscript />
+          </span>
+        </div>
+        <p
+          class="text-indigo-800 md:text-sm font-bold leading-5"
+        >
+          Elijah Moss
+          <small
+            class="text-indigo-500 md:text-sm font-normal block"
+          >
+            @
+            hexagon.bestagon
+          </small>
+        </p>
+        <button
+          class="font-bold text-blue-900 text-[13px] hover:underline ml-auto"
+          type="button"
+        >
+          Reply
+        </button>
+        <p
+          class="col-span-3 md:col-start-2 md:col-span-2 text-indigo-500 md:text-[15px] mt-4"
+        >
+           
+          Also, please allow styles to be applied based on system preferences. I would love to be able to browse Frontend Mentor in the evening after my device’s dark mode turns on without the bright background it currently has.
+        </p>
+        <section
+          class="col-span-3"
+        />
+      </article>
+      <article
+        class="feedback-comment with-replies py-6 text-[13px] grid grid-cols-[auto_minmax(100px,_1fr)_100px]"
+      >
+        <div
+          class="comment-user-container mr-4 md:mr-8"
+        >
+          <span
+            style="box-sizing: border-box; display: inline-block; overflow: hidden; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;"
+          >
+            <span
+              style="box-sizing: border-box; display: block; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;"
+            >
+              <img
+                alt=""
+                aria-hidden="true"
+                src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%2740%27%20height=%2740%27/%3e"
+                style="display: block; max-width: 100%; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;"
+              />
+            </span>
+            <img
+              alt="James Skinner profile pic"
+              data-nimg="intrinsic"
+              decoding="async"
+              src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+              style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+            />
+            <noscript />
+          </span>
+        </div>
+        <p
+          class="text-indigo-800 md:text-sm font-bold leading-5"
+        >
+          James Skinner
+          <small
+            class="text-indigo-500 md:text-sm font-normal block"
+          >
+            @
+            hummingbird1
+          </small>
+        </p>
+        <button
+          class="font-bold text-blue-900 text-[13px] hover:underline ml-auto"
+          type="button"
+        >
+          Reply
+        </button>
+        <p
+          class="col-span-3 md:col-start-2 md:col-span-2 text-indigo-500 md:text-[15px] mt-4"
+        >
+           
+          Second this! I do a lot of late night coding and reading. Adding a dark theme can be great for preventing eye strain and the headaches that result. It’s also quite a trend with modern apps and  apparently saves battery life.
+        </p>
+        <section
+          class="col-span-3"
+        >
+          <article
+            class="comment-reply mt-6 pl-6 md:pl-11 lg:pl-12 text-[13px] grid grid-cols-[auto_minmax(100px,_1fr)_100px]"
+          >
+            <div
+              class="comment-user-container mr-4 md:mr-8"
+            >
+              <span
+                style="box-sizing: border-box; display: inline-block; overflow: hidden; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;"
+              >
+                <span
+                  style="box-sizing: border-box; display: block; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;"
+                >
+                  <img
+                    alt=""
+                    aria-hidden="true"
+                    src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%2740%27%20height=%2740%27/%3e"
+                    style="display: block; max-width: 100%; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;"
+                  />
+                </span>
+                <img
+                  alt="Anne Valentine profile pic"
+                  data-nimg="intrinsic"
+                  decoding="async"
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                  style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+                />
+                <noscript />
+              </span>
+            </div>
+            <p
+              class="text-indigo-800 md:text-sm font-bold leading-5"
+            >
+              Anne Valentine
+              <small
+                class="text-indigo-500 md:text-sm font-normal block"
+              >
+                @
+                annev1990
+              </small>
+            </p>
+            <button
+              class="font-bold text-blue-900 text-[13px] hover:underline ml-auto"
+              type="button"
+            >
+              Reply
+            </button>
+            <p
+              class="col-span-3 md:col-start-2 md:col-span-2 text-indigo-500 md:text-[15px] mt-4"
+            >
+              <small
+                class="font-bold text-violet-900"
+              >
+                @
+                hummingbird1
+              </small>
+               
+              While waiting for dark mode, there are browser extensions that will also do the job. Search for 'dark theme' followed by your browser. There might be a need to turn off the extension for sites with naturally black backgrounds though.
+            </p>
+            <section
+              class="col-span-3"
+            />
+          </article>
+          <article
+            class="comment-reply mt-6 pl-6 md:pl-11 lg:pl-12 text-[13px] grid grid-cols-[auto_minmax(100px,_1fr)_100px]"
+          >
+            <div
+              class="comment-user-container mr-4 md:mr-8"
+            >
+              <span
+                style="box-sizing: border-box; display: inline-block; overflow: hidden; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;"
+              >
+                <span
+                  style="box-sizing: border-box; display: block; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;"
+                >
+                  <img
+                    alt=""
+                    aria-hidden="true"
+                    src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%2740%27%20height=%2740%27/%3e"
+                    style="display: block; max-width: 100%; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;"
+                  />
+                </span>
+                <img
+                  alt="Ryan Welles profile pic"
+                  data-nimg="intrinsic"
+                  decoding="async"
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                  style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+                />
+                <noscript />
+              </span>
+            </div>
+            <p
+              class="text-indigo-800 md:text-sm font-bold leading-5"
+            >
+              Ryan Welles
+              <small
+                class="text-indigo-500 md:text-sm font-normal block"
+              >
+                @
+                voyager.344
+              </small>
+            </p>
+            <button
+              class="font-bold text-blue-900 text-[13px] hover:underline ml-auto"
+              type="button"
+            >
+              Reply
+            </button>
+            <p
+              class="col-span-3 md:col-start-2 md:col-span-2 text-indigo-500 md:text-[15px] mt-4"
+            >
+              <small
+                class="font-bold text-violet-900"
+              >
+                @
+                annev1990
+              </small>
+               
+              Good point! Using any kind of style extension is great and can be highly customizable, like the ability to change contrast and brightness. I'd prefer not to use one of such extensions, however, for security and privacy reasons.
+            </p>
+            <section
+              class="col-span-3"
+            />
+          </article>
+        </section>
+      </article>
+    </section>
+    <form
+      class="bg-white rounded-10 p-6 md:px-8 mt-6 flex flex-wrap justify-between items-center"
+    >
+      <h2
+        class="w-full text-indigo-800 text-lg mb-6"
+      >
+        Add Comment
+      </h2>
+      <textarea
+        class="w-full text-[13px] md:text-[15px] text-indigo-800 bg-indigo-100 rounded-5 p-4 mb-2 border-indigo-100 hover:border-blue-900 border cursor-pointer"
+        maxlength="250"
+        placeholder="Type your comment here"
+        rows="3"
+      />
+      <p
+        class="text-indigo-500 text-[13px]"
+      >
+        250
+         character
+        s
+         left
+      </p>
+      <button
+        class="bg-violet-900 hover:bg-violet-500 rounded-10 text-[13px] md:text-sm leading-3 h-10 md:h-11 px-4 md:px-6 min-w-max"
+        type="submit"
+      >
+        Post Comment
+      </button>
+    </form>
+  </main>
+</div>
+`;

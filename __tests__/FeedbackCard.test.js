@@ -1,8 +1,5 @@
 import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom'
-
 import FeedbackCard from '../components/FeedbackCard'
-
 import MOCK_FEEDBACK_DATA from '../__mocks__/mock-feedbacks.json'
 
 describe('<FeedbackCard />', () => {
@@ -20,6 +17,8 @@ describe('<FeedbackCard />', () => {
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
       suggestion[0].title
     )
+
+    expect(screen.getByRole('button', { name: 'upvote' })).toBeInTheDocument()
   })
 
   it('renders with correct data and UI with link to Feedback Post', () => {

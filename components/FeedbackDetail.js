@@ -26,7 +26,7 @@ export default function FeedbackPost({ data }) {
       <FeedbackCard data={{ ...data, comments: commentsLength }} />
 
       {commentsLength ? (
-        <section className="feedback-comments-section bg-white rounded-10 p-6 pb-0 md:px-8 mt-6">
+        <section id='feedback-comments-section' className="bg-white rounded-10 p-6 pb-0 md:px-8 mt-6">
           <h2 className="text-indigo-800 text-lg">
             {commentsLength} Comment{commentsLength > 1 ? 's' : ''}
           </h2>

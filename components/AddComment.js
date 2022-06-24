@@ -42,7 +42,6 @@ export default function AddComment({ data, user }) {
       <textarea
         value={content}
         onChange={onChange}
-        aria-label={`Add a new comment to ${data.title || 'feedback'}`}
         className={`w-full text-[13px] md:text-[15px] text-indigo-800 bg-indigo-100 rounded-5 p-4 mb-2 ${
           error ? 'border-red-900' : 'border-indigo-100 hover:border-blue-900'
         } border cursor-pointer`}

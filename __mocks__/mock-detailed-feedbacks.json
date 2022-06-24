@@ -1,0 +1,67 @@
+{
+  "success": true,
+  "data": {
+    "_id": "62a89896ec3546861ad8b93d",
+    "author": "62a8b89cde22ec5a9990d9ff",
+    "title": "Add a dark theme option",
+    "description": "It would help people with light sensitivities and who prefer dark mode.",
+    "category": "feature",
+    "status": "suggestion",
+    "comments": [
+      {
+        "id": 3,
+        "content": "Also, please allow styles to be applied based on system preferences. I would love to be able to browse Frontend Mentor in the evening after my device’s dark mode turns on without the bright background it currently has.",
+        "user": {
+          "_id": "62a89129ec3546861ad8b8d5",
+          "image": "user-images/image-elijah.jpg",
+          "name": "Elijah Moss",
+          "username": "hexagon.bestagon",
+          "id": "62a89129ec3546861ad8b8d5"
+        },
+        "_id": "62acd4a6ea4a0cee961c0d4b",
+        "replies": []
+      },
+      {
+        "id": 4,
+        "content": "Second this! I do a lot of late night coding and reading. Adding a dark theme can be great for preventing eye strain and the headaches that result. It’s also quite a trend with modern apps and  apparently saves battery life.",
+        "user": {
+          "_id": "62a89129ec3546861ad8b8d8",
+          "image": "user-images/image-james.jpg",
+          "name": "James Skinner",
+          "username": "hummingbird1",
+          "id": "62a89129ec3546861ad8b8d8"
+        },
+        "replies": [
+          {
+            "content": "While waiting for dark mode, there are browser extensions that will also do the job. Search for 'dark theme' followed by your browser. There might be a need to turn off the extension for sites with naturally black backgrounds though.",
+            "replyingTo": "hummingbird1",
+            "user": {
+              "_id": "62a89129ec3546861ad8b8db",
+              "image": "user-images/image-anne.jpg",
+              "name": "Anne Valentine",
+              "username": "annev1990",
+              "id": "62a89129ec3546861ad8b8db"
+            }
+          },
+          {
+            "content": "Good point! Using any kind of style extension is great and can be highly customizable, like the ability to change contrast and brightness. I'd prefer not to use one of such extensions, however, for security and privacy reasons.",
+            "replyingTo": "annev1990",
+            "user": {
+              "_id": "62a89129ec3546861ad8b8de",
+              "image": "user-images/image-ryan.jpg",
+              "name": "Ryan Welles",
+              "username": "voyager.344",
+              "id": "62a89129ec3546861ad8b8de"
+            }
+          }
+        ],
+        "_id": "62acd4bfea4a0cee961c0d4c"
+      }
+    ],
+    "upvotes": 98,
+    "createdAt": "2022-06-14T14:17:58.145Z",
+    "updatedAt": "2022-06-17T14:32:34.006Z",
+    "__v": 0,
+    "slug": "add-a-dark-theme-option"
+  }
+}

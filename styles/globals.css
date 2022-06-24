@@ -433,11 +433,11 @@ input[type='radio']:focus + label {
 }
 
 /* Feedback Detail Page */
-.feedback-comments-section .feedback-comment:not(:last-of-type) {
+#feedback-comments-section .feedback-comment:not(:last-of-type) {
   border-bottom: 1px solid var(--color-indigo-400);
 }
 
-.feedback-comments-section img {
+#feedback-comments-section img {
   border-radius: 50%;
 }
 
