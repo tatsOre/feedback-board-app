@@ -1,12 +1,8 @@
 import { render, screen } from '@testing-library/react'
 import FeedbackCard from '../components/FeedbackCard'
-import MOCK_FEEDBACK_DATA from '../__mocks__/mock-feedbacks.json'
+import { MOCK_SUGGESTION as suggestion } from '../lib/utils/tests-fake-data'
 
 describe('<FeedbackCard />', () => {
-  const {
-    data: { suggestion },
-  } = MOCK_FEEDBACK_DATA
-
   it('renders with correct data and UI', () => {
     const { container } = render(<FeedbackCard data={suggestion[0]} />)
 

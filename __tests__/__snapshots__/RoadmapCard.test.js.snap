@@ -1,0 +1,181 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FeedbackCard /> renders card with status In-Progress with correct data and UI 1`] = `
+<div>
+  <article
+    class="roadmap-feedback-card in-progress rounded-md border-t-6 bg-white p-6 pt-3 mb-4 text-small lg:text-base"
+  >
+    <p
+      class="status text-indigo-500 mb-3"
+    >
+      In Progress
+    </p>
+    <h3
+      class="text-sm lg:text-lg mb-2"
+    >
+      <a
+        class="text-indigo-800 hover:text-blue-900 hover:cursor-pointer"
+        href="/feedback/one-click-portfolio-generation/detail"
+      >
+        One-click portfolio generation
+      </a>
+    </h3>
+    <p
+      class="text-indigo-500"
+    >
+      Add ability to create professional looking portfolio from profile.
+    </p>
+    <p
+      class="w-min rounded-10 bg-indigo-300 px-4 py-1.5 mt-2 mb-4 md:mt-3 lg:text-small font-semibold text-blue-900"
+    >
+      Feature
+    </p>
+    <button
+      aria-label="upvote"
+      class="bg-indigo-300 text-indigo-800 hover:bg-indigo-400 rounded-10 text-[13px] min-w-[70px] py-3 px-4 leading-3 flex-inline justify-evenly relative z-10"
+      type="button"
+    >
+      <svg
+        height="7"
+        width="10"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M1 6l4-4 4 4"
+          fill="none"
+          fill-rule="evenodd"
+          stroke="#4661E6"
+          stroke-width="2"
+        />
+      </svg>
+      62
+    </button>
+    <p
+      aria-label="comments"
+      class="text-indigo-800 comments float-right mt-2 font-bold lg:text-base text-indigo-800"
+    >
+      1
+    </p>
+  </article>
+</div>
+`;
+
+exports[`<FeedbackCard /> renders card with status Live with correct data and UI 1`] = `
+<div>
+  <article
+    class="roadmap-feedback-card live rounded-md border-t-6 bg-white p-6 pt-3 mb-4 text-small lg:text-base"
+  >
+    <p
+      class="status text-indigo-500 mb-3"
+    >
+      Live
+    </p>
+    <h3
+      class="text-sm lg:text-lg mb-2"
+    >
+      <a
+        class="text-indigo-800 hover:text-blue-900 hover:cursor-pointer"
+        href="/feedback/add-micro-interactions/detail"
+      >
+        Add micro-interactions
+      </a>
+    </h3>
+    <p
+      class="text-indigo-500"
+    >
+      Small animations at specific points can add delight.
+    </p>
+    <p
+      class="w-min rounded-10 bg-indigo-300 px-4 py-1.5 mt-2 mb-4 md:mt-3 lg:text-small font-semibold text-blue-900"
+    >
+      Enhancement
+    </p>
+    <button
+      aria-label="upvote"
+      class="bg-indigo-300 text-indigo-800 hover:bg-indigo-400 rounded-10 text-[13px] min-w-[70px] py-3 px-4 leading-3 flex-inline justify-evenly relative z-10"
+      type="button"
+    >
+      <svg
+        height="7"
+        width="10"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M1 6l4-4 4 4"
+          fill="none"
+          fill-rule="evenodd"
+          stroke="#4661E6"
+          stroke-width="2"
+        />
+      </svg>
+      71
+    </button>
+    <p
+      aria-label="comments"
+      class="text-indigo-800 comments float-right mt-2 font-bold lg:text-base text-indigo-800"
+    >
+      2
+    </p>
+  </article>
+</div>
+`;
+
+exports[`<FeedbackCard /> renders card with status Planned with correct data and UI 1`] = `
+<div>
+  <article
+    class="roadmap-feedback-card planned rounded-md border-t-6 bg-white p-6 pt-3 mb-4 text-small lg:text-base"
+  >
+    <p
+      class="status text-indigo-500 mb-3"
+    >
+      Planned
+    </p>
+    <h3
+      class="text-sm lg:text-lg mb-2"
+    >
+      <a
+        class="text-indigo-800 hover:text-blue-900 hover:cursor-pointer"
+        href="/feedback/more-comprehensive-reports/detail"
+      >
+        More comprehensive reports
+      </a>
+    </h3>
+    <p
+      class="text-indigo-500"
+    >
+      It would be great to see a more detailed breakdown of solutions.
+    </p>
+    <p
+      class="w-min rounded-10 bg-indigo-300 px-4 py-1.5 mt-2 mb-4 md:mt-3 lg:text-small font-semibold text-blue-900"
+    >
+      Feature
+    </p>
+    <button
+      aria-label="upvote"
+      class="bg-indigo-300 text-indigo-800 hover:bg-indigo-400 rounded-10 text-[13px] min-w-[70px] py-3 px-4 leading-3 flex-inline justify-evenly relative z-10"
+      type="button"
+    >
+      <svg
+        height="7"
+        width="10"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M1 6l4-4 4 4"
+          fill="none"
+          fill-rule="evenodd"
+          stroke="#4661E6"
+          stroke-width="2"
+        />
+      </svg>
+      123
+    </button>
+    <p
+      aria-label="comments"
+      class="text-indigo-800 comments float-right mt-2 font-bold lg:text-base text-indigo-800"
+    >
+      2
+    </p>
+  </article>
+</div>
+`;

@@ -80,6 +80,7 @@ Currently working on:
 ### Links
 - [A guide to module mocking with Jest](https://www.emgoto.com/mocking-with-jest/) - A guide to module mocking with Jest
 - [Common mistakes with React Testing Library](https://kentcdodds.com/blog/common-mistakes-with-react-testing-library) - Common mistakes with React Testing Library
+- [react-testing-library-examples](https://github.com/kentcdodds/react-testing-library-examples) - React Testing Library Examples
 
 ## Author
 

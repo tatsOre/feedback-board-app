@@ -2,23 +2,24 @@ import { render, screen, within } from '@testing-library/react'
 import FeedbackPost from '../components/FeedbackDetail'
 import useUser from '../lib/hooks/useUser'
 
-import MOCK_USER from '../__mocks__/mock-user-info.json'
-import MOCK_USER_FEEDBACK from '../__mocks__/mock-user-feedback.json'
-import MOCK_FEEDBACK from '../__mocks__/mock-detailed-feedbacks.json'
+import {
+  MOCK_USER,
+  MOCK_USER_FEEDBACK,
+  MOCK_DETAILED_FEEDBACK,
+} from '../lib/utils/tests-fake-data'
 
-import '@testing-library/jest-dom'
 import { getCommentsLength } from 'lib/utils'
 
 jest.mock('../lib/hooks/useUser', () => jest.fn())
 
 beforeEach(() => {
   useUser.mockReturnValue({
-    user: MOCK_USER.data,
+    user: MOCK_USER,
   })
 })
 
 test('renders feedback with authenticated user as author', () => {
-  const { data } = MOCK_USER_FEEDBACK
+  const data = MOCK_USER_FEEDBACK
 
   const { container } = render(<FeedbackPost data={data} />)
 
@@ -35,7 +36,7 @@ test('renders feedback with authenticated user as author', () => {
 })
 
 test('renders feedback with authenticated user but different owner', () => {
-  const { data } = MOCK_FEEDBACK
+  const data = MOCK_DETAILED_FEEDBACK
 
   const commentsLength = getCommentsLength(data.comments)
 
