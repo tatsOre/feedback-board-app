@@ -46,6 +46,7 @@ export default function Roadmap({ data }) {
             (status) =>
               status !== 'suggestion' && (
                 <div
+                  id={`roapmap-section-${status}`}
                   key={`roapmap-section-${status}`}
                   className={`hidden md:block w-full md:w-1/3 ${
                     activeTab === status && 'active-status'

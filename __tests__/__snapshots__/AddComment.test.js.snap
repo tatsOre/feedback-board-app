@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AddComment /> renders with correct UI and sets the proper values when it changes 1`] = `
+<div>
+  <form
+    class="bg-white rounded-10 p-6 md:px-8 mt-6 flex flex-wrap justify-between items-center"
+  >
+    <h2
+      class="w-full text-indigo-800 text-lg mb-6"
+    >
+      Add Comment
+    </h2>
+    <textarea
+      class="w-full text-[13px] md:text-[15px] text-indigo-800 bg-indigo-100 rounded-5 p-4 mb-2 border-indigo-100 hover:border-blue-900 border cursor-pointer"
+      maxlength="250"
+      placeholder="Type your comment here"
+      rows="3"
+    />
+    <p
+      class="text-indigo-500 text-[13px]"
+    >
+      250
+       character
+      s
+       left
+    </p>
+    <button
+      class="bg-violet-900 hover:bg-violet-500 rounded-10 text-[13px] md:text-sm leading-3 h-10 md:h-11 px-4 md:px-6 min-w-max"
+      type="submit"
+    >
+      Post Comment
+    </button>
+  </form>
+</div>
+`;
