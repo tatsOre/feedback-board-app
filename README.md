@@ -33,6 +33,7 @@ In this application users should be able to:
 - Keep track of any changes
 
 #### Expected Behaviour
+
 - New feedbacks with authenticated author
   - Current user will be "logged-in" using mockup data to populate the user data for any new comments/replies or the author when creating a new feedback request.
 - Suggestions page
@@ -53,6 +54,12 @@ In this application users should be able to:
 
 ![Design preview for the Product feedback app coding challenge](https://github.com/tatsOre/feedback-board-app/blob/main/preview.jpg)
 
+![Design preview](https://github.com/tatsOre/feedback-board-app/blob/main/preview/Tablet-Suggestions.png)
+
+![Design preview](https://github.com/tatsOre/feedback-board-app/blob/main/preview/Tablet-Edit-Feedback.png)
+
+![Design preview](https://github.com/tatsOre/feedback-board-app/blob/main/preview/Tablet-Feedback%20Detail.png)
+
 ### Links
 
 - Live Site URL: [Feedback Board App](https://feedback-board-app.vercel.app/)
@@ -70,7 +77,9 @@ In this application users should be able to:
 - MongoDB/Mongoose
 
 ### Continued development
-Currently working on: 
+
+Currently working on:
+
 - Error UI handling
 - Testing
 - Documentation
@@ -78,6 +87,7 @@ Currently working on:
 #### Implementation with Firestore: (https://github.com/tatsOre/feedback-board-app/tree/with_firebase)
 
 ### Links
+
 - [A guide to module mocking with Jest](https://www.emgoto.com/mocking-with-jest/) - A guide to module mocking with Jest
 - [Common mistakes with React Testing Library](https://kentcdodds.com/blog/common-mistakes-with-react-testing-library) - Common mistakes with React Testing Library
 - [react-testing-library-examples](https://github.com/kentcdodds/react-testing-library-examples) - React Testing Library Examples
