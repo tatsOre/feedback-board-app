@@ -1,4 +1,4 @@
-# Frontend Mentor - Product feedback app
+# Frontend Mentor - Product feedback app with NextJS/MongoDB
 
 This is a solution to the <a href="https://www.frontendmentor.io/challenges/product-feedback-app-wbvUYqjR6" target="_blank">Product feedback app challenge on Frontend Mentor</a>.
 
@@ -68,8 +68,6 @@ In this application users should be able to:
 - [Next.js](https://nextjs.org/) - React framework
 - [Tailwind](https://tailwindcss.com/) - For styles
 - [Firestore](https://firebase.google.com/) - Firebase/Firestore
-
-### What I learned
 
 ### Continued development
 Currently working on: 
