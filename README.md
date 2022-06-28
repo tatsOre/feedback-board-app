@@ -33,7 +33,7 @@ In this application users should be able to:
 - Keep track of any changes
 
 #### Expected Behaviour
-- New feedbacks author
+- New feedbacks with authenticated author
   - Current user will be "logged-in" using mockup data to populate the user data for any new comments/replies or the author when creating a new feedback request.
 - Suggestions page
   - Only product feedback requests with a status of `suggestion` should be shown on the Suggestions page.
@@ -67,13 +67,15 @@ In this application users should be able to:
 - [React](https://reactjs.org/) - JS library
 - [Next.js](https://nextjs.org/) - React framework
 - [Tailwind](https://tailwindcss.com/) - For styles
-- [Firestore](https://firebase.google.com/) - Firebase/Firestore
+- MongoDB/Mongoose
 
 ### Continued development
 Currently working on: 
 - Error UI handling
 - Testing
 - Documentation
+
+#### Implementation with Firestore: (https://github.com/tatsOre/feedback-board-app/tree/with_firebase)
 
 ### Links
 - [A guide to module mocking with Jest](https://www.emgoto.com/mocking-with-jest/) - A guide to module mocking with Jest
