@@ -3215,6 +3215,11 @@
   "resolved" "https://registry.npmjs.org/mpath/-/mpath-0.9.0.tgz"
   "version" "0.9.0"
 
+"mq-polyfill@^1.1.8":
+  "integrity" "sha512-7FolPfVZMGhkOSY4VKdHCowas+j4quxU/z43lmaK4pXCPtTllSKVb5w6mIB1CSzX0kY7x9KcYsLIkmFxpEdtIg=="
+  "resolved" "https://registry.npmjs.org/mq-polyfill/-/mq-polyfill-1.1.8.tgz"
+  "version" "1.1.8"
+
 "mquery@4.0.3":
   "integrity" "sha512-J5heI+P08I6VJ2Ky3+33IpCdAvlYGTSUjwTPxkAr8i8EoduPMBX2OY/wa3IKZIQl7MU4SbFk8ndgSKyB/cl1zA=="
   "resolved" "https://registry.npmjs.org/mquery/-/mquery-4.0.3.tgz"
