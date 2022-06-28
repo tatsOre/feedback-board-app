@@ -1,4 +1,5 @@
-# Frontend Mentor - Product feedback app
+# Frontend Mentor - Product feedback app with Firebase
+#### Version 1.0
 
 This is a solution to the <a href="https://www.frontendmentor.io/challenges/product-feedback-app-wbvUYqjR6" target="_blank">Product feedback app challenge on Frontend Mentor</a>.
 
@@ -69,18 +70,10 @@ In this application users should be able to:
 - [Tailwind](https://tailwindcss.com/) - For styles
 - [Firestore](https://firebase.google.com/) - Firebase/Firestore
 
-### What I learned
-
-### Continued development
-Currently working on: 
-- Create/Edit feedback implementation, form validation and styling
-- Error UI handling
-- Redirections on error and 404 page
-- Testing
-- Documentation
+#### This is one of the available branches, check 'development' branch to see the last updates.
 
 ## Author
 
 [LinkedIn](https://www.linkedin.com/in/tatiana-orejuela-zapata/) | [Github](https://github.com/tatsOre)
 
-##### May, 2022.
+##### 2022.
