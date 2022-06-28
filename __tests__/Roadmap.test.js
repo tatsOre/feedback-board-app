@@ -26,7 +26,7 @@ describe('<Roadmap />', () => {
   it('renders sections with proper number of cards, headings and taglines', () => {
     render(<Roadmap data={data} />)
 
-    const planned = document.getElementById('roapmap-section-planned')
+    const planned = document.getElementById('roadmap-section-planned')
 
     expect(
       within(planned).getByRole('heading', { level: 2 })
@@ -40,7 +40,7 @@ describe('<Roadmap />', () => {
       screen.getByText(ROADMAP_SECTION_TAGLINES['planned'])
     ).toBeInTheDocument()
 
-    const progress = document.getElementById('roapmap-section-in-progress')
+    const progress = document.getElementById('roadmap-section-in-progress')
 
     expect(
       within(progress).getByRole('heading', { level: 2 })
@@ -54,7 +54,7 @@ describe('<Roadmap />', () => {
       screen.getByText(ROADMAP_SECTION_TAGLINES['in-progress'])
     ).toBeInTheDocument()
 
-    const live = document.getElementById('roapmap-section-live')
+    const live = document.getElementById('roadmap-section-live')
 
     expect(within(live).getByRole('heading', { level: 2 })).toHaveTextContent(
       `Live (${data.live.length})`

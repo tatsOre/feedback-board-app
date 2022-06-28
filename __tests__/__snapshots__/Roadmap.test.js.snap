@@ -79,7 +79,7 @@ exports[`<Roadmap /> renders with proper ui and props 1`] = `
       >
         <div
           class="hidden md:block w-full md:w-1/3 active-status"
-          id="roapmap-section-planned"
+          id="roadmap-section-planned"
         >
           <h2
             class="text-indigo-800 text-lg md:text-sm lg:text-lg"
@@ -207,7 +207,7 @@ exports[`<Roadmap /> renders with proper ui and props 1`] = `
         </div>
         <div
           class="hidden md:block w-full md:w-1/3 false"
-          id="roapmap-section-in-progress"
+          id="roadmap-section-in-progress"
         >
           <h2
             class="text-indigo-800 text-lg md:text-sm lg:text-lg"
@@ -390,7 +390,7 @@ exports[`<Roadmap /> renders with proper ui and props 1`] = `
         </div>
         <div
           class="hidden md:block w-full md:w-1/3 false"
-          id="roapmap-section-live"
+          id="roadmap-section-live"
         >
           <h2
             class="text-indigo-800 text-lg md:text-sm lg:text-lg"
