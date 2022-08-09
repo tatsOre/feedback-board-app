@@ -4,6 +4,7 @@ import useSWR from 'swr'
 
 import { AxiosAPIService } from '../../../lib/services/axios'
 import FeedbackPost from '../../../components/FeedbackDetail'
+import Loader from '../../../components/Shared/loader'
 
 export default function Page() {
   const router = useRouter()
@@ -13,7 +14,7 @@ export default function Page() {
     slug ? `/feedbacks/slug?q=${slug}` : null,
     AxiosAPIService.get
   )
-  if (!data) return <p>Loading...</p>
+  if (!data) return <Loader />
   if (error) return <p>Failed to load</p>
 
   return (

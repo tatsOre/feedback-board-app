@@ -17,13 +17,12 @@ const useFormValidation = (data) => {
   let errors = {}
   let isFormValid = true
 
-  if (!data.title) {
-    errors['title'] = "Title can't be empty"
-  }
+  if (!data.title) errors['title'] = "Title can't be empty"
 
-  if (!data.description) {
-    errors['description'] = "Description can't be empty"
-  }
+  if (!data.description) errors['description'] = "Description can't be empty"
+
+  if (Object.keys(errors).length) isFormValid = false
+
   return { isFormValid, errors }
 }
 
@@ -68,11 +67,12 @@ export default function Form({ data, edit }) {
   const onSubmit = async (event) => {
     event.preventDefault()
     const { isFormValid, errors } = useFormValidation(values)
+
     if (!isFormValid) {
       return setState((state) => ({ ...state, error: errors }))
     }
 
-    let doc = {}
+    let doc = null
 
     try {
       const slug = dashify(values.title)
