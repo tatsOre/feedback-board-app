@@ -10,7 +10,6 @@ This is a solution to the <a href="https://www.frontendmentor.io/challenges/prod
   - [Links](#links)
 - [The process](#the-process)
   - [Built with](#built-with)
-  - [What I learn](#what-i-learned)
   - [Continued development](#continued-development)
 - [Author](#author)
 
@@ -50,7 +49,7 @@ In this application users should be able to:
   - Any comment/reply can have a maximum of 250 characters.
   - Current user will not see the comment form in their own feedbacks.
 
-### Screenshot
+### Screenshots
 
 ![Design preview for the Product feedback app coding challenge](https://github.com/tatsOre/feedback-board-app/blob/main/preview.jpg)
 
@@ -75,6 +74,7 @@ In this application users should be able to:
 - [Next.js](https://nextjs.org/) - React framework
 - [Tailwind](https://tailwindcss.com/) - For styles
 - MongoDB/Mongoose
+- Deployed on Vercel
 
 ### Continued development
 
@@ -85,6 +85,21 @@ Currently working on:
 - Documentation
 
 #### Implementation with Firestore: (https://github.com/tatsOre/feedback-board-app/tree/with_firebase)
+
+## Available Scripts
+
+In the project directory, you can run:
+
+#### `npm install`
+Installs modules defined in the dependencies section of the package.json file.
+
+#### `npm run dev`
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+#### `npm test`
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### Links
 
